@@ -1,17 +1,25 @@
 import { backendClient } from "../client/backendClient";  
 // course API//
-export const getCourses = async () => {
-  const response = await backendClient.get("/courses");
-  return response.data;
-};
-
 
 export const createCourses = async (courseData) => {
   const response = await backendClient.post("/courses", courseData);
   return response.data;
 };
 
+
+export const getCourses = async () => {
+  const response = await backendClient.get("/courses");
+  return response.data;
+};
+
+
 // sessions API//
+
+export const createSession = async (courseId, sessionData) => {
+  const response = await backendClient.post(`/courses/${courseId}/sessions`, sessionData);
+  return response.data;
+};
+
 export const getSessions = async (courseId) => {
   const response = await backendClient.get(`/courses/${courseId}/sessions`);
   return response.data;
@@ -22,4 +30,8 @@ export const getSession = async (courseId, sessionId) => {
   return response.data;
 };
 
+export const updateSession = async (courseId, sessionId, sessionData) => {
+  const response = await backendClient.put(`/courses/${courseId}/sessions/${sessionId}`, sessionData);
+  return response.data;
+};
 
