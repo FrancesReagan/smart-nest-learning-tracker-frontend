@@ -50,8 +50,47 @@ function App() {
     return userData
   }
 
-  
+  const register = async (username, email, password) => {
+    const response = await axios.post("/api/users/register", { username, email, password})
+    const { token, user: userData } = response.data
 
+    localStorage.setItem( "token", token )
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}` 
+    setUser(userData)
+
+    return userData
+
+  }
+
+  const logout = () => {
+    localStorage.removeItem("token")
+    delete axios.defaults.headers.common["Authorization"]
+    setUser(null)
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, login, register, logout }}> 
+    
+     <Router>
+        <div className="App">
+         { user && <NavBar/>}
+
+         <Routes>
+          <Route path= "/" element={user? <Navigate to="/dashboard" /> : <LandingPage />}/>
+          <
+
+         </Routes>
+
+
+
+
+
+
+        </div>
+     </Router>
+    
+    </AuthContext.Provider value={{ user,}}>
+  )
 
 }
 
