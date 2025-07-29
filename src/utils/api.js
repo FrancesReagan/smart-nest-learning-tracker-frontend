@@ -35,3 +35,7 @@ export const updateSession = async (courseId, sessionId, sessionData) => {
   return response.data;
 };
 
+export const deleteSession = async (courseId, sessionId) => {
+  const response = await backendClient.delete(`/courses/${courseId}/sessions/${sessionId}`);
+  return response.data;
+};
