@@ -29,8 +29,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+ const value = {
+  user,
+  token,
+  login,
+  logout
+  isAuthenticated: !!token,
+ };
 
-  
+ 
 }
 
 export default AuthContext;
