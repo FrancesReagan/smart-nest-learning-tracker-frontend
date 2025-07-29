@@ -11,4 +11,15 @@ export const createCourses = async (courseData) => {
   return response.data;
 };
 
+// sessions API//
+export const getSessions = async (courseId) => {
+  const response = await backendClient.get(`/courses/${courseId}/sessions`);
+  return response.data;
+};
+
+export const getSession = async (courseId, sessionId) => {
+  const response = await backendClient.get(`/courses/${courseId}/sessions/${sessionId}`);
+  return response.data;
+};
+
 
