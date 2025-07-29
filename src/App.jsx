@@ -79,7 +79,12 @@ function App() {
           <Route path= "/" element={user? <Navigate to="/dashboard" /> : <LandingPage />}/>
           <Route path="login" element={user? <Navigate to="/dashboard" /> : <LoginPage /> } />
           <Route path="/register" element={user? <Navigate to="/dashboard" /> : <RegisterPage />} />
-          
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+             <Dashboard />
+            </ProtectedRoute>
+          } />
+
 
          </Routes>
 
