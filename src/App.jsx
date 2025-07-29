@@ -84,20 +84,21 @@ function App() {
              <Dashboard />
             </ProtectedRoute>
           } />
+          <Routh path="/courses/:id" element={
+            <ProtectedRoute>
+              <CourseDetail />
+            </ProtectedRoute>
+          } />
 
-
+          <Route path="*" element={<Navigate to="/" />}/>
          </Routes>
-
-
-
-
-
-
         </div>
      </Router>
     
-    </AuthContext.Provider value={{ user,}}>
+    </AuthContext.Provider>
   )
 
 }
+
+export default App;
 
