@@ -56,8 +56,9 @@ function CourseCard({ course, onDelete, onEdit }) {
                >
                 Delete
                </button>
-
       </div>
     </div>
   )
 }
+
+export default CourseCard;
