@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { use } from "react";
 
 function CourseDetail() {
   const {id} = useParams();
@@ -12,7 +13,24 @@ function CourseDetail() {
     topicsLearned:""
   })
 
+useEffect(() => {
+  getCourses()
+  getSessions()
+},[id])
+
+const getGourse = async () => {
+  try {
+    const response = await axios.get(`/api/courses/${id}`)
+    setCourse(response.data)
+  } catch (error) {
+    console.error("Error retrieving course for you:", error)
+  }
 }
+
+
+
+}
+
 
 
 
