@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
+import { set } from "mongoose";
 
 
 
@@ -47,7 +48,19 @@ const login = async (credentials) => {
  setToken(null);
 
 //  specific messages for different types of errors//
-
+if (error.response?.status===400 || error.response?.status===401) {
+  throw new Error("Invalid email or password");
+} else if (error.response?.status===500){
+  throw new Error("Server error. Try again...");
+} else if (!error.response) {
+  throw new Error("Problem with your connection....Network Error.");
+} else {
+  throw new Error(error.response?.data?.message || "Login failed. Try again.");
+}
+} finally {
+  setAuthLoading(false);
+}
+};
 
 
 // register logic//
