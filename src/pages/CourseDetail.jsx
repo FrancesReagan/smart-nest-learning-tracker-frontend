@@ -84,11 +84,20 @@ return (
       <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
       <p className="text-gray-200 mb-2">{course.description}</p>
       <div className="flex space-x-4">
-        <span className text-sm text-gray-300">Category:{course.category}</span>
+        <span className="text-sm text-gray-300">Category:{course.category}</span>
+      <span className="text-sm text-gray-300">Status:{course.status}</span>
       </div>
       </div>
       
-      
+{/* add session button */}
+<div className="mb-6">
+  <button
+    onClick={() => setShowAddForm(!showAddForm)}
+    className="bg-blue-600 text-white px-4 py-2 rounded hover: bg-blue-700"
+    >
+      {showAddForm? "Cancel" : "Add Session"}
+    </button>
+</div>
     </div>
 
 
