@@ -9,7 +9,7 @@ function LoginPage() {
   const { login } = useAuth()
   const navigate = useNavigate()
 
-};
+
 
 const handleSubmit = async (e) => {
   e.preventDefault()
@@ -19,8 +19,10 @@ const handleSubmit = async (e) => {
     await login({email, password});
     navigate("/dashboard")
   } catch (error) {
-    setError("Invalid email or password")
-  };
+    console.error("Login error:", error);
+    setError(error.message || "Invalid email or password")
+  }
+}
 
 return (
   <div className="min-h-screen relative">
@@ -60,6 +62,7 @@ return (
    onChange={(e) => setPassword(e.target.value)}
    className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
    placeholder="Your Password"
+   required
    />
  </div>
 
