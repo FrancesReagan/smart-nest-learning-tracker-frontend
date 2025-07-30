@@ -27,9 +27,20 @@ const getGourse = async () => {
   }
 }
 
+const getSessions = async () => {
+  try {
+    const response = await axios.get(`/api/courses/${id}/sessions`)
+    setSessions(response.data)
+  } catch (error) {
+    console.error("Error getting sessions:", error)
+  }
+  }
+
 
 
 }
+
+
 
 
 
