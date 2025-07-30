@@ -1,0 +1,1 @@
+// dashboard.jsx handles the grid of courses -- welcome to user with their user name//
