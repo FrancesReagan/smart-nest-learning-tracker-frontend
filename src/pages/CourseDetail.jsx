@@ -98,6 +98,32 @@ return (
       {showAddForm? "Cancel" : "Add Session"}
     </button>
 </div>
+
+{/* Add Session Form */}
+
+{showAddForm && (
+  <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
+    <form onSubmit={addSession}>
+      <div className="mb-4">
+        <label className="block text-white mb-2">Notes</label>
+        <textarea
+         value={newSession.notes}
+         onChange={(e) => setNewSession ({...newSession, notes: e.target.value})}
+         className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+         placeholder="Today, I learned about..."
+         rows="3"
+         />
+      </div>
+      <div className="mb-4">
+        <label className="block text-white mb-2">Topics Learned(comma separated)</label>
+        <input
+         type="text"
+         value={newSession.topicsLearned}
+         onChange={(e) => setNewSession({...newSession, topicsLearned: e.target.value})}
+         
+      </div>
+    </form>
+)}
     </div>
 
 
