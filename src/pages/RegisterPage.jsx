@@ -91,9 +91,14 @@ function RegisterPage() {
               Login
             </Link>
           </p>
+          <Link t0="/" className="text-gray-400 hover:text-gray-300 text-sm">
+            Back to Home 
+          </Link>
         </div>
       </div>
     </div>
+  </div>
   )
+};
 
-}
+export default RegisterPage;
