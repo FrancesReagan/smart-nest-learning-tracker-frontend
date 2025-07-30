@@ -24,7 +24,18 @@ function CourseCard({ course, onDelete, onEdit }) {
           {course.status}
         </span>
       </div>
+      <p className="text-gray-600 mb-2">{course.description}</p>
       
+      {course.category && (
+        <p className="text-sm text-gray-500 mb-2">Category: {course.category}</p>
+      )}
+
+      {course.url && (
+        <a href={course.url} target="_blank" rel="noopener noreferrer">
+          className="text-blue-600 text-sm hover:underline block mb-3">
+          Course Link 
+          </a>
+      )}
     </div>
   )
 }
