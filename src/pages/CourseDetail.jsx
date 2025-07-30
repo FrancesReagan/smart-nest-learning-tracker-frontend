@@ -168,24 +168,24 @@ return (
         <div>
           <p className="text-sm text-gray-300 mb-1">Topics:</p>
           <div className="flex flex-wrap gap-2">
-            {session.topicsLearned.map((topic,index) => ()
+            {session.topicsLearned.map((topic,index) => (
               <span key={index}className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
-              {topic}
+               {topic}
               </span>
           ))}
           </div>
-      )}
-    ))
-  )
-</div>
+         </div>
+        )}
+      </div>
+      ))
+     )}
+   </div> 
+  </div>
+  </div>
+    )
+  }
 
-
-
-
-}
-
-
-
+export default CourseDetail;
 
 
 
