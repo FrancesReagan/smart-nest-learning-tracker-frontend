@@ -137,9 +137,24 @@ return (
 
   </div>
 
+{/* Sessions List */}
+<div className="space-y-4">
+  <h2 className="text-2xl font-bold text-white">Learning Sessions 
+    ({sessions.length})
+  </h2>
+
+  {sessions.lenth===0 ? (
+    <div className="bg-white/10 backdrop-blur-sm p-6 rounded text-center">
+      <p className="text-gray-300">No sessions yet. Add your first one above🔝</p>
+      </div>
+  ) : ( 
+  )
+</div>
 
 
 
+
+}
 
 
 
