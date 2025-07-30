@@ -90,8 +90,18 @@ if (error.response?.status === 400) {
   if (error.response.data?.message?.includes("email")) {
   } else if (error.response.data?.message?.includes("username")) {
     throw new Error("Please choose an alternative username...as this one is taken.");
+  } else {
+    throw new Error("Invalid registration data. Check that your information is correct.");
   }
+  } else if (error.response?.status===500){
+    throw new Error("Server error. Please try again...");
+  } else if (!error.response){
+    throw new Error("Problem with your connection....Network Error.");
+  } else {
+    throw new Error(error.response?.data?.message || "Registration failed. Please try again.");
   }
+} finally {
+  
 }
 
 
