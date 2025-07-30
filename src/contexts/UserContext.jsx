@@ -1,3 +1,5 @@
+
+// need to figure out either setCurrentUser or getCurrent User---//
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from axios;
 import { useAuth } from "./AuthContext";
@@ -28,7 +30,7 @@ useEffect(() => {
   }
 },[token]);
 
-// is it getCurrentUser or setCurrentUser?//
+
 const getCurrentUser = async() => {
   try {
     const response = await axios.get("/api/users/me");
@@ -42,3 +44,29 @@ const getCurrentUser = async() => {
     setLoading(false);
   }
   };
+
+  // update user after login/register//
+  const setUser = (useData) => {
+    setCurrentUser(useData);
+  };
+
+  // clear user on logout//
+  const clearUser = () => {
+    setCurrentUser(null);
+  };
+
+  const value = {
+    currentUser,
+    loading,
+    setUser,
+    clearUser,
+    getCurrentUser,
+  };
+
+  return {
+    <UserContext.Provider value={value}>
+     { children }
+    </UserContext.Provider>  
+
+  );
+};

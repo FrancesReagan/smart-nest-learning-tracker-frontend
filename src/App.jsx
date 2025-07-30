@@ -1,6 +1,9 @@
 
+
+// fix loading and useUser call//
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
+import { UserProvider } from "./context/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import "./App.css"
@@ -10,20 +13,27 @@ import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import CourseDetail from "./pages/CourseDetail";
 
-
+// may or may not use this spinner while loading//
+function LoadingSpinner() {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    </div>
+  );
+}
 
 function AppRoutes() {
-  const { user } = useAuth();
+ const { currentUser, loading } =useUser();
  
   return (    
      <Router>
         <div className="App">
-         { user && <NavBar/>}
+         { currentUser && <NavBar/>}
 
          <Routes>
-          <Route path= "/" element={user? <Navigate to="/dashboard" /> : <LandingPage />}/>
-          <Route path="login" element={user? <Navigate to="/dashboard" /> : <LoginPage /> } />
-          <Route path="/register" element={user? <Navigate to="/dashboard" /> : <RegisterPage />} />
+          <Route path= "/" element={currentUser? <Navigate to="/dashboard" /> : <LandingPage />}/>
+          <Route path="login" element={currentUser? <Navigate to="/dashboard" /> : <LoginPage /> } />
+          <Route path="/register" element={currentUser? <Navigate to="/dashboard" /> : <RegisterPage />} />
           <Route path="/dashboard" element={
             <ProtectedRoute>
              <Dashboard />
@@ -47,7 +57,9 @@ function AppRoutes() {
 function App() {
   return (
     <AuthProvider>
-      <AppRoutes />
+      <UserProvider>
+          <AppRoutes />
+      </UserProvider>
     </AuthProvider>
   );
 } 
