@@ -45,12 +45,39 @@ const getCourses = async () => {
   } else if (error.response?.status===500){
     setError("Server Error. Try again...")
   } else {
+    setError("Failed to load your courses...Refresh the page.")
+
+   }
+  }
+ }
+
+ const addCourses = async (e) => {
+  e.preventDefault()
+  setError("")
+  setSuccess("")
+  
+  try {
+    await axios.post("/api/courses", courseForm,{
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    setCourseForm({ title:"", description:"", category:"Other", url:"", status: "On the horizon"})
+    setShowAddForm(false)
+    setSuccess("Course added successfully.")
+    getCourses()
+
+    // clear success message after 3 seconds//
+    setTimeout(()=>setSuccess(""), 3000)
+  } catch (error) {
+    console.error("Error happened adding your course:", error)
+    if (error.response?.status===400) {
+      
+    }
     
   }
-}
-
-}
-
+ }
 
 
 
