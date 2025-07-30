@@ -23,6 +23,7 @@ function RegisterPage() {
       await register(username, email, password)
       navigate("/dashboard")
     } catch (error) {
+      console.error(error);
       setError("Registration failed. Email might already be taken.")
     }
   }

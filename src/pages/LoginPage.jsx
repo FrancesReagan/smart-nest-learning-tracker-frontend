@@ -13,15 +13,15 @@ function LoginPage() {
 
 const handleSubmit = async (e) => {
   e.preventDefault()
-  setError("")
+  setError("");
 
   try {
     await login({email, password});
     navigate("/dashboard")
   } catch (error) {
     setError("Invalid email or password")
-  }
-};
+  };
+
 return (
   <div className="min-h-screen relative">
     {/* Birds Background */}
@@ -82,6 +82,6 @@ return (
   </div>
 </div>
 );
-
+}
 
 export default LoginPage;
