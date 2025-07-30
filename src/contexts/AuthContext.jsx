@@ -1,7 +1,13 @@
 // context/authcontext//
-import { createContext, useContext, useState } from "react";
+//  User state management (user, setUser)
+// Authentication logic (login, register, logout)
+// Token management (localStorage, axios headers)
+// Auto-login on app start (getCurrentUser)
+// Navigation after logout
+
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect } from "react";
+
 
 // set up axios defaults//
 axios.defaults.baseURL = "http://localhost:3000";

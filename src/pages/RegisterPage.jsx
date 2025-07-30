@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link, useNavigate } from "ract-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function RegisterPage() {
@@ -20,7 +20,7 @@ function RegisterPage() {
       return
     }
     try {
-      await register(username, email, password)
+      await register({username, email, password})
       navigate("/dashboard")
     } catch (error) {
       console.error(error);

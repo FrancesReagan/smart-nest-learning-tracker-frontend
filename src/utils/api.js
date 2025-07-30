@@ -1,3 +1,11 @@
+// why separate API functions:
+
+// separation - it is good to have API logic separate from the components//
+// reusable - can use this across different components//
+// testing made easier - test API functions without interaction//
+// consistent - API calls follow the same kind of pattern//
+// error handling -  error handling is in one central place//
+
 import { backendClient } from "../client/backendClient";  
 // course API//
 
