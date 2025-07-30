@@ -15,4 +15,16 @@ function CourseCard({ course, onDelete, onEdit }) {
       default: return "bg-gray-500"
     }
   }
+
+  return (
+    <div className="bg-white p-4 rounded shadow">
+      <div className="flex justify-between items-start mb-2">
+        <h3 className="text-lg font-bold">{course.title}</h3>
+        <span className={`text-white text-xs px-2 py-1 rounded ${getStatusColor(course.status)}`}>
+          {course.status}
+        </span>
+      </div>
+      
+    </div>
+  )
 }
