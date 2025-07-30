@@ -36,7 +36,31 @@ const getSessions = async () => {
   }
   }
 
+const addSession = async (e) => {
+  e.preventDefault()
+  try {
+    
+    const sessionData = {
+      ...newSession,
+      topicsLearned: newSession.topicsLearned.split(",").map(topic => topic.trim()).filter(topic => topic)
+    }
+   await axios.post(`/api/courses/${id}/sessions`, sessionData)
 
+   setNewSession({ notes:"", topicsLearned:"" })
+   setShowAddForm(false)
+   getSessions()
+  } catch (error) {
+    console.error("Error adding session:", error)
+  }
+}
+
+
+
+
+  } catch (error) {
+    
+  }
+}
 
 }
 
