@@ -36,6 +36,14 @@ function CourseCard({ course, onDelete, onEdit }) {
           Course Link 
           </a>
       )}
+      <div classname="flex space-x-2">
+        <Link to={`/courses/${course._id}`}
+            className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+            >
+              View Sessions
+              
+            </Link>
+      </div>
     </div>
   )
 }
