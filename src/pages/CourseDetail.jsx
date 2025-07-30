@@ -148,6 +148,20 @@ return (
       <p className="text-gray-300">No sessions yet. Add your first one above🔝</p>
       </div>
   ) : ( 
+    sessions.map(session => (
+      <div key={session._id} className="bg-white/10 backdrop-blur-sm p-4 rounded">
+        <div className="flex justify-between items-start mb-2">
+          <div className="text-sm text-gray-300">
+            {new Date(session.date).toLocaleDateString()}
+          </div>
+          <button
+           onClick={() => deleteSession(session._id)}
+           className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
+           >
+            Delete
+           </button>
+        </div>
+    ))
   )
 </div>
 
