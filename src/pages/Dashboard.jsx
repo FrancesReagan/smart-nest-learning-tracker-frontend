@@ -73,12 +73,32 @@ const getCourses = async () => {
   } catch (error) {
     console.error("Error happened adding your course:", error)
     if (error.response?.status===400) {
-      
+      setError("Please check your course information and try again.")
+    } else if (error.response?.status===401) {
+      setError("Session expired. Log in again...")
+    } else {
+      setError("Failed to add your course...please try again.")
     }
-    
   }
  }
 
+ const updateCourse = async (e) => {
+  e.preventDefault ()
+  setError("")
+  setSuccess ("")
+
+  try {
+    await axios.put(`/api/courses/${editingCourse,._id}`,courseForm, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+
+    setCourseForm({ })
+  } catch (error) {
+    
+  }
+ }
 
 
 
