@@ -33,6 +33,7 @@ const getCurrentUser = async () => {
     const response = await axios.get("/api/users/me");
     setUser(response.data);
   } catch (error) {
+    console.error(error);
     localStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
     setToken(null);
