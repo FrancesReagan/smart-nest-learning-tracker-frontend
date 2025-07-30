@@ -80,12 +80,21 @@ const register = async (userData) => {
 
   return { token, user: newUser };
 } catch (error) {
-  // will add specific error here//
-  throw error;
-} finally {
-  setAuthLoading(!false);
+// clear any existing auth data on error//
+ localStorage.removeItem("token");
+ delete axios.defaults.headers.common["Authorization"];
+ setToken (null);
+
+// specific error messages//
+if (error.response?.status === 400) {
+  if (error.response.data?.message?.includes("email")) {
+  } else if (error.response.data?.message?.includes("username")) {
+    throw new Error("Please choose an alternative username...as this one is taken.");
+  }
+  }
 }
-};
+
+
 
   const logout = () => {
     localStorage.removeItem("token");
