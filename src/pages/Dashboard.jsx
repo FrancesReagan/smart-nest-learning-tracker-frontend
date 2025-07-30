@@ -1,12 +1,16 @@
 import{ useState, useEffect } from "react";
 import axios from "axios";
+import { useUser } from "../contexts/UserContext";
+import { useAuth } from "../contexts/AuthContext";
 import CourseCard from "../components/CourseCard";
 
 
 function Dashboard() {
   const [courses, setCourse] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editingCourse,seeEditingCourse] = useState(null); 
+  const [editingCourse,setEditingCourse] = useState(null); 
+  const [error,setError] = useState("");
+  const [success,setSuccess] = useState("");
   const [courseForm, setCourseForm] = useState({
     title: "",
     description: "",
