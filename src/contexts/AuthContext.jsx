@@ -101,9 +101,9 @@ if (error.response?.status === 400) {
     throw new Error(error.response?.data?.message || "Registration failed. Please try again.");
   }
 } finally {
-  
+  setAuthLoading(false);
 }
-
+};
 
 
   const logout = () => {
