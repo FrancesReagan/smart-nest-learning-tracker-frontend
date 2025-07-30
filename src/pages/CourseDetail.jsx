@@ -161,6 +161,20 @@ return (
             Delete
            </button>
         </div>
+      {session.notes && (
+        <p className="text-white mb-2">{session.notes}</p>
+      )}  
+      {session.topicsLearned && session.topicsLearned.length > 0 && (
+        <div>
+          <p className="text-sm text-gray-300 mb-1">Topics:</p>
+          <div className="flex flex-wrap gap-2">
+            {session.topicsLearned.map((topic,index) => ()
+              <span key={index}className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
+              {topic}
+              </span>
+          ))}
+          </div>
+      )}
     ))
   )
 </div>
