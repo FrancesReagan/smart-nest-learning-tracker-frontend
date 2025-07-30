@@ -104,7 +104,7 @@ function RegisterPage() {
             >
               {authLoading? "Creating Account..." : "Create Account"}
             </button>
-            
+
         </form>
         <div className="text-center">
           <p className="text-gray-300">
@@ -120,7 +120,7 @@ function RegisterPage() {
       </div>
     </div>
   </div>
-  )
-};
+  );
+}
 
 export default RegisterPage;
