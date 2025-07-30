@@ -79,6 +79,7 @@ const register = async (userData) => {
   setToken (token);
 
   return { token, user: newUser };
+
 } catch (error) {
 // clear any existing auth data on error//
  localStorage.removeItem("token");
@@ -88,8 +89,9 @@ const register = async (userData) => {
 // specific error messages//
 if (error.response?.status === 400) {
   if (error.response.data?.message?.includes("email")) {
-  } else if (error.response.data?.message?.includes("username")) {
-    throw new Error("Please choose an alternative username...as this one is taken.");
+    throw new Error("This email already exists. Use a different email.");
+  } else if (error.response.data?.message?.includes("username")){
+    throw new Error("Username is already taken. Choose a different username");
   } else {
     throw new Error("Invalid registration data. Check that your information is correct.");
   }
