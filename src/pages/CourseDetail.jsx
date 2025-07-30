@@ -54,15 +54,17 @@ const addSession = async (e) => {
   }
 }
 
-
-
-
-  } catch (error) {
-    
+const deleteSession = async (sessionId) => {
+  if (window.confirm("Do you want to Delete this session?")) {
+    try {
+      await axios.delete(`/api/sessions/${sessionId}`)
+      getSessions()
+    } catch (error) {
+    console.error("Error deleting session:", error)
+    }
   }
 }
 
-}
 
 
 
