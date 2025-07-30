@@ -3,6 +3,7 @@ import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { useAuth } from "../contexts/AuthContext";
 import CourseCard from "../components/CourseCard";
+import { set } from "mongoose";
 
 
 function Dashboard() {
@@ -19,17 +20,32 @@ function Dashboard() {
     status:"On the horizon"
 })
 
+const { currentUser } = useUser()
+const { token } = useAuth()
+
 useEffect(() => {
+  if (currentUser && token) {
   getCourses()
-},[])
+}
+},[currentUser,token])
 
-const getCourses = () => {
+const getCourses = async () => {
+
   try {
-    const response =await axios.get("/api/courses")
-    getCourses(response.data)
-
+    const response =await axios.get("/api/courses", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  setCourse(response.data)
   } catch (error) {
-    console.error("Error getting courses:", error)
+    console.error("Error retrieving your courses:", error)
+  } if (error.response?.status===401){
+    setError("Session expired. Login again...")
+  } else if (error.response?.status===500){
+    setError("Server Error. Try again...")
+  } else {
+    
   }
 }
 
