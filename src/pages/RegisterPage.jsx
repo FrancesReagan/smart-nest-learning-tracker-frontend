@@ -1,32 +1,45 @@
 import { useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useUser } from "../contexts/UserContext"; 
+import { set } from "mongoose";
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { register } = useAuth();
+  const { register, authLoading } = useAuth();
+  const { setUser } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = async(e) => {
     e.preventDefault()
     setError("");
 
+    // client side validation//
     if (password.length<5) {
       setError("Password must be at least 5 characters")
-      return
+      return;
     }
+     if (!email.includes("@")) {
+      setError("Please enter a valid email address")
+      return;
+     }
+
+     if(username.length <3) {
+      setError("Username must be at least 3 characters");
+      return;
+     }
+
     try {
-      await register({username, email, password})
+      const result = await register({username, email, password})
+      setUser(result.user);
       navigate("/dashboard")
     } catch (error) {
-      console.error(error);
-      setError("Registration failed. Email might already be taken.")
+      console.error("Registration error:", error);
+      setError(error.message || "Registration failed. Try again...");
     }
-  }
+  };
   
   return (
     <div className="min-h-screen relative">
