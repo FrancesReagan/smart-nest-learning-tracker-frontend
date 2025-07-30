@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useUser } from "../contexts/UserContext";
 
 function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
-  const { login } = useAuth()
+  const { login, authLoading } = useAuth()
+  const { setUser } = useUser()
   const navigate = useNavigate()
 
 
@@ -16,7 +18,9 @@ const handleSubmit = async (e) => {
   setError("");
 
   try {
-    await login({email, password});
+    const result = await login({ email, password});
+    // set user in  UserContext//
+    setUser(result.user);
     navigate("/dashboard")
   } catch (error) {
     console.error("Login error:", error);
@@ -66,8 +70,10 @@ return (
    />
  </div>
 
-<button type="submit" className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4" >
-  Login
+<button type="submit" className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4 disabled:opacity-50"
+    disabled={authLoading}
+    >
+     {authLoading? "Logging in...": "Login"}
 </button>
  </form>
 <div className="text-center">
