@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "./contexts/AuthContext";
@@ -22,12 +23,12 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}` getCurrentUser();
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      getCurrentUser();
     }
   },[])
   
   const getCurrentUser = async() => {
-
     try {
       const response = await axios.get("/api/users/me")
       setUser(response.data);
@@ -36,36 +37,36 @@ function App() {
       localStorage.removeItem("token");
       delete axios.defaults.headers.common["Authorization"];
     }
-  }
+  };
 
   const login = async (email, password) => {
-    const response = await axios.post("/api/users/login", { email, password })
-    const { token, user: userData } = response.data
+    const response = await axios.post("/api/users/login", { email, password });
+    const { token, user: userData } = response.data;
 
-    localStorage.setItem("token", token)
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
-    setUser(userData)
+    localStorage.setItem("token", token);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    setUser(userData);
 
-    return userData
-  }
+    return userData;
+  };
 
   const register = async (username, email, password) => {
-    const response = await axios.post("/api/users/register", { username, email, password})
-    const { token, user: userData } = response.data
+    const response = await axios.post("/api/users/register", { username, email, password});
+    const { token, user: userData } = response.data;
 
-    localStorage.setItem( "token", token )
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}` 
-    setUser(userData)
+    localStorage.setItem( "token", token );
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    setUser(userData);
 
-    return userData
+    return userData;
 
-  }
+  };
 
   const logout = () => {
-    localStorage.removeItem("token")
-    delete axios.defaults.headers.common["Authorization"]
-    setUser(null)
-  }
+    localStorage.removeItem("token");
+    delete axios.defaults.headers.common["Authorization"];
+    setUser(null);
+  };
 
   return (
     <AuthContext.Provider value={{ user, login, register, logout }}> 
@@ -95,7 +96,7 @@ function App() {
      </Router>
     
     </AuthContext.Provider>
-  )
+  );
 
 }
 
