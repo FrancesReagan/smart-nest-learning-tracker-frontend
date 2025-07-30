@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+ssimport { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { use } from "react";
 
 function CourseDetail() {
   const {id} = useParams();
-  const [couse, setCouse] = useState(null)
+  const [course, setCourse] = useState(null)
   const [sessions, setSessions] = useState([])
   const [showAddForm, setShowAddForm] = useState(false)
   const [newSession, setNewSession] = useState({
@@ -65,6 +65,35 @@ const deleteSession = async (sessionId) => {
   }
 }
 
+if(!course) return <div className="p-4">
+  Loading....
+</div>
+
+return (
+  <div className="min-h-screen relative">
+    {/* earth background */}
+    <div className="absolute inset-0 bg-cover bg-center opacity-30"
+    style={{ backgroundImage: "url(/designer-4.jpg)" }}
+    />
+
+    <div className="absolute inset-0 bg-black/50" />
+
+    <div className="relative z-10 p-6">
+      {/* Course Header */}
+      <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
+      <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
+      <p className="text-gray-200 mb-2">{course.description}</p>
+      <div className="flex space-x-4">
+        <span className text-sm text-gray-300">Category:{course.category}</span>
+      </div>
+      </div>
+      
+      
+    </div>
+
+
+  </div>
+)
 
 
 
