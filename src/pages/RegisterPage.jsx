@@ -66,8 +66,32 @@ function RegisterPage() {
              required
              />
           </div>
-          <div className
+          <div className="mb-6">
+            <label className="block text-white mb-2">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e)=> setPassword(e.target.value)}
+              className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
+              placeholder="At least 5 characters"
+              required
+              />
+          </div>
+          <button 
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4"
+            >
+              Create Account
+            </button>
         </form>
+        <div className="text-center">
+          <p className="text-gray-300">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-400 hover:text-blue-300">
+              Login
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )
