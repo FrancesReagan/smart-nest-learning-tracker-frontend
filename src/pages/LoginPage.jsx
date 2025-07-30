@@ -16,12 +16,12 @@ const handleSubmit = async (e) => {
   setError("")
 
   try {
-    await login(email, password)
+    await login({email, password});
     navigate("/dashboard")
   } catch (error) {
     setError("Invalid email or password")
   }
-}
+};
 return (
   <div className="min-h-screen relative">
     {/* Birds Background */}
@@ -67,12 +67,21 @@ return (
   Login
 </button>
  </form>
-
-    </div>
+<div className="text-center">
+  <p className="text-gray-300">
+    Don't have an account?{" "}
+    <Link to="/register" className="text-blue-400 hover:text-blue-300">
+    Sign Up
+    </Link>
+  </p>
+  <Link to="/" className="text-gray-400 hover:text-gray-300 text-sm">
+     Back to home
+    </Link>
   </div>
-)
+  </div>
+  </div>
+</div>
+);
 
-  } catch (error) {
-    
-  }
-}  
+
+export default LoginPage;
