@@ -120,15 +120,23 @@ return (
          type="text"
          value={newSession.topicsLearned}
          onChange={(e) => setNewSession({...newSession, topicsLearned: e.target.value})}
-         
+         className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+         placeholder="React hooks, API calls, Crypto, etc."
+         />
       </div>
-    </form>
-)}
-    </div>
 
+      <button 
+        type="submit"
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          Add Session
+        </button>
+      </form>
+    </div>
+)}
 
   </div>
-)
+
 
 
 
