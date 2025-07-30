@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "./contexts/AuthContext";
@@ -10,7 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import CourseDetail from "./pages/CourseDetail";
-import { set } from "mongoose";
+
 
 
 function App() {
@@ -84,7 +83,7 @@ function App() {
              <Dashboard />
             </ProtectedRoute>
           } />
-          <Routh path="/courses/:id" element={
+          <Route path="/courses/:id" element={
             <ProtectedRoute>
               <CourseDetail />
             </ProtectedRoute>
