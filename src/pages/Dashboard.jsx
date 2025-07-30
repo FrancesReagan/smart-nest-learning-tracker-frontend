@@ -1,1 +1,64 @@
-// dashboard.jsx handles the grid of courses -- welcome to user with their user name//
+import{ useState, useEffect } from "react";
+import axios from "axios";
+import CourseCard from "../components/CourseCard";
+
+
+function Dashboard() {
+  const [courses, setCourse] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [editingCourse,seeEditingCourse] = useState(null); 
+  const [courseForm, setCourseForm] = useState({
+    title: "",
+    description: "",
+    category: "Other",
+    url: "",
+    status:"On the horizon"
+})
+
+useEffect(() => {
+  getCourses()
+},[])
+
+const getCourses = () => {
+  try {
+    const response =await axios.get("/api/courses")
+    getCourses(response.data)
+
+  } catch (error) {
+    console.error("Error getting courses:", error)
+  }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// DASHBOARD for logged in Users
+// Dashboard.jsx This is where users will:
+// •	See all their courses in a grid
+// •	Add new courses
+// •	Navigate to course details
+// This Dashboard:
+// •	Has earth background (inside the app)
+// •	Shows all user's courses in a grid using CourseCard
+// •	Simple form to add new courses (all backend fields)
+// •	Edit existing courses (reuses same form)
+// •	Delete courses (handled by CourseCard)
+// Uses all course API endpoints:
+// •	GET /api/courses
+// •	POST /api/courses
+// •	PUT /api/courses/:id
+// •	DELETE /api/courses/:id

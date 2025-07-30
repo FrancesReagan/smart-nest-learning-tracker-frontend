@@ -13,6 +13,7 @@ axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3
 const AuthContext = createContext();
 
 // custom hook to use the AuthContext//
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   return useContext(AuthContext);
 };
@@ -40,12 +41,13 @@ const login = async (credentials) => {
   return { token, user: userData };
 
  } catch (error) {
-  // will add specific error here//
-  throw error;
- } finally {
-  setAuthLoading(false);
- }
-};
+ //clear any existing auth data on error//
+ localStorage.removeItem("token");
+ delete axios.defaults.headers.common["Authorization"];
+ setToken(null);
+
+//  specific messages for different types of errors//
+
 
 
 // register logic//
