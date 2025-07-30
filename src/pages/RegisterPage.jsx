@@ -7,6 +7,7 @@ import { set } from "mongoose";
 function RegisterPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const { register, authLoading } = useAuth();
   const { setUser } = useUser();
@@ -57,6 +58,8 @@ function RegisterPage() {
 
         </div>
         )}
+
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-white mb-2">Username</label>
@@ -89,14 +92,19 @@ function RegisterPage() {
               className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
               placeholder="At least 5 characters"
               required
+              disabled={authLoading}
               />
           </div>
+
           <button 
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4"
+            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4
+                       disabled: opacity-50 disabled:cursor-not-allowed"
+                       disabled={authLoading}
             >
-              Create Account
+              {authLoading? "Creating Account..." : "Create Account"}
             </button>
+            
         </form>
         <div className="text-center">
           <p className="text-gray-300">
