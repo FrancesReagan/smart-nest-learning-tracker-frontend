@@ -48,7 +48,12 @@ function CourseDetail() {
   // wrap getSessions in a useCallback//
   const getSessions = useCallback(async () => {
     try {
-      
+      const response = await axios.get(`/api/courses/${id}/sessions`, {
+        headers: {
+          Authorization:`Bearer ${token}`,
+        },
+      });
+      setSessions(response.data);
     } catch (error) {
       
     }
