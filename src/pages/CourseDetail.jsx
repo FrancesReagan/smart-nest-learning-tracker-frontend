@@ -1,7 +1,7 @@
-// I believe I need an addCourse and deleteCourse here--missing these//
+// finish addCourse logic  and add add and delete course buttons//
 
 import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { useAuth } from "../contexts/AuthContext";
@@ -11,6 +11,7 @@ function CourseDetail() {
   const [course, setCourse] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showAddCourseForm, setShowAddCourseForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [newSession, setNewSession] = useState({
@@ -18,13 +19,19 @@ function CourseDetail() {
     topicsLearned:""
   });
 
+  const [newCourse, setNewCourse] = useState({
+    title:"",
+    decription:"",
+    category:"",
+    status:"Active",
+  });
   const { currentUser } = useUser();
   const { token } = useAuth();
 
-  // need to missing add a  course and add session to the top---missing addcourse I believe//
-
+ 
+// GET COURSE//
   // wrap getCourse in a useCallback//
-  const getCourse = useCallback(async () => {
+  const getCourse = useCallback(async() => {
     try {
       const response = await axios.get(`/api/courses/${id}`,{
         headers: {
@@ -46,9 +53,9 @@ function CourseDetail() {
         setError("Course failed to load...please try again.");
       }
      }
-    }
   },[id,token]); 
 
+  // GET SESSIONS//
   // wrap getSessions in a useCallback//
   const getSessions = useCallback(async () => {
     try {
@@ -60,22 +67,20 @@ function CourseDetail() {
       setSessions(response.data);
     } catch (error) {
       console.error("Error getting sessions:", error);
-      if (error.response?.status === 401) {
+      if (error.response?.status === 404) {
         setError("Session has expired. Please log in again.");
+      } else if (error.response?.status===401) {
+        setError("Session expired. You need to log in once more.");
       } else if (error.response?.status===403) {
         setError("You do not have the right permissions to view these sessions.")
       } else {
         setError("Sessions failed to load. Refresh the page.");
       }
+      }
       },[id,token]);
    
       // 
-useEffect(() => {
- if (currentUser && token) {
-  getCourse();
-  getSessions();
- }
-},[id, currentUser, token,getCourse,getSessions]);
+
 
 const addSessions = async (e) => {
   e.preventDefault();
@@ -151,6 +156,13 @@ const deleteSession = async (sessionId) => {
    }
   }
 };
+
+useEffect(() => {
+ if (currentUser && token) {
+  getCourse();
+  getSessions();
+ }
+},[id, currentUser, token,getCourse,getSessions]);
 
 if(!course) {
   if (error) {
