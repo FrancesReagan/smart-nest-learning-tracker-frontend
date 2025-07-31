@@ -322,7 +322,15 @@ return (
   <form onSumbit={addCourse}>
  <div className="mb-4">
   <label className="block text-white mb-2">Course Title</label>
-
+ <input 
+   type="text"
+   value={newCourse.title}
+   onChange={(e) => setNewCourse({...newCourse, title: e.target.value})}
+   className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+   placeholder="Enter course title"
+   required
+   />
+   
  </div>
 
   </form>
