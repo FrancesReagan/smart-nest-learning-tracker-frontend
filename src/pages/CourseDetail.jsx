@@ -55,19 +55,38 @@ function CourseDetail() {
       });
       setSessions(response.data);
     } catch (error) {
-      
-    }
-  })
+      console.error("Error getting sessions:", error);
+      if (error.response?.status === 401) {
+        setError("Session has expired. Please log in again.");
+      } else if (error.response?.status===403) {
+        setError("You do not have the right permissions to view these sessions.")
+      } else {
+        setError("Sessions failed to load. Refresh the page.");
+      }
+      },[id,token]);
+   
+      // 
 useEffect(() => {
  if (currentUser && token) {
   getCourse();
   getSessions();
  }
-},[id, currentUser, token]);
+},[id, currentUser, token,getCourse,getSessions]);
 
-const getCourse = async () => {
+const addSessions = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccess("");
 
   try {
+    const sessionData = {
+      ...newSession,
+      topicsLearned: newSession.topicsLearned,
+      .split(",")
+      .map((topic) => topic.trim())
+      .filter((topic) => topic),
+    };
+    
     const response = await axios.get(`/api/courses/${id}`, {
       headers: {
         Authorization:`Bearer ${token}`
