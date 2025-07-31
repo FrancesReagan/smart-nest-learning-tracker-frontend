@@ -31,34 +31,41 @@ function CourseCard({ course, onDelete, onEdit }) {
       )}
 
       {course.url && (
-        <a href={course.url} target="_blank" rel="noopener noreferrer">
-          className="text-blue-600 text-sm hover:underline block mb-3">
-          Course Link 
-          </a>
+        // for enhanced security--noopener--no linked page can take control and noreferrer prevents sharing of referrer info//
+        <a href={course.url} target="_blank" rel="noopener noreferrer"
+          className="text-blue-600 text-sm hover:underline block mb-3"
+          >
+         Course Link 
+
+        </a>
       )}
+
       <div classname="flex space-x-2">
         <Link to={`/courses/${course._id}`}
             className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
             >
               View Sessions
 
-            </Link>
+        </Link>
+
             <button 
                onClick={() => onEdit(course)}
                className="bg-gray-600 text-white px-3 py-1 rounded text-sm hover:bg-gray-700"
                >
                 Edit
-               </button>
+
+            </button>
 
              <button 
                onClick={handleDelete}
                className="bg-red-600 text-white px-3 py-1 rounded text-sm hover: bg-red-700"
                >
                 Delete
-               </button>
+
+             </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default CourseCard;
