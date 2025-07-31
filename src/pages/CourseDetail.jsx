@@ -36,8 +36,21 @@ function CourseDetail() {
         setError("Course not found.");
       } else if (error.response?.status===401) {
         setError("Session expired. You need to log in once more.");
+      } else if (error.response?.status===403) {
+        setError("To view this course you need to have the correct permissions.")
+      } else {
+        setError("Course failed to load...please try again.");
       }
-      }
+     }
+    }
+  },[id,token]); 
+
+  // wrap getSessions in a useCallback//
+  const getSessions = useCallback(async () => {
+    try {
+      
+    } catch (error) {
+      
     }
   })
 useEffect(() => {
