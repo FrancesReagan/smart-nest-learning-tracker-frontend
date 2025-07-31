@@ -34,13 +34,11 @@ try {
   }
   }, [token,logout,baseURL]);
 
-  
-
 useEffect(() => {
   if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     getCurrentUser();
   } else {
+    setCurrentUser(null);
     setLoading(false);
   }
 },[token,getCurrentUser]);
@@ -72,12 +70,5 @@ return (
 );
 };
 
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("useUser has to be inside a UserProvider wrapper");
-  }
-  return context;
-};
-
+export default UserContext;
 
