@@ -254,8 +254,23 @@ const getCourses = async () => {
           placeholder="What will you learn today?"
           rows="3"
           required
-          />
-          
+          />    
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 mb-4">
+        <div>
+          <label className="block text-white mb-2">Course URL(optional)</label>
+          <input
+           type="url"
+           value={courseForm.url}
+           onChange={(e) => setCourseForm({...courseForm, url: e.target.value})}
+           className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+           placeholder="https://..."
+           />
+        </div>
+        <div>
+          <label className="block text-white mb-2">Status</label>
+        </div>
       </div>
       </form>
 
