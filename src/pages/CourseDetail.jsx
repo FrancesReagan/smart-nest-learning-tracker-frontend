@@ -330,12 +330,45 @@ return (
    placeholder="Enter course title"
    required
    />
-   
  </div>
-
-  </form>
-
-  </div>
+ <label className="block text-white mb-2">Description</label>
+ <textarea 
+   value={newCourse.description}
+   onChange={(e) => setNewCourse ({...newCourse,description:e.target})}
+   className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+   placeholder="Enter course description"
+   rows="3"
+   />
+</div>
+<div className="mb-4">
+  <label className="block text-white mb-2">Category</label>
+  <input 
+    type="text"
+    value={newCourse.category}
+    onChange={(e)=> setNewCourse({...newCourse, category:e.target.value})}
+    className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+    placeholder="Enter a course category"
+    />
+</div>
+<div className="mb-4">
+  <label className="block text-white mb-2">Status</label>
+  <select 
+   value={newCourse.status}
+   onChange={(e)=> setNewCourse({...newCourse,status:e.target.value})}
+   className="w-full p-2 rounded bg-white/20 text-white"
+   >
+    <option value="Active">Active</option>
+    <option value="Inactive">Inactive</option>
+   </select>
+ </div>
+ <button
+ type="submit"
+ className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+ >
+  ➕Add Course
+ </button>
+</form>
+</div>
 ))
 
 {/* Add Session Form */}
