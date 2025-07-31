@@ -120,9 +120,42 @@ const getCourses = async () => {
     setError ("")
     setSuccess ("")
 
-    
+    try {
+      await axios.delete(`/api/courses/$(courseId)`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setSuccess("Course successfully deleted.")
+      getCourses()
+
+      // clear succcess message after 3 seconds//
+      setTimeout(() =>setSuccess (""), 3000)
+    } catch (error) {
+      console.error("Error deleting course:", error)
+      if (error.response?.status===401){
+        setError("Session expired. Log in again.")
+      } else if (error.response?.status===403) {
+        setError("Permission to delete course denied.")
+      } else {
+        setError("Could not delete course...try again.")
+      }
+    }
   }
 
+  const startEdit = (course) => {
+    setError ("")
+    setSuccess("")
+    setEditingCourse (course) 
+    setCourseForm({
+      title: course.title,
+      description: course.description,
+      category: course.category,
+      url: course.url || "",
+      status: course.status,
+    })
+    setShowAddForm(true)
+  }
 
 
 
