@@ -11,7 +11,7 @@ function Dashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCourse,setEditingCourse] = useState(null); 
   const [error,setError] = useState("");
-  const [isloading,setisLoading] = useState()
+  const [isLoading,setisLoading] = useState(false)
   const [success,setSuccess] = useState("");
   const [courseForm, setCourseForm] = useState({
     title: "",
@@ -168,9 +168,7 @@ const getCourses = async () => {
     setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
   };
 
-  // somewhere I closed the dashboard function too early//
-  // outside of function---//
-  // show loading if the user is not yet loaded//
+ 
   if(!currentUser){
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -318,7 +316,7 @@ const getCourses = async () => {
 
 {/* Course Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {isloading && (
+  {isLoading && (
   <div className="text-center py-4">
     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
   </div>
