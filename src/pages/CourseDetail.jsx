@@ -137,9 +137,17 @@ const deleteSession = async (sessionId) => {
   }
 };
 
-if(!course) return <div className="p-4">
-  Loading....
-</div>
+if(!course) {
+  if (error) {
+    return(
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="bg-red-500/20 border border-red-500 text-red-200 p-6 rounded-lg">
+        <h2 className="text-xl font-bold mb-2">Error</h2>
+        <p>{error}</p>
+      </div>
+     </div>
+    );
+  }
 
 return (
   <div className="min-h-screen relative">
