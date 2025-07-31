@@ -50,7 +50,7 @@ const getCourses = async () => {
   }
  };
 
- const addCourses = async (e) => {
+ const addCourse = async (e) => {
   e.preventDefault();
   setError("");
   setSuccess("");
@@ -167,16 +167,16 @@ const getCourses = async () => {
     setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
   };
 
-  // // show loading if the user is not yet loaded//
-  // if(!currentUser){
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
-  //       </div>
-  //     </div>
-  //   );
-  // }
-useUser() {
+  // show loading if the user is not yet loaded//
+  if(!currentUser){
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
+        </div>
+      </div>
+    );
+  }
+ 
   return (
     <div className="min-h-screen relative">
       {/* earth background */}
