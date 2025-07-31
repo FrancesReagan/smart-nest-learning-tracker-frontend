@@ -36,36 +36,75 @@ const getGourse = async () => {
     });
     setCourse(response.data);
   } catch (error) {
-    console.error("Error retrieving course for you:", error)
+    console.error("Error retrieving course for you:", error);
+    if(error.response?.status === 404) {
+      setError("Course not found.");
+    } else if (error.response?.status===401){
+      setError("Session expired. Please log in again.");
+    } else if (error.response?.status===403){
+      setError("You need permission to view this course.");
+    } else {
+      setError("Failed to load course. Try again...");
+    }
   }
-}
+};
 
 const getSessions = async () => {
   try {
-    const response = await axios.get(`/api/courses/${id}/sessions`)
-    setSessions(response.data)
+    const response = await axios.get(`/api/courses/${id}/sessions`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    setSessions(response.data);
   } catch (error) {
-    console.error("Error getting sessions:", error)
-  }
-  }
+    console.error("Error getting sessions:", error);
+    if(error.response?.status===401) {
+      setError("Session expired. Try to log in again.");
+    } else if (error.response?.status===403) {
+      setError("You don't have permission to view these sessions.");
+    } else {
+      setError("Failed to load sesions. Please refresh the page.");
+    }
+   }
+  };
 
 const addSession = async (e) => {
-  e.preventDefault()
+  e.preventDefault();
+  setError("");
+  setSucccess("");
+
   try {
     
     const sessionData = {
       ...newSession,
       topicsLearned: newSession.topicsLearned.split(",").map(topic => topic.trim()).filter(topic => topic)
-    }
-   await axios.post(`/api/courses/${id}/sessions`, sessionData)
+    };
 
-   setNewSession({ notes:"", topicsLearned:"" })
-   setShowAddForm(false)
-   getSessions()
+   await axios.post(`/api/courses/${id}/sessions`, sessionData. {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+   });
+
+   setNewSession({ notes:"", topicsLearned:"" });
+   setShowAddForm(false);
+   setSucccess("Session added successfully");
+   getSessions();
+  //  clear success message after 3 seconds//
   } catch (error) {
-    console.error("Error adding session:", error)
+    console.error("Error adding session:", error);
+    if (error.response?.status===400) {
+      setError ("Please check your session information and try again");
+    } else if (error.response?.status===401){
+      setError("Session expired. Please log in again. ");
+    } else if (error.response?.status===403){
+      setError ("You don't have permission to add sessions to this course.");
+    } else {
+      setError("Failed to add a session. Please try again.");
+    }
   }
-}
+};
 
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
