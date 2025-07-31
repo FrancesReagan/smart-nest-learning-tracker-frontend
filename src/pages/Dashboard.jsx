@@ -229,6 +229,19 @@ const getCourses = async () => {
               />
           </div>
         <div>
+        <label className="block text-white mb-2">Category</label>
+        <select 
+         value={courseForm.category}
+         onChange={(e) => setCourseForm({...courseForm, category: e.target.value})}
+         className="w-full p-2 rounded bg-white/20 text-white"
+         >
+          <option value="Programming">Programming</option>
+          <option value="Design">Design</option>
+          <option value="Business">Business</option>
+          <option value="Data Science">Data Science</option>
+          <option value="Investing">Investing</option>
+          <option value="Other">Other</option>
+         </select>
 
           </div>
         </div>
