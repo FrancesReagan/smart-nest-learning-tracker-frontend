@@ -34,11 +34,10 @@ const getCourses = async () => {
     const response = await axios.get("/api/courses", {
     headers: {
       Authorization: `Bearer ${token}`
-    }
-  });
-
-  getCourses(response.data)
-  } catch (error) {
+    },
+     });
+      setCourses(response.data)
+     } catch (error) {
     console.error("Error retrieving your courses:", error);
   } if (error.response?.status===401){
     setError("Session expired. Login again...");
@@ -48,7 +47,8 @@ const getCourses = async () => {
     setError("Failed to load your courses...Refresh the page.");
    }
   }
- };
+};
+ 
 
  const addCourse = async (e) => {
   e.preventDefault();
@@ -88,10 +88,10 @@ const getCourses = async () => {
   setSuccess ("");
 
   try {
-    await axios.put(`/api/courses/${editingCourse,_id}`, courseForm, {
+    await axios.put(`/api/courses/${editingCourse._id}`, courseForm, {
       headers: {
         Authorization: `Bearer ${token}`
-      }
+      },
     });
 
     setCourseForm({ title: "", description:"", category:"Other", url: "", status: "On the horizon"});
