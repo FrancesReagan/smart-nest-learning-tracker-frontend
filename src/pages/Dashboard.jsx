@@ -36,6 +36,7 @@ const getCourses = async () => {
       Authorization: `Bearer ${token}`
     }
   });
+
   getCourses(response.data)
   } catch (error) {
     console.error("Error retrieving your courses:", error);
@@ -68,6 +69,7 @@ const getCourses = async () => {
 
     // clear success message after 3 seconds//
     setTimeout(() => setSuccess(""), 3000);
+
   } catch (error) {
     console.error("Error happened adding your course:", error);
     if (error.response?.status===400) {
@@ -86,7 +88,7 @@ const getCourses = async () => {
   setSuccess ("");
 
   try {
-    await axios.put(`/api/courses/${editingCourse,._id}`, courseForm, {
+    await axios.put(`/api/courses/${editingCourse,_id}`, courseForm, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -100,6 +102,7 @@ const getCourses = async () => {
 
     // clear success message after 3 seconds//
     setTimeout(() => setSuccess(""), 3000);
+
   } catch (error) {
     console.error ("Error updating course:", error);
     if (error.response?.status===400){
@@ -129,6 +132,7 @@ const getCourses = async () => {
 
       // clear succcess message after 3 seconds//
       setTimeout(() =>setSuccess (""), 3000);
+
     } catch (error) {
       console.error("Error deleting course:", error);
       if (error.response?.status===401) {
@@ -163,16 +167,16 @@ const getCourses = async () => {
     setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
   };
 
-  // show loading if the user is not yet loaded//
-  if(!currentUser){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
-        </div>
-      </div>
-    );
-  }
-
+  // // show loading if the user is not yet loaded//
+  // if(!currentUser){
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
+  //       </div>
+  //     </div>
+  //   );
+  // }
+useUser() {
   return (
     <div className="min-h-screen relative">
       {/* earth background */}
@@ -327,7 +331,7 @@ const getCourses = async () => {
     </div>
   </div>
  </div>
-);
+)};
 
 
 export default Dashboard;

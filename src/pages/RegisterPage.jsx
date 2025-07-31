@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useUser } from "../contexts/UserContext"; 
-import { set } from "mongoose";
+
 
 function RegisterPage() {
   const [username, setUsername] = useState("");
