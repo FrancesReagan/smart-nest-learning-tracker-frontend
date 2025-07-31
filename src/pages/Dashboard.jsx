@@ -242,9 +242,21 @@ const getCourses = async () => {
           <option value="Investing">Investing</option>
           <option value="Other">Other</option>
          </select>
-
-          </div>
         </div>
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-white mb-2">Description</label>
+        <textarea
+          value={courseForm.description}
+          onChange={(e) => setCourseForm({...courseForm, description: e.target.value})}
+          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          placeholder="What will you learn today?"
+          rows="3"
+          required
+          />
+          
+      </div>
       </form>
 
      )}
