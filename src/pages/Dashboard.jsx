@@ -209,7 +209,32 @@ const getCourses = async () => {
           {showAddForm ? "Cancel" : "Add Course"}
         </button>
      </div>
-     
+     {/* add/edit course form */}
+     {showAddForm && (
+      <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
+        <h3 className="text-white text-lg mb-4">
+          {editingCourse? "Edit Course" : "Add New Course"}
+        </h3>
+      <form onSubmit={editingCourse? updateCourse : addCourse}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-white mb-2">Title</label>
+            <input
+              type="text"
+              value={courseForm.title}
+              onChange={(e) => setCourseForm({...courseForm, title: e.target.value})}
+              className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+              placeholder="Course title"
+              required
+              />
+          </div>
+        <div>
+
+          </div>
+        </div>
+      </form>
+
+     )}
     </div>
     </div>
   )
