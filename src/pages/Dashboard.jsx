@@ -99,8 +99,6 @@ const getCourses = async () => {
     setShowAddForm(false);
     setSuccess("Course updated successfully.");
     getCourses();
-
-    // clear success message after 3 seconds//
     setTimeout(() => setSuccess(""), 3000);
 
   } catch (error) {
@@ -129,8 +127,6 @@ const getCourses = async () => {
       });
       setSuccess("Course successfully deleted.");
       getCourses();
-
-      // clear succcess message after 3 seconds//
       setTimeout(() =>setSuccess (""), 3000);
 
     } catch (error) {
@@ -167,6 +163,8 @@ const getCourses = async () => {
     setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
   };
 
+  // somewhere I closed the dashboard function too early//
+  // outside of function---//
   // show loading if the user is not yet loaded//
   if(!currentUser){
     return (
@@ -177,6 +175,7 @@ const getCourses = async () => {
     );
   }
  
+  // outside of function//
   return (
     <div className="min-h-screen relative">
       {/* earth background */}
@@ -331,7 +330,8 @@ const getCourses = async () => {
     </div>
   </div>
  </div>
-)};
+);
+}
 
 
 export default Dashboard;
