@@ -317,13 +317,15 @@ const getCourses = async () => {
        onDelete={deleteCourse}
        onEdit={startEdit}
        />
-
-    )
-  )
-
+       ))
+     )}
     </div>
-    </div>
+  </div>
+ </div>
   )
+}
+
+export default Dashboard;
 
 
 
