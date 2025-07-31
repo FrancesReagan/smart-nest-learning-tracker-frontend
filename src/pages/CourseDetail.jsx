@@ -1,3 +1,5 @@
+// I believe I need an addCourse and deleteCourse here--missing these//
+
 import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -18,6 +20,8 @@ function CourseDetail() {
 
   const { currentUser } = useUser();
   const { token } = useAuth();
+
+  // need to missing add a  course and add session to the top---missing addcourse I believe//
 
   // wrap getCourse in a useCallback//
   const getCourse = useCallback(async () => {
@@ -86,88 +90,36 @@ const addSessions = async (e) => {
       .map((topic) => topic.trim())
       .filter((topic) => topic),
     };
-    
-    const response = await axios.get(`/api/courses/${id}`, {
+
+     const response = await axios.post(`/api/courses/${id}/sessions`, sessionData, {
       headers: {
         Authorization:`Bearer ${token}`
       }
     });
 
-    setCourse(response.data);
-
-  } catch (error) {
-    console.error("Error retrieving course for you:", error);
-    if(error.response?.status === 404) {
-      setError("Course not found.");
-    } else if (error.response?.status===401){
-      setError("Session expired. Please log in again.");
-    } else if (error.response?.status===403){
-      setError("You need permission to view this course.");
-    } else {
-      setError("Failed to load course. Try again...");
-    }
-  }
-};
-
-const getSessions = async () => {
-  try {
-    const response = await axios.get(`/api/courses/${id}/sessions`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-
-    setSessions(response.data);
-
-  } catch (error) {
-    console.error("Error getting sessions:", error);
-    if(error.response?.status===401) {
-      setError("Session expired. Try to log in again.");
-    } else if (error.response?.status===403) {
-      setError("You don't have permission to view these sessions.");
-    } else {
-      setError("Failed to load sessions. Please refresh the page.");
-    }
-   }
-  };
-
-const addSession = async (e) => {
-  e.preventDefault();
-  setError("");
-  setSuccess("");
-
-  try {
-    
-    const sessionData = {
-      ...newSession,
-      topicsLearned: newSession.topicsLearned.split(",").map(topic => topic.trim()).filter(topic => topic)
-    };
-
-   await axios.post(`/api/courses/${id}/sessions`, sessionData, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-   });
-
-   setNewSession({ notes:"", topicsLearned:"" });
-   setShowAddForm(false);
-   setSuccess("Session added successfully");
-   getSessions();
-  setTimeout(() => setSuccess(""), 3000);
+    setNewSession({notes:"", topicsLearned:""});
+    setShowAddForm(false);
+    setSuccess("Session added successfully");
+    getSessions();
+    setTimeout(() => setSuccess(""), 3000);
 
   } catch (error) {
     console.error("Error adding session:", error);
-    if (error.response?.status===400) {
-      setError ("Please check your session information and try again");
+    if(error.response?.status === 404) {
+      setError("Check your session information and try again.");
     } else if (error.response?.status===401){
-      setError("Session expired. Please log in again. ");
+      setError("Session expired. Please log in again.");
     } else if (error.response?.status===403){
-      setError ("You don't have permission to add sessions to this course.");
+      setError("You need permission to add sessions to this course.");
     } else {
-      setError("Failed to add a session. Please try again.");
+      setError("Failed to load session. Try again...");
     }
   }
 };
+
+
+
+
 
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
