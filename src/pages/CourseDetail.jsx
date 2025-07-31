@@ -1,6 +1,3 @@
-// finish addCourse logic  and add add and delete course buttons----add these update course--put ---update session put---
-// logic and buttons//
-
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -9,17 +6,14 @@ import { useAuth } from "../contexts/AuthContext";
 
 function CourseDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [course, setCourse] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showAddCourseForm, setShowAddCourseForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const [newSession, setNewSession] = useState({
-    notes:"",
-    topicsLearned:""
-  });
-
+  const [newSession, setNewSession] = useState({ notes:"", topicsLearned:"" });
   const [newCourse, setNewCourse] = useState({
     title:"",
     decription:"",
@@ -34,51 +28,39 @@ function CourseDetail() {
   // wrap getCourse in a useCallback//
   const getCourse = useCallback(async() => {
     try {
-      const response = await axios.get(`/api/courses/${id}`,{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await axios.get(`${baseURL}/api/courses/${id}`,{
+        headers: { Authorization: `Bearer ${token}`},
       });
 
       setCourse(response.data);
-
     } catch (error) {
       console.error("Error in retrieving your course:", error);
-      if (error.response?.status === 404) {
-        setError("Course not found.");
-      } else if (error.response?.status===401) {
-        setError("Session expired. You need to log in once more.");
-      } else if (error.response?.status===403) {
-        setError("To view this course you need to have the correct permissions.")
-      } else {
-        setError("Course failed to load...please try again.");
-      }
-     }
-  },[id,token]); 
+      if (error.response?.status === 404) setError("Course not found.");
+       else if (error.response?.status===401) setError("Session expired. You need to log in once more.");
+       else if (error.response?.status===403) setError("To view this course you need to have the correct permissions.");
+       else setError("Course failed to load...please try again.");
+    }
+  },[id,token,baseURL]); 
 
   // GET SESSIONS//
   // wrap getSessions in a useCallback//
   const getSessions = useCallback(async () => {
     try {
-      const response = await axios.get(`/api/courses/${id}/sessions`, {
-        headers: {
-          Authorization:`Bearer ${token}`,
-        },
+      const response = await axios.get(`${baseURL}/api/courses/${id}/sessions`, {
+        headers: { Authorization:`Bearer ${token}`},
       });
       setSessions(response.data);
     } catch (error) {
       console.error("Error getting sessions:", error);
-      if (error.response?.status === 404) {
+      if (error.response?.status === 404) 
         setError("Session has expired. Please log in again.");
-      } else if (error.response?.status===401) {
+       else if (error.response?.status===401) 
         setError("Session expired. You need to log in once more.");
-      } else if (error.response?.status===403) {
+       else if (error.response?.status===403) 
         setError("You do not have the right permissions to view these sessions.")
-      } else {
-        setError("Sessions failed to load. Refresh the page.");
+      else setError("Sessions failed to load. Refresh the page.");
       }
-      }
-      },[id,token]);
+    },[id,token]);
    
   // Add Course//
   const addCourse = async (e) => {
@@ -96,16 +78,15 @@ function CourseDetail() {
       setNewCourse({ title: "", description:"", category:"", status:"Active"});
       setShowAddCourseForm(false);
       // redirect to new course detail page//
-      Navigate(`/courses/${response.data._id}`)''
+      navigate(`/courses/${response.data._id}`)''
         } catch (error) {
       console.error("Error adding course:", error);
-      if (error.response?.status === 401) {
+      if (error.response?.status === 401) 
         setError("Session expired. Please log in again.");
-      } else if (error.response?.status === 403) {
+       else if (error.response?.status === 403) 
         setError("You do not have permission to add a course.");
-      } else {
-        setError("Failed to add course. Try again...");
-      }
+       else setError("Failed to add course. Try again...");
+      
     }
   };
 
@@ -140,15 +121,13 @@ const addSessions = async (e) => {
 
   } catch (error) {
     console.error("Error adding session:", error);
-    if(error.response?.status === 404) {
+    if(error.response?.status === 404) 
       setError("Check your session information and try again.");
-    } else if (error.response?.status===401){
+     else if (error.response?.status===401)
       setError("Session expired. Please log in again.");
-    } else if (error.response?.status===403){
+    else if (error.response?.status===403)
       setError("You need permission to add sessions to this course.");
-    } else {
-      setError("Failed to load session. Try again...");
-    }
+     else setError("Failed to load session. Try again...");
   }
 };
 
@@ -171,19 +150,17 @@ const deleteCourse = async () => {
       }, 2000);
           } catch (error) {
         console.error("Error deleting course:", error);
-        if (error.response?.status === 401) {
+        if (error.response?.status === 401) 
           setError("Session expired. Try to log in again...");
-        } else if (error.response?.status === 403) {
+         else if (error.response?.status === 403) 
           setError("You do not have permission to delete this course.");
-        } else if (error.response?.status === 404) {
+         else if (error.response?.status === 404) 
           setError("Course not found.");
-        } else {
-          setError("Could not delete course. Try again...");
-        }
+         else setError("Could not delete course. Try again...");
       }
     }
   };
-v
+
 
 // Delete Sessions//
 const deleteSession = async (sessionId) => {
@@ -204,15 +181,13 @@ const deleteSession = async (sessionId) => {
 
     } catch (error) {
     console.error("Error deleting session:", error);
-    if (error.response?.status===401) {
+    if (error.response?.status===401) 
       setError("Session expired. Try to log in again...");
-    } else if (error.response?.status===403) {
+     else if (error.response?.status===403) 
       setError("You can not delete this session...you don't have permission to.");
-    } else if (error.response?.status===404) {
+     else if (error.response?.status===404) 
       setError("Session is not found.");
-    } else {
-      setError("Could not delete session. Try again...");
-    }
+    else setError("Could not delete session. Try again...");
    }
   }
 };
@@ -319,7 +294,7 @@ return (
 {/* Add Course Form */}
 (showAddCourseForm && (
   <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
-  <form onSumbit={addCourse}>
+<form onSumbit={addCourse}>
  <div className="mb-4">
   <label className="block text-white mb-2">Course Title</label>
  <input 
@@ -367,9 +342,10 @@ return (
  >
   ➕Add Course
  </button>
-</form>
 </div>
-))
+</div>
+</form>
+
 
 {/* Add Session Form */}
 
@@ -407,7 +383,6 @@ return (
     </form>
   </div>
  )}
-</div> 
   
 
 {/* Sessions List */}

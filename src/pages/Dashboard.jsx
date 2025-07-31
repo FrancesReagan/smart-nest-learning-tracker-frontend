@@ -189,7 +189,9 @@ const getCourses = async () => {
       {/* HEADER */}
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-white mb-2">
+         
           🤓Good to see you again. Let's do this {currentUser.username}
+       
         </h1>
         <p className="text-gray-200">SmartNesting...Track your courses and learning process!</p>
       </div>
@@ -197,7 +199,9 @@ const getCourses = async () => {
       {/* Error & Success Messages */}
       {error && (
         <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
+        
           {error} 
+       
         </div>
       )}
 
@@ -214,6 +218,7 @@ const getCourses = async () => {
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           {showAddForm ? "Cancel" : "Add Course"}
+
         </button>
      </div>
 

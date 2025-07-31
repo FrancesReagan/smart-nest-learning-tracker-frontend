@@ -15,12 +15,13 @@ export const UserProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const { token, logout } = useAuth();
 
-  const baseURL = "import.meta.env.VITE_BACKEND_URL || "http://localhost:3000;
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 
 // wrapping getCurrentUser in useCalback//
 const getCurrentUser = useCallback(async () => {
 try {
+   setLoading(true);
     const response = await axios.get(`${baseURL}/api/users/me`, {
       headers: { Authorization: `Bearer ${token}`},
     });
