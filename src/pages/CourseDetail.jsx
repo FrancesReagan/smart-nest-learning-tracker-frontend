@@ -159,12 +159,31 @@ const deleteCourse = async () => {
     setError("");
     setSuccess("");
     try {
-      
-    } catch (error) {
-      
+      const response = await axios.delete(`/api/courses/${id}`,{
+        headers: {
+          Authorization:`Bearer ${token}`,
+        },
+      });
+      setSuccess("Course has been deleted.");
+      setTimeout(() => {
+        // redirect to courses list or homepage//
+        Navigate("/courses"); 
+      }, 2000);
+          } catch (error) {
+        console.error("Error deleting course:", error);
+        if (error.response?.status === 401) {
+          setError("Session expired. Try to log in again...");
+        } else if (error.response?.status === 403) {
+          setError("You do not have permission to delete this course.");
+        } else if (error.response?.status === 404) {
+          setError("Course not found.");
+        } else {
+          setError("Could not delete course. Try again...");
+        }
+      }
     }
-  }
-}
+  };
+v
 
 // Delete Sessions//
 const deleteSession = async (sessionId) => {
