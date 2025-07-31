@@ -50,16 +50,16 @@ const login = async (credentials) => {
 //  specific messages for different types of errors//
 if (error.response?.status===400 || error.response?.status===401) {
   throw new Error("Invalid email or password");
-} else if (error.response?.status===500){
+ } else if (error.response?.status===500){
   throw new Error("Server error. Try again...");
-} else if (!error.response) {
+ } else if (!error.response) {
   throw new Error("Problem with your connection....Network Error.");
-} else {
+ } else {
   throw new Error(error.response?.data?.message || "Login failed. Try again.");
-}
-} finally {
+ }
+ } finally {
   setAuthLoading(false);
-}
+ }
 };
 
 
@@ -80,8 +80,8 @@ const register = async (userData) => {
 
   return { token, user: newUser };
 
-} catch (error) {
-// clear any existing auth data on error//
+ } catch (error) {
+ // clear any existing auth data on error//
  localStorage.removeItem("token");
  delete axios.defaults.headers.common["Authorization"];
  setToken (null);
@@ -90,21 +90,21 @@ const register = async (userData) => {
 if (error.response?.status === 400) {
   if (error.response.data?.message?.includes("email")) {
     throw new Error("This email already exists. Use a different email.");
-  } else if (error.response.data?.message?.includes("username")){
+   } else if (error.response.data?.message?.includes("username")){
     throw new Error("Username is already taken. Choose a different username");
-  } else {
+   } else {
     throw new Error("Invalid registration data. Check that your information is correct.");
-  }
-  } else if (error.response?.status===500){
+   }
+   } else if (error.response?.status===500){
     throw new Error("Server error. Please try again...");
-  } else if (!error.response){
+   } else if (!error.response){
     throw new Error("Problem with your connection....Network Error.");
-  } else {
+   } else {
     throw new Error(error.response?.data?.message || "Registration failed. Please try again.");
-  }
-} finally {
+   }
+ } finally {
   setAuthLoading(false);
-}
+ }
 };
 
 
