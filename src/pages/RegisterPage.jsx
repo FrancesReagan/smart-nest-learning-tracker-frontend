@@ -118,7 +118,7 @@ function RegisterPage() {
             </Link>
           </p>
 
-          <Link t0="/" className="text-gray-400 hover:text-gray-300 text-sm">
+          <Link to="/" className="text-gray-400 hover:text-gray-300 text-sm">
             Back to Home 
           </Link>
 

@@ -19,7 +19,7 @@ function CourseDetail() {
   const { currentUser } = useUser();
   const { token } = useAuth();
 
-  // missing dependencies to include or ? getCourse,getSessions//
+  // missing dependencies to include or ? getCourse,getSessions---if so will need to wrap  in a callback function//
 useEffect(() => {
  if (currentUser && token) {
   getCourse();
