@@ -7,7 +7,7 @@ import CourseCard from "../components/CourseCard";
 
 
 function Dashboard() {
-  const [courses, setCourse] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCourse,setEditingCourse] = useState(null); 
   const [error,setError] = useState("");
@@ -20,150 +20,149 @@ function Dashboard() {
     status:"On the horizon"
 })
 
-const { currentUser } = useUser()
-const { token } = useAuth()
+const { currentUser } = useUser();
+const { token } = useAuth();
 
 useEffect(() => {
   if (currentUser && token) {
-  getCourses()
-}
-},[currentUser,token])
+  getCourses();
+  }
+},[currentUser,token]);
 
 const getCourses = async () => {
 
   try {
-    const response =await axios.get("/api/courses", {
+    const response = await axios.get("/api/courses", {
     headers: {
       Authorization: `Bearer ${token}`
     }
-  })
-  setCourse(response.data)
+  });
+  setCourses(response.data)
   } catch (error) {
-    console.error("Error retrieving your courses:", error)
+    console.error("Error retrieving your courses:", error);
   } if (error.response?.status===401){
-    setError("Session expired. Login again...")
+    setError("Session expired. Login again...");
   } else if (error.response?.status===500){
-    setError("Server Error. Try again...")
+    setError("Server Error. Try again...");
   } else {
-    setError("Failed to load your courses...Refresh the page.")
-
+    setError("Failed to load your courses...Refresh the page.");
    }
   }
- }
+ };
 
  const addCourses = async (e) => {
-  e.preventDefault()
-  setError("")
-  setSuccess("")
+  e.preventDefault();
+  setError("");
+  setSuccess("");
   
   try {
-    await axios.post("/api/courses", courseForm,{
+    await axios.post("/api/courses", courseForm, {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    })
+    });
 
-    setCourseForm({ title:"", description:"", category:"Other", url:"", status: "On the horizon"})
-    setShowAddForm(false)
-    setSuccess("Course added successfully.")
-    getCourses()
+    setCourseForm({ title:"", description:"", category:"Other", url:"", status: "On the horizon"});
+    setShowAddForm(false);
+    setSuccess("Course added successfully.");
+    getCourses();
 
     // clear success message after 3 seconds//
-    setTimeout(()=>setSuccess(""), 3000)
+    setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
-    console.error("Error happened adding your course:", error)
+    console.error("Error happened adding your course:", error);
     if (error.response?.status===400) {
-      setError("Please check your course information and try again.")
+      setError("Please check your course information and try again.");
     } else if (error.response?.status===401) {
-      setError("Session expired. Log in again...")
+      setError("Session expired. Log in again...");
     } else {
-      setError("Failed to add your course...please try again.")
+      setError("Failed to add your course...please try again.");
     }
-  }
- }
+   }
+ };
 
  const updateCourse = async (e) => {
-  e.preventDefault ()
-  setError("")
-  setSuccess ("")
+  e.preventDefault ();
+  setError("");
+  setSuccess ("");
 
   try {
     await axios.put(`/api/courses/${editingCourse,._id}`,courseForm, {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    })
+    });
 
-    setCourseForm({ title: "", description:"", category:"Other", url: "", status: "On the horizon"})
-    setEditingCourse(null)
-    setShowAddForm(false)
-    setSuccess("Course updated successfully.")
-    getCourses()  
+    setCourseForm({ title: "", description:"", category:"Other", url: "", status: "On the horizon"});
+    setEditingCourse(null);
+    setShowAddForm(false);
+    setSuccess("Course updated successfully.");
+    getCourses();
 
     // clear success message after 3 seconds//
-    setTimeout(() =>setSuccess(""), 3000)
+    setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
-    console.error ("Error updating course:", error)
+    console.error ("Error updating course:", error);
     if (error.response?.status===400){
-      setError("Check your course information and try once again...")
+      setError("Check your course information and try once again...");
     } else if (error.response?.status===401){
-      setError("Session expired. Log in again.")
+      setError("Session expired. Log in again.");
     } else if (error.response?.status===403) {
-      setError("You don't have permission to edit this course.")
+      setError("You don't have permission to edit this course.");
     } else {
-      setError("Could not update this course...try again.")
+      setError("Could not update this course...try again.");
     }
   }
- }
+ };
 
   const deleteCourse = async (courseId) => {
-    setError ("")
-    setSuccess ("")
+    setError ("");
+    setSuccess ("");
 
     try {
       await axios.delete(`/api/courses/$(courseId)`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      })
-      setSuccess("Course successfully deleted.")
-      getCourses()
+      });
+      setSuccess("Course successfully deleted.");
+      getCourses();
 
       // clear succcess message after 3 seconds//
-      setTimeout(() =>setSuccess (""), 3000)
+      setTimeout(() =>setSuccess (""), 3000);
     } catch (error) {
-      console.error("Error deleting course:", error)
-      if (error.response?.status===401){
-        setError("Session expired. Log in again.")
+      console.error("Error deleting course:", error);
+      if (error.response?.status===401) {
+        setError("Session expired. Log in again.");
       } else if (error.response?.status===403) {
-        setError("Permission to delete course denied.")
+        setError("Permission to delete course denied.");
       } else {
-        setError("Could not delete course...try again.")
+        setError("Could not delete course...try again.");
       }
     }
-  }
+  };
 
   const startEdit = (course) => {
-    setError ("")
-    setSuccess("")
-    setEditingCourse (course) 
+    setError ("");
+    setSuccess("");
+    setEditingCourse (course);
     setCourseForm({
       title: course.title,
       description: course.description,
       category: course.category,
       url: course.url || "",
       status: course.status,
-    })
+    });
     setShowAddForm(true)
-  }
+  };
 
   const cancelEdit = () => {
-    setError ("")
-    setSuccess("")
-    setEditingCourse(null)
-    setShowAddForm(false) 
-    setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" })
-  } 
+    setError ("");
+    setSuccess("");
+    setEditingCourse(null);
+    setShowAddForm(false);
+    setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
+  };
 
   // show loading if the user is not yet loaded//
   if(!currentUser){
@@ -172,7 +171,7 @@ const getCourses = async () => {
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -189,17 +188,20 @@ const getCourses = async () => {
         </h1>
         <p className="text-gray-200">SmartNesting...Track your courses and learning process!</p>
       </div>
+
       {/* Error & Success Messages */}
       {error && (
         <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
           {error} 
         </div>
       )}
+
      {success && (
       <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
         {success} 
       </div>
      )}
+
      {/* add course button */}
      <div className="mb-6">
       <button
@@ -209,6 +211,7 @@ const getCourses = async () => {
           {showAddForm ? "Cancel" : "Add Course"}
         </button>
      </div>
+
      {/* add/edit course form */}
      {showAddForm && (
       <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
@@ -228,6 +231,7 @@ const getCourses = async () => {
               required
               />
           </div>
+
         <div>
         <label className="block text-white mb-2">Category</label>
         <select 
@@ -257,7 +261,7 @@ const getCourses = async () => {
           />    
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
           <label className="block text-white mb-2">Course URL(optional)</label>
           <input
@@ -268,6 +272,7 @@ const getCourses = async () => {
            placeholder="https://..."
            />
         </div>
+
         <div>
           <label className="block text-white mb-2">Status</label>
           <select
@@ -289,6 +294,7 @@ const getCourses = async () => {
          >
           {editingCourse?"Update Course" : "Add Course"} 
         </button>
+
         {editingCourse && (
           <button
            type="button"
@@ -301,7 +307,7 @@ const getCourses = async () => {
          </div>
       </form>
     </div>
-     )}
+    )}
 
 {/* Course Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -322,8 +328,8 @@ const getCourses = async () => {
     </div>
   </div>
  </div>
-  )
-}
+);
+
 
 export default Dashboard;
 
