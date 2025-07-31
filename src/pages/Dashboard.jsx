@@ -270,8 +270,18 @@ const getCourses = async () => {
         </div>
         <div>
           <label className="block text-white mb-2">Status</label>
+          <select
+            value={courseForm.status}
+            onChange={(e) => setCourseForm({...courseForm, status:e.target.value})}
+            className="w-full p-2 rounded bg-white/20 text-white"
+            >
+              <option value="On the horizon">On the horizon</option>
+              <option value="Working it">Working it</option>
+              <option value="BAM did it">BAM did it</option>
+            </select>
         </div>
       </div>
+      
       </form>
 
      )}
