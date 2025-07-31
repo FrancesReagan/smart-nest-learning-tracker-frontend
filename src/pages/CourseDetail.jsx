@@ -19,6 +19,7 @@ function CourseDetail() {
   const { currentUser } = useUser();
   const { token } = useAuth();
 
+  // missing dependencies to include or ? getCourse,getSessions//
 useEffect(() => {
  if (currentUser && token) {
   getCourse();
@@ -34,7 +35,9 @@ const getCourse = async () => {
         Authorization:`Bearer ${token}`
       }
     });
+
     setCourse(response.data);
+
   } catch (error) {
     console.error("Error retrieving course for you:", error);
     if(error.response?.status === 404) {
@@ -56,7 +59,9 @@ const getSessions = async () => {
         Authorization: `Bearer ${token}`
       }
     });
+
     setSessions(response.data);
+
   } catch (error) {
     console.error("Error getting sessions:", error);
     if(error.response?.status===401) {
@@ -91,7 +96,6 @@ const addSession = async (e) => {
    setShowAddForm(false);
    setSuccess("Session added successfully");
    getSessions();
-  //  clear success message after 3 seconds//
   setTimeout(() => setSuccess(""), 3000);
 
   } catch (error) {
@@ -119,11 +123,11 @@ const deleteSession = async (sessionId) => {
           Authorization: `Bearer ${token}`
         }
       });
+
       setSuccess("Session deleted successfully.");
       getSessions();
-
-      // clear success message after 3 seconds//
       setTimeout(() => setSuccess(""),3000);
+
     } catch (error) {
     console.error("Error deleting session:", error);
     if (error.response?.status===401) {
@@ -135,7 +139,7 @@ const deleteSession = async (sessionId) => {
     } else {
       setError("Could not delete session. Try again...");
     }
-    }
+   }
   }
 };
 
@@ -173,25 +177,29 @@ return (
       {/* Error and Succeess Messages */}
       {error && (
         <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
+
           {error} 
+
         </div>
-      )}
+       )}
 
       {success && (
         <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
+
           {success} 
+
         </div>
       )}
 
       {/* Course Header */}
-      <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
-      <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
-      <p className="text-gray-200 mb-2">{course.description}</p>
-      <div className="flex space-x-4">
+    <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
+       <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
+       <p className="text-gray-200 mb-2">{course.description}</p>
+     <div className="flex space-x-4">
         <span className="text-sm text-gray-300">Category:{course.category}</span>
-      <span className="text-sm text-gray-300">Status: {course.status}</span>
-      </div>
-      </div>
+       <span className="text-sm text-gray-300">Status: {course.status}</span>
+     </div>
+    </div>
       
 {/* add session button */}
 <div className="mb-6">
@@ -200,7 +208,8 @@ return (
     className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
     >
       {showAddForm? "Cancel" : "Add Session"}
-    </button>
+
+  </button>
 </div>
 
 {/* Add Session Form */}
@@ -220,12 +229,12 @@ return (
       </div>
       <div className="mb-4">
         <label className="block text-white mb-2">Topics Learned (comma separated)</label>
-        <input
-         type="text"
-         value={newSession.topicsLearned}
-         onChange={(e) => setNewSession({...newSession, topicsLearned: e.target.value})}
-         className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
-         placeholder="React hooks, API calls, Crypto, etc."
+         <input
+          type="text"
+          value={newSession.topicsLearned}
+          onChange={(e) => setNewSession({...newSession, topicsLearned: e.target.value})}
+          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          placeholder="React hooks, API calls, Crypto, etc."
          />
       </div>
 
@@ -234,16 +243,18 @@ return (
         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           Add Session
-        </button>
-      </form>
-    </div>
-)}
 
+      </button>
+    </form>
   </div>
+ )}
+</div> 
+  
 
 {/* Sessions List */}
 <div className="space-y-4">
-  <h2 className="text-2xl font-bold text-white">Learning Sessions 
+  <h2 className="text-2xl font-bold text-white">
+     Learning Sessions 
     ({sessions.length})
   </h2>
 
@@ -259,15 +270,18 @@ return (
             {new Date(session.date).toLocaleDateString()}
           </div>
           <button
-           onClick={() => deleteSession(session._id)}
-           className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
+            onClick={() => deleteSession(session._id)}
+            className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
            >
             Delete
-           </button>
+
+          </button>
         </div>
+
       {session.notes && (
         <p className="text-white mb-2">{session.notes}</p>
       )}  
+
       {session.topicsLearned && session.topicsLearned.length > 0 && (
         <div>
           <p className="text-sm text-gray-300 mb-1">Topics:</p>
@@ -276,7 +290,7 @@ return (
               <span key={index} className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
                {topic}
               </span>
-          ))}
+             ))}
           </div>
          </div>
         )}
@@ -286,8 +300,8 @@ return (
    </div> 
   </div>
 
-    );
-  }
+ );
+}
 
 export default CourseDetail;
 
