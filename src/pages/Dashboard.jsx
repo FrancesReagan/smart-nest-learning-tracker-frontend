@@ -303,8 +303,24 @@ const getCourses = async () => {
     </div>
      )}
 
+{/* Course Grid */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {courses.length===0 ? (
+    <div className="col-span-full text-center py-12">
+      <p className="text-gray-300 text-lg">No courses added yet...add your first one.</p>
+</div>
+  ) : (
+    courses.map(course => (
+      <CourseCard
+       key={course._id}
+       course={course}
+       onDelete={deleteCourse}
+       onEdit={startEdit}
+       />
 
-     
+    )
+  )
+
     </div>
     </div>
   )
