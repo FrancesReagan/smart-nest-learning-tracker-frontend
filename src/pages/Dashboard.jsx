@@ -3,7 +3,7 @@ import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import { useAuth } from "../contexts/AuthContext";
 import CourseCard from "../components/CourseCard";
-import { set } from "mongoose";
+import { get, set } from "mongoose";
 
 
 function Dashboard() {
@@ -94,7 +94,11 @@ const getCourses = async () => {
       }
     })
 
-    setCourseForm({ })
+    setCourseForm({ title: "", description:"", category:"Other", url: "", status: "On the horizon"})
+    setEditingCourse(null)
+    setShowAddForm(false)
+    setSuccess("Course updated successfully.")
+    getCourses()  
   } catch (error) {
     
   }
