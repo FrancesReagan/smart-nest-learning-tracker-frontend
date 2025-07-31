@@ -1,6 +1,6 @@
 
 // need to figure out either setCurrentUser or getCurrent User---//
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
@@ -8,12 +8,8 @@ import { useAuth } from "./AuthContext";
 // create the context//
 const UserContext = createContext();
 
-// custom hook to use the UserContext//
-export const useUser = () => {
-  return useContext(UserContext);
-};
 
-// UserProvider component -- handles user data only-- may remove this into its own component folder//
+
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +20,7 @@ export const UserProvider = ({ children }) => {
 useEffect(() => {
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    setCurrentUser();
+    getCurrentUser();
   } else {
     setLoading(false);
   }
@@ -47,8 +43,13 @@ const getCurrentUser = async() => {
 
   // update user after login/register//
   const setUser = (userData) => {
-    getCurrentUser(userData);
-  };
+    if (userData) {
+      setCurrentUser(userData);
+    } else {
+      getCurrentUser();
+    }
+    };
+   
 
   // clear user on logout//
   const clearUser = () => {
