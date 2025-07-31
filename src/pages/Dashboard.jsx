@@ -187,8 +187,20 @@ const getCourses = async () => {
         <h1 className="text-3xl font-bold text-white mb-2">
           🤓Good to see you again. Let's do this {currentUser.username}
         </h1>
-        
+        <p className="text-gray-200">SmartNesting...Track your courses and learning process!</p>
       </div>
+      {/* Error & Success Messages */}
+      {error && (
+        <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
+          {error} 
+        </div>
+      )}
+     {success && (
+      <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
+        {success} 
+      </div>
+     )}
+     
     </div>
     </div>
   )
