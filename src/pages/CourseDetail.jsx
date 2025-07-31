@@ -1,4 +1,5 @@
-// finish addCourse logic  and add add and delete course buttons//
+// finish addCourse logic  and add add and delete course buttons----add these update course--put ---update session put---
+// logic and buttons//
 
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -79,9 +80,38 @@ function CourseDetail() {
       }
       },[id,token]);
    
-      // 
+  // Add Course//
+  const addCourse = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    try {
+      const response = await axios.post(`/api/courses`, newCourse), {
+        headers: {
+          Authorization:`Bearer ${token}`,
+        },
+      }),
+
+      setSuccess("Course added successfully.");
+      setNewCourse({ title: "", description:"", category:"", status:"Active"});
+      setShowAddCourseForm(false);
+      // redirect to new course detail page//
+      Navigate(`/courses/${response.data._id}`)''
+        } catch (error) {
+      console.error("Error adding course:", error);
+      if (error.response?.status === 401) {
+        setError("Session expired. Please log in again.");
+      } else if (error.response?.status === 403) {
+        setError("You do not have permission to add a course.");
+      } else {
+        setError("Failed to add course. Try again...");
+      }
+    }
+  };
 
 
+
+// Add Sessions//
 const addSessions = async (e) => {
   e.preventDefault();
   setError("");
@@ -125,7 +155,7 @@ const addSessions = async (e) => {
 
 
 
-
+// Delete Sessions//
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
     setError("");
