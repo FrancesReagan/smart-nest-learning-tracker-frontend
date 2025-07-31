@@ -230,7 +230,9 @@ if(!course) {
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-red-500/20 border border-red-500 text-red-200 p-6 rounded-lg">
         <h2 className="text-xl font-bold mb-2">Error</h2>
-        <p>{error}</p>
+        <p>
+          {error}
+        </p>
       </div>
      </div>
     );
@@ -280,8 +282,16 @@ return (
         <span className="text-sm text-gray-300">Category:{course.category}</span>
        <span className="text-sm text-gray-300">Status: {course.status}</span>
      </div>
-    </div>
-      
+  
+      {/* Delete course button */}
+      <button 
+        onClick={deleteCourse}
+        className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        >
+        🖾 Delete Course 🖾
+        </button>
+      </div>
+
 {/* add session button */}
 <div className="mb-6">
   <button
