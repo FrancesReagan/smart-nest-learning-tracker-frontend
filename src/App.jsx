@@ -3,7 +3,7 @@
 // fix loading and useUser call//
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
-import { UserProvider } from "./context/UserContext";
+import { UserProvider } from "./contexts/UserContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import "./App.css"

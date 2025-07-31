@@ -30,14 +30,13 @@ useEffect(() => {
 },[currentUser,token]);
 
 const getCourses = async () => {
-
   try {
     const response = await axios.get("/api/courses", {
     headers: {
       Authorization: `Bearer ${token}`
     }
   });
-  setCourses(response.data)
+  getCourses(response.data)
   } catch (error) {
     console.error("Error retrieving your courses:", error);
   } if (error.response?.status===401){
@@ -87,7 +86,7 @@ const getCourses = async () => {
   setSuccess ("");
 
   try {
-    await axios.put(`/api/courses/${editingCourse,._id}`,courseForm, {
+    await axios.put(`/api/courses/${editingCourse,._id}`, courseForm, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -120,7 +119,7 @@ const getCourses = async () => {
     setSuccess ("");
 
     try {
-      await axios.delete(`/api/courses/$(courseId)`, {
+      await axios.delete(`/api/courses/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
