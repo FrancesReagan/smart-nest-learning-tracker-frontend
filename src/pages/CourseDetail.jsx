@@ -108,14 +108,34 @@ const addSession = async (e) => {
 
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
+    setError("");
+    setSucccess("");
+
     try {
-      await axios.delete(`/api/sessions/${sessionId}`)
-      getSessions()
+      await axios.delete(`/api/sessions/${sessionId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setSucccess("Session deleted successfully.");
+      getSessions();
+
+      // clear success message after 3 seconds//
+      setTimeout(() => setSucccess(""),3000);
     } catch (error) {
-    console.error("Error deleting session:", error)
+    console.error("Error deleting session:", error);
+    if (error.response?.status===401) {
+      setError("Session expired. Try to log in again...");
+    } else if (error.response?.status===403) {
+      setError("You can not delete this session...you don't have permission to.");
+    } else if (error.response?.status===404) {
+      setError("Session is not found.");
+    } else {
+      setError("Could not delete session. Try again...");
+    }
     }
   }
-}
+};
 
 if(!course) return <div className="p-4">
   Loading....
