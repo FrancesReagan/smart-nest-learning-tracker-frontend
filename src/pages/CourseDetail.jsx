@@ -4,7 +4,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../hooks/useUser";
 import { useAuth } from "../contexts/AuthContext";
 
 function CourseDetail() {
