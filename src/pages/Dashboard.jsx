@@ -165,7 +165,33 @@ const getCourses = async () => {
     setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" })
   } 
 
+  // show loading if the user is not yet loaded//
+  if(!currentUser){
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
+        </div>
+      </div>
+    )
+  }
 
+  return (
+    <div className="min-h-screen relative">
+      {/* earth background */}
+      <div className="absolute inset-0 bg-cover bg-center opacity-30"
+           style={{ backgroundImage: "url(/designer-4.jpg)"}}
+           />
+    <div className="relative z-10 p-6">
+      {/* HEADER */}
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-white mb-2">
+          🤓Good to see you again. Let's do this {currentUser.username}
+        </h1>
+        
+      </div>
+    </div>
+    </div>
+  )
 
 
 
