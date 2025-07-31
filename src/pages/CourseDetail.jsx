@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
@@ -19,7 +19,27 @@ function CourseDetail() {
   const { currentUser } = useUser();
   const { token } = useAuth();
 
-  // missing dependencies to include or ? getCourse,getSessions---if so will need to wrap  in a callback function//
+  // wrap getCourse in a useCallback//
+  const getCourse = useCallback(async () => {
+    try {
+      const response = await axios.get(`/api/courses/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCourse(response.data);
+
+    } catch (error) {
+      console.error("Error in retrieving your course:", error);
+      if (error.response?.status === 404) {
+        setError("Course not found.");
+      } else if (error.response?.status===401) {
+        setError("Session expired. You need to log in once more.");
+      }
+      }
+    }
+  })
 useEffect(() => {
  if (currentUser && token) {
   getCourse();
@@ -307,15 +327,3 @@ export default CourseDetail;
 
 
 
-// This CourseDetail page:
-// •	Shows course info at the top
-// •	Has earth background (designer-4.jpg) with transparency
-// •	Simple "Add Session" button that shows/hides form
-// •	Form to add notes and topics (converts comma-separated topics to array)
-// •	Lists all sessions with dates and delete buttons
-// •	Shows topics as little blue badges
-// Uses exact API endpoints:
-// •	GET /api/courses/:id
-// •	GET /api/courses/:courseId/sessions
-// •	POST /api/courses/:courseId/sessions
-// •	DELETE /api/sessions/:id
