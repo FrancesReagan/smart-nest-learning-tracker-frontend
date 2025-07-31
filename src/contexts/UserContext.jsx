@@ -10,14 +10,13 @@ import { useAuth } from "./AuthContext";
 const UserContext = createContext();
 
 
-
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const { token, logout } = useAuth();
 
 
-// check if user is already logged in on app's start//
+// check if user is already logged in on app's start----if I add getCurrentUser in dependencies---need to use useCallback and wrap it//
 useEffect(() => {
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
