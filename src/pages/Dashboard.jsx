@@ -200,6 +200,15 @@ const getCourses = async () => {
         {success} 
       </div>
      )}
+     {/* add course button */}
+     <div className="mb-6">
+      <button
+        onClick={() => setShowAddForm(!showAddForm)}
+        className="bg-blue-600 text-white px-4 py-2 rounded hover: bg-blue-700"
+        >
+          {showAddForm ? "Cancel" : "Add Course"}
+        </button>
+     </div>
      
     </div>
     </div>
