@@ -11,6 +11,7 @@ function Dashboard() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingCourse,setEditingCourse] = useState(null); 
   const [error,setError] = useState("");
+  const [isloading,setisLoading] = useState()
   const [success,setSuccess] = useState("");
   const [courseForm, setCourseForm] = useState({
     title: "",
@@ -30,24 +31,28 @@ useEffect(() => {
 },[currentUser,token]);
 
 const getCourses = async () => {
+  setisLoading(true);
   try {
     const response = await axios.get("/api/courses", {
     headers: {
       Authorization: `Bearer ${token}`
-    },
+       },
      });
       setCourses(response.data)
-     } catch (error) {
+    } catch (error) {
     console.error("Error retrieving your courses:", error);
-  } if (error.response?.status===401){
-    setError("Session expired. Login again...");
-  } else if (error.response?.status===500){
-    setError("Server Error. Try again...");
-  } else {
-    setError("Failed to load your courses...Refresh the page.");
-   }
+    if (error.response?.status === 401) {
+      setError("Session expired. Login again...");
+    } else if (error.response?.status === 500) {
+      setError("Server Error. Try again...");
+    } else {
+      setError("Failed to load your courses...Refresh the page.");
+    }
+  } finally {
+    setisLoading(false);
   }
 };
+
  
 
  const addCourse = async (e) => {
@@ -208,7 +213,7 @@ const getCourses = async () => {
      <div className="mb-6">
       <button
         onClick={() => setShowAddForm(!showAddForm)}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover: bg-blue-700"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           {showAddForm ? "Cancel" : "Add Course"}
         </button>
@@ -313,7 +318,12 @@ const getCourses = async () => {
 
 {/* Course Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {courses.length===0 ? (
+  {isloading && (
+  <div className="text-center py-4">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+  </div>
+)}
+  {courses.length===0 ?(
     <div className="col-span-full text-center py-12">
       <p className="text-gray-300 text-lg">No courses added yet...add your first one.</p>
 </div>
