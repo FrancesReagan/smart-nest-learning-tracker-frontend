@@ -1,27 +1,40 @@
-ssimport { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { use } from "react";
+import { useUser } from "../contexts/UserContext";
+import { useAuth } from "../contexts/AuthContext";
 
 function CourseDetail() {
-  const {id} = useParams();
-  const [course, setCourse] = useState(null)
-  const [sessions, setSessions] = useState([])
-  const [showAddForm, setShowAddForm] = useState(false)
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+  const [sessions, setSessions] = useState([]);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [error, setError] = useState("");
+  const [succcess, setSucccess] = useState("");
   const [newSession, setNewSession] = useState({
     notes:"",
     topicsLearned:""
-  })
+  });
+
+  const { currentUser } = useUser();
+  const { token } = useAuth();
 
 useEffect(() => {
-  getCourses()
-  getSessions()
-},[id])
+ if (currentUser && token) {
+  getCourses();
+  getSession();
+ }
+},[id, currentUser, token]);
 
 const getGourse = async () => {
+
   try {
-    const response = await axios.get(`/api/courses/${id}`)
-    setCourse(response.data)
+    const response = await axios.get(`/api/courses/${id}`, {
+      headers: {
+        Authorization:`Bearer ${token}`
+      }
+    });
+    setCourse(response.data);
   } catch (error) {
     console.error("Error retrieving course for you:", error)
   }
