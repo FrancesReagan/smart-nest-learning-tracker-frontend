@@ -157,6 +157,14 @@ const getCourses = async () => {
     setShowAddForm(true)
   }
 
+  const cancelEdit = () => {
+    setError ("")
+    setSuccess("")
+    setEditingCourse(null)
+    setShowAddForm(false) 
+    setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" })
+  } 
+
 
 
 
