@@ -288,7 +288,7 @@ return (
         onClick={deleteCourse}
         className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
         >
-        🖾Delete Course
+        ✖️Delete Course
         </button>
       </div>
 
@@ -299,7 +299,7 @@ return (
    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-4"
   >
 
-{showAddCourseForm?"Cancel" : "➕Add New Course"}
+{showAddCourseForm?"Cancel" : "Add New Course"}
 
   </button>
 
@@ -315,6 +315,20 @@ return (
 
   </button>
 </div>
+
+{/* Add Course Form */}
+(showAddCourseForm && (
+  <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
+  <form onSumbit={addCourse}>
+ <div className="mb-4">
+  <label className="block text-white mb-2">Course Title</label>
+
+ </div>
+
+  </form>
+
+  </div>
+))
 
 {/* Add Session Form */}
 
@@ -346,7 +360,7 @@ return (
         type="submit"
         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
-          Add Session
+          ➕Add Session
 
       </button>
     </form>
@@ -358,7 +372,7 @@ return (
 {/* Sessions List */}
 <div className="space-y-4">
   <h2 className="text-2xl font-bold text-white">
-     Learning Sessions 
+     🎒Learning Sessions 
     ({sessions.length})
   </h2>
 
@@ -377,7 +391,7 @@ return (
             onClick={() => deleteSession(session._id)}
             className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
            >
-            Delete
+            ✖️Delete
 
           </button>
         </div>
