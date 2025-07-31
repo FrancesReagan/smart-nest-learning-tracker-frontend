@@ -1,6 +1,6 @@
 
 // need to figure out either setCurrentUser or getCurrent User---//
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext, useCallback, use } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
@@ -16,7 +16,20 @@ export const UserProvider = ({ children }) => {
   const { token, logout } = useAuth();
 
 
-// check if user is already logged in on app's start----if I add getCurrentUser in dependencies---need to use useCallback and wrap it//
+// wrapping getCurrentUser in useCalback//
+const getCurrentUser = useCallback(async () => {
+  try {
+    const response = await axios.get("/api/users/me");
+    setCurrentUser(response.data);
+
+  } catch (error) {
+    console.error("Get current user error:", error);
+    logout();
+    setCurrentUser(null);
+  } finally {
+    setLoading(false);
+  }, [logout]);
+
 useEffect(() => {
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -24,61 +37,40 @@ useEffect(() => {
   } else {
     setLoading(false);
   }
-},[token]);
+},[token,getCurrentUser]);
 
-
-const getCurrentUser = async() => {
-  try {
-    const response = await axios.get("/api/users/me");
-    setCurrentUser(response.data);
-  } catch (error) {
-    console.error("Get current user error:", error);
-    // if getting the user fails, logout to clear invalid tokens//
-    logout();
-    setCurrentUser(null);
-  } finally {
-    setLoading(false);
+const setUser = (userData) => {
+  if (userData) {
+    setCurrentUser(userData);
+  } else{
+    getCurrentUser();
   }
-  };
-
-  // update user after login/register//
-  const setUser = (userData) => {
-    if (userData) {
-      setCurrentUser(userData);
-    } else {
-      getCurrentUser();
-    }
-    };
-   
-
-  // clear user on logout//
-  const clearUser = () => {
-    setCurrentUser(null);
-  };
-
-  const value = {
-    currentUser,
-    loading,
-    setUser,
-    clearUser,
-    getCurrentUser,
-  };
-
-  return (
-    <UserContext.Provider value={value}>
-     { children }
-    </UserContext.Provider>  
-
-  );
 };
 
-// issues here---forgot to define//
+const clearUser = () => {
+  setCurrentUser(null);
+};
+
+const value = {
+  currentUser,
+  loading,
+  setUser,
+  clearUser,
+  getCurrentUser,
+};
+
+return (
+  <UserContext.Provider value={value}>
+    {children}
+  </UserContext.Provider>
+);
+};
+
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {
-    throw new Error("useUser has to be inside a UserProvider wrapper");
+    throw 
   }
-  return context;
-};
+}
 
 
