@@ -1,6 +1,6 @@
 
 // need to figure out either setCurrentUser or getCurrent User---//
-import { createContext, useState, useEffect, useContext, useCallback, use } from "react";
+import { createContext, useState, useEffect, useContext, useCallback} from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
@@ -18,17 +18,19 @@ export const UserProvider = ({ children }) => {
 
 // wrapping getCurrentUser in useCalback//
 const getCurrentUser = useCallback(async () => {
-  try {
+try {
     const response = await axios.get("/api/users/me");
     setCurrentUser(response.data);
-
   } catch (error) {
     console.error("Get current user error:", error);
     logout();
     setCurrentUser(null);
   } finally {
     setLoading(false);
+  }
   }, [logout]);
+
+  
 
 useEffect(() => {
   if (token) {
