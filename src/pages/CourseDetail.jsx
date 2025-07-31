@@ -10,7 +10,7 @@ function CourseDetail() {
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [error, setError] = useState("");
-  const [succcess, setSucccess] = useState("");
+  const [success, setSuccess] = useState("");
   const [newSession, setNewSession] = useState({
     notes:"",
     topicsLearned:""
@@ -21,12 +21,12 @@ function CourseDetail() {
 
 useEffect(() => {
  if (currentUser && token) {
-  getCourses();
-  getSession();
+  getCourse();
+  getSessions();
  }
 },[id, currentUser, token]);
 
-const getGourse = async () => {
+const getCourse = async () => {
 
   try {
     const response = await axios.get(`/api/courses/${id}`, {
@@ -64,7 +64,7 @@ const getSessions = async () => {
     } else if (error.response?.status===403) {
       setError("You don't have permission to view these sessions.");
     } else {
-      setError("Failed to load sesions. Please refresh the page.");
+      setError("Failed to load sessions. Please refresh the page.");
     }
    }
   };
@@ -72,7 +72,7 @@ const getSessions = async () => {
 const addSession = async (e) => {
   e.preventDefault();
   setError("");
-  setSucccess("");
+  setSuccess("");
 
   try {
     
@@ -81,7 +81,7 @@ const addSession = async (e) => {
       topicsLearned: newSession.topicsLearned.split(",").map(topic => topic.trim()).filter(topic => topic)
     };
 
-   await axios.post(`/api/courses/${id}/sessions`, sessionData. {
+   await axios.post(`/api/courses/${id}/sessions`, sessionData, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -89,9 +89,11 @@ const addSession = async (e) => {
 
    setNewSession({ notes:"", topicsLearned:"" });
    setShowAddForm(false);
-   setSucccess("Session added successfully");
+   setSuccess("Session added successfully");
    getSessions();
   //  clear success message after 3 seconds//
+  setTimeout(() => setSuccess(""), 3000);
+
   } catch (error) {
     console.error("Error adding session:", error);
     if (error.response?.status===400) {
@@ -109,7 +111,7 @@ const addSession = async (e) => {
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
     setError("");
-    setSucccess("");
+    setSuccess("");
 
     try {
       await axios.delete(`/api/sessions/${sessionId}`, {
@@ -117,11 +119,11 @@ const deleteSession = async (sessionId) => {
           Authorization: `Bearer ${token}`
         }
       });
-      setSucccess("Session deleted successfully.");
+      setSuccess("Session deleted successfully.");
       getSessions();
 
       // clear success message after 3 seconds//
-      setTimeout(() => setSucccess(""),3000);
+      setTimeout(() => setSuccess(""),3000);
     } catch (error) {
     console.error("Error deleting session:", error);
     if (error.response?.status===401) {
@@ -149,6 +151,14 @@ if(!course) {
     );
   }
 
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
+      </div>
+    </div>
+    );
+  }
+
 return (
   <div className="min-h-screen relative">
     {/* earth background */}
@@ -159,13 +169,27 @@ return (
     <div className="absolute inset-0 bg-black/50" />
 
     <div className="relative z-10 p-6">
+
+      {/* Error and Succeess Messages */}
+      {error && (
+        <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
+          {error} 
+        </div>
+      )}
+
+      {success && (
+        <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
+          {success} 
+        </div>
+      )}
+
       {/* Course Header */}
       <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
       <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
       <p className="text-gray-200 mb-2">{course.description}</p>
       <div className="flex space-x-4">
         <span className="text-sm text-gray-300">Category:{course.category}</span>
-      <span className="text-sm text-gray-300">Status:{course.status}</span>
+      <span className="text-sm text-gray-300">Status: {course.status}</span>
       </div>
       </div>
       
@@ -173,7 +197,7 @@ return (
 <div className="mb-6">
   <button
     onClick={() => setShowAddForm(!showAddForm)}
-    className="bg-blue-600 text-white px-4 py-2 rounded hover: bg-blue-700"
+    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
     >
       {showAddForm? "Cancel" : "Add Session"}
     </button>
@@ -195,7 +219,7 @@ return (
          />
       </div>
       <div className="mb-4">
-        <label className="block text-white mb-2">Topics Learned(comma separated)</label>
+        <label className="block text-white mb-2">Topics Learned (comma separated)</label>
         <input
          type="text"
          value={newSession.topicsLearned}
@@ -223,7 +247,7 @@ return (
     ({sessions.length})
   </h2>
 
-  {sessions.lenth===0 ? (
+  {sessions.length===0 ? (
     <div className="bg-white/10 backdrop-blur-sm p-6 rounded text-center">
       <p className="text-gray-300">No sessions yet. Add your first one above🔝</p>
       </div>
@@ -248,8 +272,8 @@ return (
         <div>
           <p className="text-sm text-gray-300 mb-1">Topics:</p>
           <div className="flex flex-wrap gap-2">
-            {session.topicsLearned.map((topic,index) => (
-              <span key={index}className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
+            {session.topicsLearned.map((topic, index) => (
+              <span key={index} className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
                {topic}
               </span>
           ))}
@@ -261,8 +285,8 @@ return (
      )}
    </div> 
   </div>
-  </div>
-    )
+
+    );
   }
 
 export default CourseDetail;
