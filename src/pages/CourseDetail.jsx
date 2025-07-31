@@ -153,7 +153,18 @@ const addSessions = async (e) => {
 };
 
 
-
+// Delete Course//
+const deleteCourse = async () => {
+  if(window.confirm("This is a permanent decision--you want to delete this course?")){
+    setError("");
+    setSuccess("");
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
+}
 
 // Delete Sessions//
 const deleteSession = async (sessionId) => {
