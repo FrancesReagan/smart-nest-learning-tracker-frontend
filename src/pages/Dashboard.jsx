@@ -3,15 +3,15 @@ import axios from "axios";
 import { useUser } from "../hooks/useUser";
 import { useAuth } from "../contexts/AuthContext";
 import CourseCard from "../components/CourseCard";
-
+import { useNavigate } from "react-router-dom";
 
 
 function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editingCourse,setEditingCourse] = useState(null); 
   const [error,setError] = useState("");
-  const [isLoading,setisLoading] = useState(false)
+  // const [isLoading, setLoading] = useState(false)
+  // const [editingCourse,setEditingCourse] = useState(null); 
   const [success,setSuccess] = useState("");
   const [courseForm, setCourseForm] = useState({
     title: "",
@@ -19,10 +19,12 @@ function Dashboard() {
     category: "Other",
     url: "",
     status:"On the horizon"
-})
+});
 
 const { currentUser } = useUser();
 const { token } = useAuth();
+const navigate = useNavigate();
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 useEffect(() => {
   if (currentUser && token) {
