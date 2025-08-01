@@ -215,24 +215,8 @@ const getCourses = useCallback(async () => {
         </div>
       </div>
 
-      <div className="flex space-x-2">
-        <button 
-         type="submit"
-         className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-         >
-          {editingCourse?"Update Course" : "Add Course"} 
-        </button>
-
-        {editingCourse && (
-          <button
-           type="button"
-           onClick={cancelEdit}
-           className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700"
-           >
-            Cancel
-           </button>
-        )}
-         </div>
+      {/* <div className="flex space-x-2"> */}
+        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Course</button>
       </form>
     </div>
     )}
