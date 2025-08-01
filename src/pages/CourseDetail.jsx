@@ -60,7 +60,7 @@ function CourseDetail() {
         setError("You do not have the right permissions to view these sessions.")
       else setError("Sessions failed to load. Refresh the page.");
       }
-    },[id,token]);
+    },[id,token,baseURL]);
    
   // Add Course//
   const addCourse = async (e) => {
@@ -68,23 +68,21 @@ function CourseDetail() {
     setError("");
     setSuccess("");
     try {
-      const response = await axios.post(`/api/courses`, newCourse), {
-        headers: {
-          Authorization:`Bearer ${token}`,
-        },
+       const response = await axios.post(`${baseURL}/api/courses`, newCourse, {
+        headers: {Authorization:`Bearer ${token}`},
       }),
 
       setSuccess("Course added successfully.");
       setNewCourse({ title: "", description:"", category:"", status:"Active"});
       setShowAddCourseForm(false);
       // redirect to new course detail page//
-      navigate(`/courses/${response.data._id}`)''
+      navigate(`/courses/${response.data._id}`);
         } catch (error) {
       console.error("Error adding course:", error);
       if (error.response?.status === 401) 
         setError("Session expired. Please log in again.");
        else if (error.response?.status === 403) 
-        setError("You do not have permission to add a course.");
+        setError("You don't have the right permissions to add this course.");
        else setError("Failed to add course. Try again...");
       
     }
@@ -101,19 +99,17 @@ const addSessions = async (e) => {
   try {
     const sessionData = {
       ...newSession,
-      topicsLearned: newSession.topicsLearned,
+      topicsLearned: newSession.topicsLearned
       .split(",")
       .map((topic) => topic.trim())
       .filter((topic) => topic),
     };
 
-     const response = await axios.post(`/api/courses/${id}/sessions`, sessionData, {
-      headers: {
-        Authorization:`Bearer ${token}`
-      }
+      const response = await axios.post(`${baseURL}/api/courses/${id}/sessions`, sessionData, {
+      headers: {Authorization:`Bearer ${token}`},
     });
 
-    setNewSession({notes:"", topicsLearned:""});
+    setNewSession({ notes:"", topicsLearned:""});
     setShowAddForm(false);
     setSuccess("Session added successfully");
     getSessions();
@@ -134,20 +130,15 @@ const addSessions = async (e) => {
 
 // Delete Course//
 const deleteCourse = async () => {
-  if(window.confirm("This is a permanent decision--you want to delete this course?")){
+  if(window.confirm("This is a permanent decision--you want to delete this course?")) {
     setError("");
     setSuccess("");
     try {
-      const response = await axios.delete(`/api/courses/${id}`,{
-        headers: {
-          Authorization:`Bearer ${token}`,
-        },
+        const response = await axios.delete(`${baseURL}/api/courses/${id}`, {
+        headers: {Authorization:`Bearer ${token}`,},
       });
       setSuccess("Course has been deleted.");
-      setTimeout(() => {
-        // redirect to courses list or homepage//
-        Navigate("/courses"); 
-      }, 2000);
+      setTimeout(() => navigate("/courses"), 2000);
           } catch (error) {
         console.error("Error deleting course:", error);
         if (error.response?.status === 401) 
@@ -169,10 +160,8 @@ const deleteSession = async (sessionId) => {
     setSuccess("");
 
     try {
-      await axios.delete(`/api/sessions/${sessionId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+        const response = await axios.delete(`${baseURL}/api/sessions/${sessionId}`, {
+        headers: {Authorization: `Bearer ${token}`},
       });
 
       setSuccess("Session deleted successfully.");
@@ -191,6 +180,23 @@ const deleteSession = async (sessionId) => {
    }
   }
 };
+
+// UPDATE SESSION//
+const updateSession = async (sessionId, updatedSession) => {
+  setError("");
+  setSuccess("");
+  try {
+    const sessionData = {
+      ...updatedSession,
+      topicsLearned: updatedSession.topicsLearned
+        .split(",")
+        .map(topic => topic.trim())
+        .filter((topic) => topic),
+    };
+  } catch (error) {
+    
+  }
+}
 
 useEffect(() => {
  if (currentUser && token) {
