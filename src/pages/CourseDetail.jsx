@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
@@ -44,7 +44,20 @@ function CourseDetail() {
   },[id,token,baseURL]); 
 
   // GET COURSE BY ID---GET//
-  const getCourse = 
+  const getCourse = useCallback(async() => {
+    try {
+      const response = await axios.get(`${baseURL}/api/courses/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setEditedCourse({...response.data});
+     } catch (error) {
+      console.error("Error retrieving course:", error);
+      if (error.response?.status === 404) setError("Course not found.");
+      else if (error.response?.status === 401) setError("Session expired. Log in again.");
+      else if (error.response?.status === 403) setError("To view this course you need to have the correct permissions.");
+      else setError("Course failed to load...please try again.");
+    }
+  }, [id, token, baseURL]);
 
   
 
