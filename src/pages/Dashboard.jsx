@@ -1,4 +1,4 @@
-import{ useState, useEffect } from "react";
+import{ useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
 import { useAuth } from "../contexts/AuthContext";
@@ -32,28 +32,22 @@ useEffect(() => {
   }
 },[currentUser,token]);
 
-const getCourses = async () => {
+const getCourses = useCallback(async () => {
   setisLoading(true);
   try {
-    const response = await axios.get("/api/courses", {
-    headers: {
-      Authorization: `Bearer ${token}`
-       },
+    const response = await axios.get(`${baseURL}/api/courses`, {
+    headers: {Authorization: `Bearer ${token}`},
      });
-      setCourses(response.data)
+      setCourses(response.data);
     } catch (error) {
     console.error("Error retrieving your courses:", error);
-    if (error.response?.status === 401) {
-      setError("Session expired. Login again...");
-    } else if (error.response?.status === 500) {
-      setError("Server Error. Try again...");
-    } else {
-      setError("Failed to load your courses...Refresh the page.");
-    }
+    if (error.response?.status === 401) setError("Session expired. Login again...");
+    else if (error.response?.status === 500) setError("Server Error. Try again...");
+    else setError("Failed to load your courses...Refresh the page.");
   } finally {
-    setisLoading(false);
+    setIsLoading(false);
   }
-};
+}, [token,baseURL]);
 
  
 
