@@ -1,4 +1,4 @@
-limport { useState, useEffect, useCallback, use } from "react";
+lalimport { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
@@ -335,7 +335,15 @@ return (
           rows="3"
           />
       </div>
-
+     <div className="mb-4">
+      <label className="block text-white mb-2>Category</label>
+       <input
+        type="text"
+        value={editedCourse.category}
+        onChange={(e) => setEditedCourse({...editedCourse, category: e.target.value})}
+        placeholder="Enter a course category"
+        />
+     </div>
     </form>
 )}
 
