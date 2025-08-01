@@ -193,6 +193,12 @@ const updateSession = async (sessionId, updatedSession) => {
         .map(topic => topic.trim())
         .filter((topic) => topic),
     };
+    const response = await axios.put(`${baseURL}/api/courses/${courseId}/sessions/${sessionId}`, sessionData, {
+      headers: { Authorization: `Bearer $ {token}` },
+    }),
+    setSuccess("Session updated succesffuly.");
+    getSessions();
+    setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
     
   }
