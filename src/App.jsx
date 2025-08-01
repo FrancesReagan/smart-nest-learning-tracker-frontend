@@ -4,7 +4,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
-import { useUser } from "./hooks/useUser.js";
+import { useUser } from '@/hooks/useUser.js';
+
 
 
 
@@ -29,19 +30,18 @@ function App() {
 } 
 
 
-// may or may not use this spinner while loading//
-// function LoadingSpinner() {
-//   return (
-//     <div className="min-h-screen flex items-center justify-center">
-//       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-//     </div>
-//   );
-// }
 
 
 function AppRoutes() {
- const { currentUser } = useUser();
+ const { currentUser, loading } = useUser();
  
+ if(loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
   return (    
      <Router>
         <div className="App">

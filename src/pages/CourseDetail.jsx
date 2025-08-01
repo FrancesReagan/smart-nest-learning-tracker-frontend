@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useUser } from "../hooks/useUser.js";
+import { useUser } from '@/hooks/useUser.js';
+
 
 
 

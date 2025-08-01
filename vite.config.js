@@ -1,14 +1,19 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
 import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react({
-      jsxRuntime: "automatic", 
-      tsDecorators: false, 
+      jsxRuntime: 'automatic',
+      tsDecorators: false,
     }),
     tailwindcss(),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'), // <--- alias
+    },
+  },
 });

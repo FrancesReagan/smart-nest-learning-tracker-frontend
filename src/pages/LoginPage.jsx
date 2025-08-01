@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useUser } from "../hooks/useUser.js";
+import { useUser } from '@/hooks/useUser.js';
+
 
 
 

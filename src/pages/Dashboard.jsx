@@ -1,6 +1,7 @@
 import{ useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useUser } from "../hooks/useUser.js";
+import { useUser } from '@/hooks/useUser.js';
+
 
 
 
@@ -27,9 +28,6 @@ const { token } = useAuth();
 const navigate = useNavigate();
 const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-useEffect(() => {
-  if (currentUser && token) getCourses();
-  },[currentUser,token,getCourses]);
 
   // GET COURSES ---GET//
 const getCourses = useCallback(async () => {
@@ -45,6 +43,10 @@ const getCourses = useCallback(async () => {
     else setError("Failed to load your courses...Refresh the page.");
   }
 }, [token,baseURL]);
+
+useEffect(() => {
+  if (currentUser && token) getCourses();
+  },[currentUser,token,getCourses]);
 
 
  // Add Course--POST//

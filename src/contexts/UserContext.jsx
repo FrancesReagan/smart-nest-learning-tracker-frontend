@@ -1,8 +1,11 @@
 
 // need to figure out either setCurrentUser or getCurrent User---//
+import { useAuth } from "./AuthContext";
+
 import { createContext, useState, useEffect, useCallback} from "react";
 import axios from "axios";
-import { useAuth } from "./AuthContext";
+
+
 
 
 
