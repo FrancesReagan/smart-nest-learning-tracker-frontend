@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
+import { useUser } from "../hooks/useUser";
+
 
 const ProtectedRoute = ({ children }) => {
   const { currentUser } = useUser();
@@ -9,7 +10,7 @@ const ProtectedRoute = ({ children }) => {
     // redirect to login if authenticated//
     return <Navigate to="/login" replace />
   }
-  
+
   return children;
   
 };

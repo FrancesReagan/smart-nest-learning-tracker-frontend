@@ -178,8 +178,8 @@ const updateSession = async (sessionId, updatedSession) => {
     };
     // ${baseURL}/api/courses/${courseId}/sessions/${sessionId}
     const response = await axios.put(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, sessionData, {
-      headers: { Authorization: `Bearer $ {token}` },
-    }),
+      headers: { Authorization: `Bearer ${token}` },
+    });
     setSuccess("Session updated succesffuly.");
     getSessions();
     setTimeout(() => setSuccess(""), 3000);
