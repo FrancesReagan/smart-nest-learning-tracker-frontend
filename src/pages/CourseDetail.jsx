@@ -10,18 +10,14 @@ function CourseDetail() {
   const [course, setCourse] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [showAddCourseForm, setShowAddCourseForm] = useState(false);
+ const [showEditForm, setShowEditForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [newSession, setNewSession] = useState({ notes:"", topicsLearned:"" });
-  const [newCourse, setNewCourse] = useState({
-    title:"",
-    decription:"",
-    category:"",
-    status:"Active",
-  });
+  const [editedCourse, setEditedCourse] = useState(null);
   const { currentUser } = useUser();
   const { token } = useAuth();
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
  
 // GET COURSE//
@@ -200,9 +196,12 @@ const updateSession = async (sessionId, updatedSession) => {
     getSessions();
     setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
-    
-  }
-}
+    console.error("Error updating session:", error);
+      if (error.response?.status === 401) setError("Session expired. Log in again...");
+      else if (error.response?.status === 403) setError("Insufficient permissions.");
+      else setError("Could not update session. Try again...");
+    }
+  };
 
 useEffect(() => {
  if (currentUser && token) {
