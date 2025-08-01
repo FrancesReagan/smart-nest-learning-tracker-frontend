@@ -1,5 +1,5 @@
-/* @import "tailwindcss"; */
 @import "tailwindcss";
+/* These three directives are essential for Tailwind to work. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
