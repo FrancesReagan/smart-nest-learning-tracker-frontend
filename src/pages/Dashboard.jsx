@@ -55,7 +55,7 @@ useEffect(() => {
     setError("");
     setSuccess("");
     try {
-       const response = await axios.post(`${baseURL}/api/courses`, courseForm, {
+       await axios.post(`${baseURL}/api/courses`, courseForm, {
         headers: {Authorization:`Bearer ${token}`},
       });
       setCourseForm({ title:"", description:"", category:"Other", url:"", status:"On the horizon" });
@@ -79,7 +79,7 @@ useEffect(() => {
 
     try {
       // await axios.delete(`${baseURL}/api/courses/${Id}//
-      const response = await axios.delete(`${baseURL}/api/courses/${courseId}`, {
+       await axios.delete(`${baseURL}/api/courses/${courseId}`, {
         headers: { Authorization: `Bearer ${token}`},
       });
       setSuccess("Course successfully deleted.");
