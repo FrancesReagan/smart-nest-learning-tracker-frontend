@@ -298,7 +298,19 @@ return (
         </button>
       </div>
 
-{/* add Course button */}
+
+{/* Update course button */}
+<button 
+  onClick={() => setShowEditForm(!showEditForm)}
+  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-4"
+  >
+
+     {showEditForm ? "Cancel" : "Update Course"}
+
+  </button>
+</div>
+
+{/* --moving to dashboard--add Course button//
 <div className="mb-6">
  <button 
    onClick={() => setShowAddCourseForm(!showAddCourseForm)}
@@ -309,7 +321,7 @@ return (
 
   </button>
 
-</div>
+</div> */}
 
 {/* add session button */}
 <div className="mb-6">
