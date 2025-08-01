@@ -83,8 +83,6 @@ const updateCourse = async (e) => {
   };
 
 
-
-
   // Delete Course--DELETE//
 const deleteCourse = async () => {
   if(window.confirm("This is a permanent decision--you want to delete this course?")) {
@@ -108,26 +106,6 @@ const deleteCourse = async () => {
       }
     }
   };
-
-// GET SESSIONS---GET//
-  // wrap getSessions in a useCallback//
-  const getSessions = useCallback(async () => {
-    try {
-      const response = await axios.get(`${baseURL}/api/courses/${id}/sessions`, {
-        headers: { Authorization:`Bearer ${token}`},
-      });
-      setSessions(response.data);
-    } catch (error) {
-      console.error("Error getting sessions:", error);
-      if (error.response?.status === 404) 
-        setError("Session has expired. Please log in again.");
-       else if (error.response?.status===401) 
-        setError("Session expired. You need to log in once more.");
-       else if (error.response?.status===403) 
-        setError("You do not have the right permissions to view these sessions.")
-      else setError("Sessions failed to load. Refresh the page.");
-      }
-    },[id,token,baseURL]);
 
 // Add Sessions--POST//
 const addSessions = async (e) => {
@@ -166,6 +144,26 @@ const addSessions = async (e) => {
   }
 };
 
+// GET SESSIONS---GET//
+  // wrap getSessions in a useCallback//
+  const getSessions = useCallback(async () => {
+    try {
+      const response = await axios.get(`${baseURL}/api/courses/${id}/sessions`, {
+        headers: { Authorization:`Bearer ${token}`},
+      });
+      setSessions(response.data);
+    } catch (error) {
+      console.error("Error getting sessions:", error);
+      if (error.response?.status === 404) 
+        setError("Session has expired. Please log in again.");
+       else if (error.response?.status===401) 
+        setError("Session expired. You need to log in once more.");
+       else if (error.response?.status===403) 
+        setError("You do not have the right permissions to view these sessions.")
+      else setError("Sessions failed to load. Refresh the page.");
+      }
+    },[id,token,baseURL]);
+
 // UPDATE SESSION----PUT//
 const updateSession = async (sessionId, updatedSession) => {
   setError("");
@@ -192,8 +190,6 @@ const updateSession = async (sessionId, updatedSession) => {
       else setError("Could not update session. Try again...");
     }
   };
-
- 
 
 
 // Delete Sessions---DELETE//
@@ -230,8 +226,9 @@ useEffect(() => {
  if (currentUser && token) {
   getCourse();
   getSessions();
+  getCourses();
  }
-},[id, currentUser, token,getCourse,getSessions]);
+},[id, currentUser, token,getCourse,getSessions,getCourses]);
 
 if(!course) {
   if (error) {
