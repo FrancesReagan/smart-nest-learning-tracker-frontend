@@ -27,10 +27,8 @@ const navigate = useNavigate();
 const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 useEffect(() => {
-  if (currentUser && token) {
-  getCourses();
-  }
-},[currentUser,token]);
+  if (currentUser && token) getCourses();
+  },[currentUser,token,getCourses]);
 
 const getCourses = useCallback(async () => {
   setisLoading(true);
