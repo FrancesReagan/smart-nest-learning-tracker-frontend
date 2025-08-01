@@ -356,7 +356,15 @@ return (
         <option value="Inactive">Inactive</option>
         </select>
      </div>
+
+     <button 
+       type="submit"
+       className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+       >
+        ➕Update Course
+       </button>
     </form>
+    </div>
 )}
 
 {/* --moving to dashboard--add Course button//
