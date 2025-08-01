@@ -1,4 +1,4 @@
-lalimport { useState, useEffect, useCallback, use } from "react";
+lalalimport { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
@@ -336,13 +336,25 @@ return (
           />
       </div>
      <div className="mb-4">
-      <label className="block text-white mb-2>Category</label>
+      <label className="block text-white mb-2">Category</label>
        <input
         type="text"
         value={editedCourse.category}
         onChange={(e) => setEditedCourse({...editedCourse, category: e.target.value})}
+        className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
         placeholder="Enter a course category"
         />
+     </div>
+     <div className="mb-4">
+      <label className="block text-white mb-2">Status</label>
+      <select
+        value={editedCourse.status}
+        onChange={(e) => setEditedCourse({...editedCourse,status:e.target.value})}
+        className="w-full p-2 rounded bg-white/20 text-white"
+        >
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        </select>
      </div>
     </form>
 )}
