@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
 import { useAuth } from "../contexts/AuthContext";
+import { get } from "mongoose";
 
 function CourseDetail() {
   const { id } = useParams();
@@ -29,6 +30,8 @@ function CourseDetail() {
       });
 
       setCourse(response.data);
+      // initialize with current course data//
+      setEditedCourse({...response.data}); 
     } catch (error) {
       console.error("Error in retrieving your course:", error);
       if (error.response?.status === 404) setError("Course not found.");
@@ -58,7 +61,7 @@ function CourseDetail() {
       }
     },[id,token,baseURL]);
    
-  // Add Course//
+  // Add Course--POST//
   const addCourse = async (e) => {
     e.preventDefault();
     setError("");
@@ -86,7 +89,7 @@ function CourseDetail() {
 
 
 
-// Add Sessions//
+// Add Sessions--POST//
 const addSessions = async (e) => {
   e.preventDefault();
   setError("");
@@ -123,8 +126,24 @@ const addSessions = async (e) => {
   }
 };
 
+const updateCourse = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccess("");
+  try {
+    const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
+      headers: {Authorization: `Bearer ${token}`},
+    });
+    setSuccess("Course updated.");
+    setShowEditForm(false);
+    getCourse();
+    setTimeout(() => setSuccess(""), 3000);
+  } catch (error) {
+    
+  }
+}
 
-// Delete Course//
+// Delete Course--DELETE//
 const deleteCourse = async () => {
   if(window.confirm("This is a permanent decision--you want to delete this course?")) {
     setError("");
