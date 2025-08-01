@@ -73,48 +73,16 @@ const getCourses = useCallback(async () => {
     }
   };
 
- const updateCourse = async (e) => {
-  e.preventDefault ();
-  setError("");
-  setSuccess ("");
-
-  try {
-    await axios.put(`/api/courses/${editingCourse._id}`, courseForm, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-    });
-
-    setCourseForm({ title: "", description:"", category:"Other", url: "", status: "On the horizon"});
-    setEditingCourse(null);
-    setShowAddForm(false);
-    setSuccess("Course updated successfully.");
-    getCourses();
-    setTimeout(() => setSuccess(""), 3000);
-
-  } catch (error) {
-    console.error ("Error updating course:", error);
-    if (error.response?.status===400){
-      setError("Check your course information and try once again...");
-    } else if (error.response?.status===401){
-      setError("Session expired. Log in again.");
-    } else if (error.response?.status===403) {
-      setError("You don't have permission to edit this course.");
-    } else {
-      setError("Could not update this course...try again.");
-    }
-  }
- };
+ 
 
   const deleteCourse = async (courseId) => {
     setError ("");
     setSuccess ("");
 
     try {
-      await axios.delete(`/api/courses/${courseId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
+      // await axios.delete(`${baseURL}/api/courses/${Id}//
+      const response = await axios.delete(`${baseURL}/api/courses/${courseId}`, {
+        headers: { Authorization: `Bearer ${token}`},
       });
       setSuccess("Course successfully deleted.");
       getCourses();
@@ -122,15 +90,12 @@ const getCourses = useCallback(async () => {
 
     } catch (error) {
       console.error("Error deleting course:", error);
-      if (error.response?.status===401) {
-        setError("Session expired. Log in again.");
-      } else if (error.response?.status===403) {
-        setError("Permission to delete course denied.");
-      } else {
-        setError("Could not delete course...try again.");
+      if (error.response?.status===401) setError("Session expired. Log in again.");
+       else if (error.response?.status===403) setError("You don't have the right permissions to delete course.");
+       else setError("Could not delete course...try again.");
       }
-    }
-  };
+    };
+ 
 
   const startEdit = (course) => {
     setError ("");
