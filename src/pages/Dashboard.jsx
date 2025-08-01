@@ -98,44 +98,25 @@ const getCourses = useCallback(async () => {
  
 
   const startEdit = (course) => {
-    setError ("");
-    setSuccess("");
-    setEditingCourse (course);
-    setCourseForm({
-      title: course.title,
-      description: course.description,
-      category: course.category,
-      url: course.url || "",
-      status: course.status,
-    });
-    setShowAddForm(true)
+    // redirect to coursedetail page for editing courses//
+    navigate(`/courses/${course._id}`);
   };
-
-  const cancelEdit = () => {
-    setError ("");
-    setSuccess("");
-    setEditingCourse(null);
-    setShowAddForm(false);
-    setCourseForm({ title: "", description: "", category: "Other", url: "", status: "On the horizon" });
-  };
-
  
-  if(!currentUser){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
-        </div>
-      </div>
-    );
-  }
+  // not sure about the loading spin animation---may delete//
+  // if(!currentUser){
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
+  //       </div>
+  //     </div>
+  //   );
+  // }
  
-  // outside of function//
+  
   return (
     <div className="min-h-screen relative">
       {/* earth background */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-30"
-           style={{ backgroundImage: "url(/designer-4.jpg)"}}
-           />
+      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: "url(/designer-4.jpg)"}}/>
     <div className="relative z-10 p-6">
       {/* HEADER */}
       <div className="mb-6">
@@ -146,22 +127,10 @@ const getCourses = useCallback(async () => {
         </h1>
         <p className="text-gray-200">SmartNesting...Track your courses and learning process!</p>
       </div>
-
-      {/* Error & Success Messages */}
-      {error && (
-        <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
-        
-          {error} 
-       
-        </div>
-      )}
-
-     {success && (
-      <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
-        {success} 
-      </div>
-     )}
-
+{/* error and success message */}
+    {error && <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">{error}</div>}
+    {success && <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">{success}</div>}
+    
      {/* add course button */}
      <div className="mb-6">
       <button
@@ -170,16 +139,14 @@ const getCourses = useCallback(async () => {
         >
           {showAddForm ? "Cancel" : "Add Course"}
 
-        </button>
+      </button>
      </div>
 
-     {/* add/edit course form */}
+     {/* add course form */}
      {showAddForm && (
       <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
-        <h3 className="text-white text-lg mb-4">
-          {editingCourse? "Edit Course" : "Add New Course"}
-        </h3>
-      <form onSubmit={editingCourse? updateCourse : addCourse}>
+        <h3 className="text-white text-lg mb-4">Add New Course</h3>
+      <form onSubmit={addCourse}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-white mb-2">Title</label>
