@@ -3,13 +3,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
 import { useAuth } from "../contexts/AuthContext";
-import { get } from "mongoose";
+
 
 function CourseDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [course, setCourse] = useState(null);
+  const [courses, setCourses] = useState(null);
   const [sessions, setSessions] = useState([]);
+  const [selectedSession, setSelectedSession] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
  const [showEditForm, setShowEditForm] = useState(false);
   const [error, setError] = useState("");
@@ -21,27 +23,80 @@ function CourseDetail() {
   const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
  
-// GET COURSE//
-  // wrap getCourse in a useCallback//
-  const getCourse = useCallback(async() => {
+  //  GET ALL COURSES---GET//
+  // wrap getCourses in a useCallback//
+  const getCourses = useCallback(async() => {
     try {
-      const response = await axios.get(`${baseURL}/api/courses/${id}`,{
+      const response = await axios.get(`${baseURL}/api/courses`,{
         headers: { Authorization: `Bearer ${token}`},
       });
 
-      setCourse(response.data);
+      setCourses(response.data);
       // initialize with current course data//
-      setEditedCourse({...response.data}); 
+      console.log("All courses:", response.data);
     } catch (error) {
-      console.error("Error in retrieving your course:", error);
-      if (error.response?.status === 404) setError("Course not found.");
+      console.error("Error in retrieving all courses:", error);
+      if (error.response?.status === 404) setError("Your courses could not found.");
        else if (error.response?.status===401) setError("Session expired. You need to log in once more.");
-       else if (error.response?.status===403) setError("To view this course you need to have the correct permissions.");
-       else setError("Course failed to load...please try again.");
+       else if (error.response?.status===403) setError("To view courses you need to have the correct permissions.");
+       else setError("Courses failed to load...please try again.");
     }
   },[id,token,baseURL]); 
 
-  // GET SESSIONS//
+  // GET COURSE BY ID---GET//
+  const getCourse = 
+
+  
+
+  // Update a course -- PUT//
+const updateCourse = async (e) => {
+  e.preventDefault();
+  setError("");
+  setSuccess("");
+  try {
+    const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
+      headers: {Authorization: `Bearer ${token}`},
+    });
+    setSuccess("Course updated.");
+    setShowEditForm(false);
+    getCourse();
+    setTimeout(() => setSuccess(""), 3000);
+  } catch (error) {
+     console.error("Error updating course:", error);
+      if (error.response?.status === 401) setError("Session expired. Log in again.");
+      else if (error.response?.status === 403) setError("Insufficient permissions.");
+      else setError("Could not update course. Try again...");
+    }
+  };
+
+
+
+
+  // Delete Course--DELETE//
+const deleteCourse = async () => {
+  if(window.confirm("This is a permanent decision--you want to delete this course?")) {
+    setError("");
+    setSuccess("");
+    try {
+        const response = await axios.delete(`${baseURL}/api/courses/${id}`, {
+        headers: {Authorization:`Bearer ${token}`,},
+      });
+      setSuccess("Course has been deleted.");
+      setTimeout(() => navigate("/courses"), 2000);
+          } catch (error) {
+        console.error("Error deleting course:", error);
+        if (error.response?.status === 401) 
+          setError("Session expired. Try to log in again...");
+         else if (error.response?.status === 403) 
+          setError("You do not have permission to delete this course.");
+         else if (error.response?.status === 404) 
+          setError("Course not found.");
+         else setError("Could not delete course. Try again...");
+      }
+    }
+  };
+
+// GET SESSIONS---GET//
   // wrap getSessions in a useCallback//
   const getSessions = useCallback(async () => {
     try {
@@ -60,34 +115,6 @@ function CourseDetail() {
       else setError("Sessions failed to load. Refresh the page.");
       }
     },[id,token,baseURL]);
-   
-  // Add Course--POST//
-  const addCourse = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
-    try {
-       const response = await axios.post(`${baseURL}/api/courses`, newCourse, {
-        headers: {Authorization:`Bearer ${token}`},
-      }),
-
-      setSuccess("Course added successfully.");
-      setNewCourse({ title: "", description:"", category:"", status:"Active"});
-      setShowAddCourseForm(false);
-      // redirect to new course detail page//
-      navigate(`/courses/${response.data._id}`);
-        } catch (error) {
-      console.error("Error adding course:", error);
-      if (error.response?.status === 401) 
-        setError("Session expired. Please log in again.");
-       else if (error.response?.status === 403) 
-        setError("You don't have the right permissions to add this course.");
-       else setError("Failed to add course. Try again...");
-      
-    }
-  };
-
-
 
 // Add Sessions--POST//
 const addSessions = async (e) => {
@@ -126,56 +153,44 @@ const addSessions = async (e) => {
   }
 };
 
-const updateCourse = async (e) => {
-  e.preventDefault();
+// UPDATE SESSION----PUT//
+const updateSession = async (sessionId, updatedSession) => {
   setError("");
   setSuccess("");
   try {
-    const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
-      headers: {Authorization: `Bearer ${token}`},
-    });
-    setSuccess("Course updated.");
-    setShowEditForm(false);
-    getCourse();
+    const sessionData = {
+      ...updatedSession,
+      topicsLearned: updatedSession.topicsLearned
+        .split(",")
+        .map(topic => topic.trim())
+        .filter((topic) => topic),
+    };
+    // ${baseURL}/api/courses/${courseId}/sessions/${sessionId}
+    const response = await axios.put(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, sessionData, {
+      headers: { Authorization: `Bearer $ {token}` },
+    }),
+    setSuccess("Session updated succesffuly.");
+    getSessions();
     setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
-    
-  }
-}
-
-// Delete Course--DELETE//
-const deleteCourse = async () => {
-  if(window.confirm("This is a permanent decision--you want to delete this course?")) {
-    setError("");
-    setSuccess("");
-    try {
-        const response = await axios.delete(`${baseURL}/api/courses/${id}`, {
-        headers: {Authorization:`Bearer ${token}`,},
-      });
-      setSuccess("Course has been deleted.");
-      setTimeout(() => navigate("/courses"), 2000);
-          } catch (error) {
-        console.error("Error deleting course:", error);
-        if (error.response?.status === 401) 
-          setError("Session expired. Try to log in again...");
-         else if (error.response?.status === 403) 
-          setError("You do not have permission to delete this course.");
-         else if (error.response?.status === 404) 
-          setError("Course not found.");
-         else setError("Could not delete course. Try again...");
-      }
+    console.error("Error updating session:", error);
+      if (error.response?.status === 401) setError("Session expired. Log in again...");
+      else if (error.response?.status === 403) setError("Insufficient permissions.");
+      else setError("Could not update session. Try again...");
     }
   };
 
+ 
 
-// Delete Sessions//
+
+// Delete Sessions---DELETE//
 const deleteSession = async (sessionId) => {
   if (window.confirm("Do you want to Delete this session?")) {
     setError("");
     setSuccess("");
 
     try {
-        const response = await axios.delete(`${baseURL}/api/sessions/${sessionId}`, {
+        const response = await axios.delete(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, {
         headers: {Authorization: `Bearer ${token}`},
       });
 
@@ -196,31 +211,7 @@ const deleteSession = async (sessionId) => {
   }
 };
 
-// UPDATE SESSION//
-const updateSession = async (sessionId, updatedSession) => {
-  setError("");
-  setSuccess("");
-  try {
-    const sessionData = {
-      ...updatedSession,
-      topicsLearned: updatedSession.topicsLearned
-        .split(",")
-        .map(topic => topic.trim())
-        .filter((topic) => topic),
-    };
-    const response = await axios.put(`${baseURL}/api/courses/${courseId}/sessions/${sessionId}`, sessionData, {
-      headers: { Authorization: `Bearer $ {token}` },
-    }),
-    setSuccess("Session updated succesffuly.");
-    getSessions();
-    setTimeout(() => setSuccess(""), 3000);
-  } catch (error) {
-    console.error("Error updating session:", error);
-      if (error.response?.status === 401) setError("Session expired. Log in again...");
-      else if (error.response?.status === 403) setError("Insufficient permissions.");
-      else setError("Could not update session. Try again...");
-    }
-  };
+
 
 useEffect(() => {
  if (currentUser && token) {
