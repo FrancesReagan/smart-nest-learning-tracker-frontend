@@ -1,14 +1,18 @@
+import backgroundImage1 from '../assets/designer-4.jpg';
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from '@/hooks/useUser.js';
 import { useAuth } from "../contexts/AuthContext";
-import backgroundImage1 from '../assets/designer-4.jpg';
+
 
 
 function CourseDetail() {
+  // Get the course ID from the URL parameters//
   const { id } = useParams();
   const navigate = useNavigate();
+
+  // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
   const [courses, setCourses] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -19,6 +23,8 @@ function CourseDetail() {
   const [success, setSuccess] = useState("");
   const [newSession, setNewSession] = useState({ notes:"", topicsLearned:"" });
   const [editedCourse, setEditedCourse] = useState(null);
+
+  // custom hooks for user and authentication context//
   const { currentUser } = useUser();
   const { token } = useAuth();
   const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -26,6 +32,8 @@ function CourseDetail() {
  
   //  GET ALL COURSES---GET//
   // wrap getCourses in a useCallback//
+  // useCallback is used to memoize functions, preventing unnecessary re-creation on re-renders
+  // This is especially useful for functions passed as dependencies to useEffect.
   const getCourses = useCallback(async() => {
     try {
       const response = await axios.get(`${baseURL}/api/courses`,{
@@ -71,9 +79,10 @@ const updateCourse = async (e) => {
     const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
       headers: {Authorization: `Bearer ${token}`},
     });
-   setCourses(response.data);
+  //  setCourses(response.data);
     setSuccess("Course updated.");
     setShowEditForm(false);
+    // get updated course data//
     getCourse();
     setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
@@ -225,15 +234,16 @@ const deleteSession = async (sessionId) => {
 };
 
 
-
+// this is the  main effect hook that will fetch or get the initial data//
 useEffect(() => {
  if (currentUser && token) {
   getCourse();
   getSessions();
   getCourses();
  }
-},[id, currentUser, token,getCourse,getSessions,getCourses]);
+}, [id, currentUser, token, getCourse, getSessions, getCourses]);
 
+// loading and error states//
 if(!course) {
   if (error) {
     return(
@@ -261,7 +271,8 @@ return (
     {/* earth background */}
     <div className="absolute inset-0 bg-cover bg-center opacity-30"
       style={{ 
-        backgroundImage: `url(${backgroundImage1})`
+        backgroundImage: `url(${backgroundImage1})`,
+        backgroundColor: '#1a202c'
         }}
     />
 
@@ -286,7 +297,7 @@ return (
         </div>
       )}
 
-      {/* Course Header */}
+      {/* Course Header with details and action buttons*/}
     <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
        <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
        <p className="text-gray-200 mb-2">{course.description}</p>
@@ -305,7 +316,7 @@ return (
       </div>
 
 
-{/* Update course button */}
+{/* Update course form, conditionally rendered */}
 <button 
   onClick={() => setShowEditForm(!showEditForm)}
   className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-4"

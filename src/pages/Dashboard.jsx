@@ -1,7 +1,8 @@
+import backgroundImage1 from '../assets/designer-4.jpg';
 import{ useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useUser } from '@/hooks/useUser.js';
-import backgroundImage1 from '../assets/designer-4.jpg';
+
 
 
 
@@ -107,7 +108,8 @@ useEffect(() => {
       {/* earth background */}
       <div className="absolute inset-0 bg-cover bg-center opacity-30" 
        style={{ 
-           backgroundImage: `url(${backgroundImage1})`
+           backgroundImage: `url(${backgroundImage1})`,
+            backgroundColor: '#1a202c'
            }}
       />
     <div className="relative z-10 p-6">

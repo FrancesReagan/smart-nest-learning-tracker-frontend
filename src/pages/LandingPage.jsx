@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
 import backgroundImage2 from '../assets/designer-5.jpg';
+import { Link } from "react-router-dom";
+
 
 function LandingPage() {
   return (
     <div className="h-screen relative">
       <div className="absolute inset-0 bg-cover bg-center opacity-40"
          style={{ 
-           backgroundImage: `url(${backgroundImage2})`
+           backgroundImage: `url(${backgroundImage2})`,
+            backgroundColor: '#1a202c'
           }}
        />
       <div className="relative z-10 h-full flex flex-col">
