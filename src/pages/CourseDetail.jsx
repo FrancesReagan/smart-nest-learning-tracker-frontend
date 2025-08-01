@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, use } from "react";
+limport { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
@@ -323,6 +323,16 @@ return (
           className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
           placeholder="Enter desired course title"
           required
+          />
+      </div>
+      <div className="mb-4">
+        <label className="block text-white mb-2">Description</label>
+        <textarea 
+          value="{editedCourse.description}"
+          onChange={(e) => setEditedCourse ({...editedCourse, description: e.target.value})}
+          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          placeholder="Enter course description"
+          rows="3"
           />
       </div>
 
