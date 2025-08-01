@@ -1,9 +1,10 @@
+import backgroundImage1 from '../assets/designer-4.jpg';
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from '@/hooks/useUser.js';
 import { useAuth } from "../contexts/AuthContext";
-import backgroundImage1 from '../assets/designer-4.jpg';
+
 
 
 function CourseDetail() {
@@ -261,7 +262,8 @@ return (
     {/* earth background */}
     <div className="absolute inset-0 bg-cover bg-center opacity-30"
       style={{ 
-        backgroundImage: `url(${backgroundImage1})`
+        backgroundImage: `url(${backgroundImage1})`,
+        backgroundColor: '#1a202c'
         }}
     />
 
