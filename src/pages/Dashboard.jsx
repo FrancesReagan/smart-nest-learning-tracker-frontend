@@ -30,6 +30,7 @@ useEffect(() => {
   if (currentUser && token) getCourses();
   },[currentUser,token,getCourses]);
 
+  // GET COURSES ---GET//
 const getCourses = useCallback(async () => {
   setisLoading(true);
   try {
@@ -47,7 +48,6 @@ const getCourses = useCallback(async () => {
   }
 }, [token,baseURL]);
 
- 
 
  // Add Course--POST//
   const addCourse = async (e) => {
@@ -55,23 +55,21 @@ const getCourses = useCallback(async () => {
     setError("");
     setSuccess("");
     try {
-       const response = await axios.post(`${baseURL}/api/courses`, newCourse, {
+       const response = await axios.post(`${baseURL}/api/courses`, courseForm, {
         headers: {Authorization:`Bearer ${token}`},
-      }),
-
+      });
+      setCourseForm({ title:"", description:"", category:"Other", url:"", status:"On the horizon" });
+      setShowAddForm(false);
       setSuccess("Course added successfully.");
-      setNewCourse({ title: "", description:"", category:"", status:"Active"});
-      setShowAddCourseForm(false);
-      // redirect to new course detail page//
-      navigate(`/courses/${response.data._id}`);
+      getCourses();
+      setTimeout(() => setSuccess(""),3000);
+      // // redirect to new course detail page//
+      // navigate(`/courses/${response.data._id}`);
         } catch (error) {
       console.error("Error adding course:", error);
-      if (error.response?.status === 401) 
-        setError("Session expired. Please log in again.");
-       else if (error.response?.status === 403) 
-        setError("You don't have the right permissions to add this course.");
+      if (error.response?.status === 401) setError("Session expired. Please log in again.");
+       else if (error.response?.status === 403) setError("You don't have the right permissions to add this course.");
        else setError("Failed to add course. Try again...");
-      
     }
   };
 
