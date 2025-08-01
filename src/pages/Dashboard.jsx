@@ -1,6 +1,9 @@
 import{ useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { useUser } from "../hooks/useUser";
+import { useUser } from "../hooks/useUser.js";
+
+
+
 import { useAuth } from "../contexts/AuthContext";
 import CourseCard from "../components/CourseCard";
 import { useNavigate } from "react-router-dom";
@@ -9,9 +12,7 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
-  const [error,setError] = useState("");
-  // const [isLoading, setLoading] = useState(false)
-  // const [editingCourse,setEditingCourse] = useState(null); 
+  const [error,setError] = useState(""); 
   const [success,setSuccess] = useState("");
   const [courseForm, setCourseForm] = useState({
     title: "",
@@ -32,7 +33,6 @@ useEffect(() => {
 
   // GET COURSES ---GET//
 const getCourses = useCallback(async () => {
-  setisLoading(true);
   try {
     const response = await axios.get(`${baseURL}/api/courses`, {
     headers: {Authorization: `Bearer ${token}`},
@@ -43,8 +43,6 @@ const getCourses = useCallback(async () => {
     if (error.response?.status === 401) setError("Session expired. Login again...");
     else if (error.response?.status === 500) setError("Server Error. Try again...");
     else setError("Failed to load your courses...Refresh the page.");
-  } finally {
-    setIsLoading(false);
   }
 }, [token,baseURL]);
 
@@ -63,8 +61,6 @@ const getCourses = useCallback(async () => {
       setSuccess("Course added successfully.");
       getCourses();
       setTimeout(() => setSuccess(""),3000);
-      // // redirect to new course detail page//
-      // navigate(`/courses/${response.data._id}`);
         } catch (error) {
       console.error("Error adding course:", error);
       if (error.response?.status === 401) setError("Session expired. Please log in again.");
@@ -102,16 +98,7 @@ const getCourses = useCallback(async () => {
     navigate(`/courses/${course._id}`);
   };
  
-  // not sure about the loading spin animation---may delete//
-  // if(!currentUser){
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center">
-  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600">
-  //       </div>
-  //     </div>
-  //   );
-  // }
- 
+
   
   return (
     <div className="min-h-screen relative">
@@ -223,11 +210,6 @@ const getCourses = useCallback(async () => {
 
 {/* Course Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {isLoading && (
-  <div className="text-center py-4">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-  </div>
-)}
   {courses.length===0 ?(
     <div className="col-span-full text-center py-12">
       <p className="text-gray-300 text-lg">No courses added yet...add your first one.</p>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useUser } from "../contexts/UserContext"; 
+import { useUser } from "./hooks/useUser.js";
+
+
 
 
 function RegisterPage() {

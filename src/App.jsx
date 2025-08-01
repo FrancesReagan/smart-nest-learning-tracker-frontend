@@ -4,7 +4,10 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { UserProvider } from "./contexts/UserContext";
-import { useUser } from "./contexts/UserContext";
+import { useUser } from "./hooks/useUser.js";
+
+
+
 import ProtectedRoute from "./components/ProtectedRoute";
 import NavBar from "./components/NavBar";
 import "./App.css"
