@@ -18,6 +18,7 @@ const AuthContext = createContext();
 export const useAuth = () => {
   return useContext(AuthContext);
 };
+ const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 // AuthProvider component(handles authentication only)
 export const AuthProvider = ({ children }) => {
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 const login = async (credentials) => {
  try {
   setAuthLoading(true);
-  const response = await axios.post("/api/users/login", credentials);
+  const response = await axios.post(`${baseURL}/api/users/login`, credentials);
 
   if(!response.data) {
     throw new Error("Login Failed");

@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
   const { token, logout } = useAuth();
 
   const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
- console.log (import.meta.env.VITE_API_URL);
+
 
 // wrapping getCurrentUser in useCalback//
 const getCurrentUser = useCallback(async () => {
