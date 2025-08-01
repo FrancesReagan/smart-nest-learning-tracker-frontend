@@ -243,9 +243,9 @@ const getCourses = useCallback(async () => {
        ))
      )}
     </div>
+   </div>
   </div>
- </div>
-);
+ );
 }
 
 
