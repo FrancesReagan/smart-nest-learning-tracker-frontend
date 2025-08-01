@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import backgroundImage2 from '../assets/designer-5.jpg';
 
 function LandingPage() {
   return (
     <div className="h-screen relative">
       <div className="absolute inset-0 bg-cover bg-center opacity-40"
-      style={{ backgroundImage: "url(/designer-5.jpg)"}}
-      />
+         style={{ 
+           backgroundImage: `url(${backgroundImage2})`
+          }}
+       />
       <div className="relative z-10 h-full flex flex-col">
         <nav className="p-6 flex justify-between">
           <div className="text-white text-xl font-bold">SmartNest</div>

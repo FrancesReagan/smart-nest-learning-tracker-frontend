@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { useUser } from '@/hooks/useUser.js';
+import backgroundImage2 from '../assets/designer-5.jpg';
 
 
 
@@ -36,7 +37,9 @@ return (
   <div className="min-h-screen relative">
     {/* Birds Background */}
     <div className="absolute inset-0 bg-cover bg-center opacity-40"
-    style={{ backgroundImage: "url(/designer-5.jpg)"}}
+   style={{ 
+            backgroundImage: `url(${backgroundImage2})`
+           }}
     />
     <div className="absolute inset-0 bg-black/50" />
     <div className="relative z-10 min-h-screen flex items-center justify-center px-6">

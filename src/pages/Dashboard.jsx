@@ -1,7 +1,7 @@
 import{ useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useUser } from '@/hooks/useUser.js';
-
+import backgroundImage1 from '../assets/designer-4.jpg';
 
 
 
@@ -105,7 +105,11 @@ useEffect(() => {
   return (
     <div className="min-h-screen relative">
       {/* earth background */}
-      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: "url(/designer-4.jpg)"}}/>
+      <div className="absolute inset-0 bg-cover bg-center opacity-30" 
+       style={{ 
+           backgroundImage: `url(${backgroundImage1})`
+           }}
+      />
     <div className="relative z-10 p-6">
       {/* HEADER */}
       <div className="mb-6">

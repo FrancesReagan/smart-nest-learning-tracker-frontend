@@ -1,12 +1,9 @@
-import { useState, useEffect, useCallback, use } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from '@/hooks/useUser.js';
-
-
-
-
 import { useAuth } from "../contexts/AuthContext";
+import backgroundImage1 from '../assets/designer-4.jpg';
 
 
 function CourseDetail() {
@@ -34,7 +31,6 @@ function CourseDetail() {
       const response = await axios.get(`${baseURL}/api/courses`,{
         headers: { Authorization: `Bearer ${token}`},
       });
-
       setCourses(response.data);
       // initialize with current course data//
       console.log("All courses:", response.data);
@@ -53,6 +49,7 @@ function CourseDetail() {
       const response = await axios.get(`${baseURL}/api/courses/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      setCourse(response.data);
       setEditedCourse({...response.data});
      } catch (error) {
       console.error("Error retrieving course:", error);
@@ -74,6 +71,7 @@ const updateCourse = async (e) => {
     const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
       headers: {Authorization: `Bearer ${token}`},
     });
+   setCourses(response.data);
     setSuccess("Course updated.");
     setShowEditForm(false);
     getCourse();
@@ -96,6 +94,7 @@ const deleteCourse = async () => {
         const response = await axios.delete(`${baseURL}/api/courses/${id}`, {
         headers: {Authorization:`Bearer ${token}`,},
       });
+      setCourses(response.data);
       setSuccess("Course has been deleted.");
       setTimeout(() => navigate("/courses"), 2000);
           } catch (error) {
@@ -111,8 +110,8 @@ const deleteCourse = async () => {
     }
   };
 
-// Add Sessions--POST//
-const addSessions = async (e) => {
+// Add Session--POST//
+const addSession = async (e) => {
   e.preventDefault();
   setError("");
   setSuccess("");
@@ -129,7 +128,7 @@ const addSessions = async (e) => {
       const response = await axios.post(`${baseURL}/api/courses/${id}/sessions`, sessionData, {
       headers: {Authorization:`Bearer ${token}`},
     });
-
+     setSessions(response.data);
     setNewSession({ notes:"", topicsLearned:""});
     setShowAddForm(false);
     setSuccess("Session added successfully");
@@ -184,6 +183,7 @@ const updateSession = async (sessionId, updatedSession) => {
     const response = await axios.put(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, sessionData, {
       headers: { Authorization: `Bearer ${token}` },
     });
+     setSessions(response.data);
     setSuccess("Session updated succesffuly.");
     getSessions();
     setTimeout(() => setSuccess(""), 3000);
@@ -206,7 +206,7 @@ const deleteSession = async (sessionId) => {
         const response = await axios.delete(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, {
         headers: {Authorization: `Bearer ${token}`},
       });
-
+       setSessions(response.data);
       setSuccess("Session deleted successfully.");
       getSessions();
       setTimeout(() => setSuccess(""),3000);
@@ -260,7 +260,9 @@ return (
   <div className="min-h-screen relative">
     {/* earth background */}
     <div className="absolute inset-0 bg-cover bg-center opacity-30"
-    style={{ backgroundImage: "url(/designer-4.jpg)" }}
+      style={{ 
+        backgroundImage: `url(${backgroundImage1})`
+        }}
     />
 
     <div className="absolute inset-0 bg-black/50" />
@@ -371,18 +373,6 @@ return (
     </div>
 )}
 
-{/* --moving to dashboard--add Course button//
-<div className="mb-6">
- <button 
-   onClick={() => setShowAddCourseForm(!showAddCourseForm)}
-   className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-4"
-  >
-
-{showAddCourseForm?"Cancel" : "Add New Course"}
-
-  </button>
-
-</div> */}
 
 {/* add session button */}
 <div className="mb-6">
@@ -395,61 +385,6 @@ return (
   </button>
 </div>
 
-{/* moving add course form to dashboard */}
-{/* Add Course Form
-(showAddCourseForm && (
-  <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
-<form onSubmit={addCourse}>
-  <div className="mb-4">
-  <label className="block text-white mb-2">Course Title</label>
- <input 
-   type="text"
-   value={newCourse.title}
-   onChange={(e) => setNewCourse({...newCourse, title: e.target.value})}
-   className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
-   placeholder="Enter course title"
-   required
-   />
- </div>
- <label className="block text-white mb-2">Description</label>
- <textarea 
-   value={newCourse.description}
-   onChange={(e) => setNewCourse ({...newCourse,description:e.target})}
-   className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
-   placeholder="Enter course description"
-   rows="3"
-   />
-</div>
-<div className="mb-4">
-  <label className="block text-white mb-2">Category</label>
-  <input 
-    type="text"
-    value={newCourse.category}
-    onChange={(e)=> setNewCourse({...newCourse, category:e.target.value})}
-    className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
-    placeholder="Enter a course category"
-    />
-</div>
-<div className="mb-4">
-  <label className="block text-white mb-2">Status</label>
-  <select 
-   value={newCourse.status}
-   onChange={(e)=> setNewCourse({...newCourse,status:e.target.value})}
-   className="w-full p-2 rounded bg-white/20 text-white"
-   >
-    <option value="Active">Active</option>
-    <option value="Inactive">Inactive</option>
-   </select>
- </div>
- <button
- type="submit"
- className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
- >
-  ➕Add Course
- </button>
-</div>
-</div>
-</form> */}
 
 
 {/* Add Session Form */}
