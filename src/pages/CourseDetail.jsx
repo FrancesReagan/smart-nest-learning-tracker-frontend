@@ -310,6 +310,25 @@ return (
   </button>
 </div>
 
+{/* update course form */}
+{showEditForm && (
+  <div className="bg-white/10 backdrop-blur-sm p-4 roundedmb-6">
+    <form onSubmit={updateCourse}>
+      <div className="mb-4">
+        <label className="block text-white mb-2">Course Title</label>
+        <input 
+          type="text"
+          value={editedCourse.title}
+          onChange={(e) => setEditedCourse({...editedCourse, title: e.target.value})}
+          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          placeholder="Enter desired course title"
+          required
+          />
+      </div>
+
+    </form>
+)}
+
 {/* --moving to dashboard--add Course button//
 <div className="mb-6">
  <button 
