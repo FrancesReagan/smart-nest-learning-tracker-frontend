@@ -1,4 +1,4 @@
-lalalimport { useState, useEffect, useCallback, use } from "react";
+import { useState, useEffect, useCallback, use } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "../hooks/useUser";
@@ -391,11 +391,12 @@ return (
   </button>
 </div>
 
-{/* Add Course Form */}
+{/* moving add course form to dashboard */}
+{/* Add Course Form
 (showAddCourseForm && (
   <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
-<form onSumbit={addCourse}>
- <div className="mb-4">
+<form onSubmit={addCourse}>
+  <div className="mb-4">
   <label className="block text-white mb-2">Course Title</label>
  <input 
    type="text"
@@ -444,7 +445,7 @@ return (
  </button>
 </div>
 </div>
-</form>
+</form> */}
 
 
 {/* Add Session Form */}
