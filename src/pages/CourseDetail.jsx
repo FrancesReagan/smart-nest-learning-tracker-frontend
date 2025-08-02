@@ -14,7 +14,7 @@ function CourseDetail() {
 
   // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
-  // const [courses, setCourses] = useState(null);
+  const [courses, setCourses] = useState(null);
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -68,10 +68,10 @@ const updateCourse = async (e) => {
   setError("");
   setSuccess("");
   try {
-    const response = await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
+    await axios.put(`${baseURL}/api/courses/${id}`, editedCourse, {
       headers: {Authorization: `Bearer ${token}`},
     });
-  //  setCourses(response.data);
+  
     setSuccess("Course updated.");
     setShowEditForm(false);
     // get updated course data//
@@ -88,7 +88,7 @@ const updateCourse = async (e) => {
 
   // Delete Course--DELETE//
 const deleteCourse = async () => {
-  if(window.confirm("This is a permanent decision--you want to delete this course?")) {
+  
     setError("");
     setSuccess("");
     // close the confirmation modal//
@@ -97,7 +97,7 @@ const deleteCourse = async () => {
         const response = await axios.delete(`${baseURL}/api/courses/${id}`, {
         headers: {Authorization:`Bearer ${token}`,},
       });
-      setCourses(response.data);
+     
       setSuccess("Course has been deleted.");
       // redirect to courses after 2s//
       setTimeout(() => navigate("/courses"), 2000);
@@ -111,8 +111,8 @@ const deleteCourse = async () => {
           setError("Course not found.");
          else setError("Could not delete course. Try again...");
       }
-    }
-  };
+    };
+  
 
 // Add Session--POST//
 const addSession = async (e) => {
