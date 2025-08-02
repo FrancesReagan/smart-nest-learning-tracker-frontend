@@ -563,6 +563,23 @@ return (
    )}
   </div>
 
+  {/* In-line confirmation moduals to ensure users truly want to do the actions they take or not */}
+  {showDeleteCourseModal && (
+     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-xl text-center">
+        <p className="text-gray-800 text-lg mb-4">Are you absolutely sure you want to permanently delete this course?</p>
+        <div className="flex justify-center space-x-4">
+          <button 
+            onClick={deleteCourse}
+            className="bg-red-300 text-gray-900 px-4 py-2 rounded hover:bg-orange-400 transition duration-300"
+            >
+              Confirm
+            </button>
+        </div>
+      </div>
+     </div>
+  )}
+
        
 
 export default CourseDetail;
