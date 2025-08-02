@@ -530,10 +530,17 @@ return (
              >
               Update 
             </button>
-            
+          <button 
+            type="button"
+            onClick={() => setEditingSession(null)}
+            className="bg-gray-500 text-gray-900 px-3 py-1 rounded-lg text-sm hover:bg-gray-700 transition duration-300"
+            >
+              Cancel
+            </button>
           </div>
         </form>
-      )
+      ) : (
+        
         <p className="text-gray-900 mb-2 drop-shadow-2xl">{session.notes}</p>
       )}  
 
