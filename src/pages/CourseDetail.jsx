@@ -540,32 +540,20 @@ return (
           </div>
         </form>
       ) : (
-        
-        <p className="text-gray-900 mb-2 drop-shadow-2xl">{session.notes}</p>
-      )}  
-
-      {session.topicsLearned && session.topicsLearned.length > 0 && (
-        <div>
-          <p className="text-sm text-gray-900 mb-1">Topics:</p>
-          <div className="flex flex-wrap gap-2">
-            {session.topicsLearned.map((topic, index) => (
-              <span key={index} className="bg-blue-400 text-gray-900 px-2 py-1 rounded text-sm drop-shadow-2xl"> 
-               {topic}
-              </span>
-             ))}
-          </div>
-         </div>
+        <>
+        {session.notes && (
+          <p className="text-gray-800 mb-2 drop-shadow-2xl">{session.notes}</p>
         )}
-      </div>
-      ))
-     )}
-   </div> 
-  </div>
-
- );
-}
+        {session.topicsLearned && session.topicsLearned.length > 0 && (
+          <div>
+            <p className="text-sm text-gray-900 mb-1 drop-shadow-2xl">Topics:</p>
+            <div className="flex flex-wrap gap-2">
+              {session.topicsLearned.map((topic,index) => (
+                <span key={index} className="bg-blue-400 text-gray-900 px-2 py-1 rounded-lg text-sm drop-shadow-2xl">
+                  {topic} 
+                </span>
+              ))}
+       
 
 export default CourseDetail;
-
-
 
