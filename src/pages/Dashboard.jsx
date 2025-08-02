@@ -29,21 +29,27 @@ const { token } = useAuth();
 const navigate = useNavigate();
 const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-
-  // GET COURSES ---GET//
-const getCourses = useCallback(async () => {
-  try {
-    const response = await axios.get(`${baseURL}/api/courses`, {
-    headers: {Authorization: `Bearer ${token}`},
-     });
+//  GET ALL COURSES---GET-//
+  // wrap getCourses in a useCallback//
+  // useCallback is used to memoize functions, preventing unnecessary re-creation on re-renders
+  // This is especially useful for functions passed as dependencies to useEffect.
+  const getCourses = useCallback(async() => {
+    try {
+      const response = await axios.get(`${baseURL}/api/courses`,{
+        headers: { Authorization: `Bearer ${token}`},
+      });
       setCourses(response.data);
+      // initialize with current course data//
+      console.log("All courses:", response.data);
     } catch (error) {
-    console.error("Error retrieving your courses:", error);
-    if (error.response?.status === 401) setError("Session expired. Login again...");
-    else if (error.response?.status === 500) setError("Server Error. Try again...");
-    else setError("Failed to load your courses...Refresh the page.");
-  }
-}, [token,baseURL]);
+      console.error("Error in retrieving all courses:", error);
+      if (error.response?.status === 404) setError("Your courses could not found.");
+       else if (error.response?.status===401) setError("Session expired. You need to log in once more.");
+       else if (error.response?.status===403) setError("To view courses you need to have the correct permissions.");
+       else setError("Courses failed to load...please try again.");
+    }
+  },[token,baseURL]); 
+
 
 useEffect(() => {
   if (currentUser && token) getCourses();
