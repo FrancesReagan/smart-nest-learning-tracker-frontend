@@ -508,7 +508,22 @@ return (
           <div className="mb-2">
             <label className="block text-gray-800 mb-1 text-sm drop-shadow-2xl">Notes</label>
             <textarea
+              value={editedSessionData.notes}
+              onChange={(e) => setEditedSessionData({...editedSessionData, notes: e.target.value })}
+              className="w-full p-1 rounded bg-white/20 text-gray-900 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm
+              rows=2"
+              />
           </div>
+          <div className="mb-2">
+            <label className="block text-gray-900 mb-1 text-sm">Topics Learned (comma separated)</label>
+            <input 
+              type="text"
+              value={editedSessionData.topicsLearned}
+              onChange={(e) => setEditedSessionData({...editedSessionData, topicsLearned: e.target.value })}
+              className="w-full p-1 bg-white/20 text-gray-900 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+              />
+          </div>
+          
         </form>
       )
         <p className="text-gray-900 mb-2 drop-shadow-2xl">{session.notes}</p>
