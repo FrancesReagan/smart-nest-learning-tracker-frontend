@@ -597,13 +597,22 @@ return (
            >
             Confirm 
           </button>
-            
-
-            </div>
+          <button
+            onClick={() => {
+              setShowDeleteSessionModal(false);
+              setSessionToDelete(null);
+            }}
+            className="bg-gray-700 text-gray-900 px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+            >
+              Cancel
+          </button>
+        </div>
       </div>
     </div>
   )}
-
+</div>
+);
+}
        
 
 export default CourseDetail;
