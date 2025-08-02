@@ -282,7 +282,7 @@ return (
 
       {/* Error and Succeess Messages */}
       {error && (
-        <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">
+        <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6 drop-shadow-lg">
 
           {error} 
 
@@ -290,7 +290,7 @@ return (
        )}
 
       {success && (
-        <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">
+        <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6 drop-shadow-lg">
 
           {success} 
 
@@ -299,17 +299,17 @@ return (
 
       {/* Course Header with details and action buttons*/}
     <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
-       <h1 className="text-3xl font-bold text-white mb-2">{course.title}</h1>
-       <p className="text-gray-200 mb-2">{course.description}</p>
+       <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-2xl">{course.title}</h1>
+       <p className="text-gray-200 mb-2 drop-shadow-2xl">{course.description}</p>
      <div className="flex space-x-4">
-        <span className="text-sm text-gray-300">Category:{course.category}</span>
-       <span className="text-sm text-gray-300">Status: {course.status}</span>
+        <span className="text-sm text-gray-300 drop-shadow-2xl">Category:{course.category}</span>
+       <span className="text-sm text-gray-300 drop-shadow-2xl">Status: {course.status}</span>
      </div>
   
       {/* Delete course button */}
       <button 
         onClick={deleteCourse}
-        className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+        className="mt-4 bg-red-600 text-white px-4 py-2 drop-shadow-xl rounded hover:bg-red-700"
         >
         ✖️Delete Course
         </button>
@@ -319,7 +319,7 @@ return (
 {/* Update course form, conditionally rendered */}
 <button 
   onClick={() => setShowEditForm(!showEditForm)}
-  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mr-4"
+  className="mt-4 bg-blue-600 text-white px-4 py-2 drop-shadow-xl rounded hover:bg-blue-700 mr-4"
   >
 
      {showEditForm ? "Cancel" : "Update Course"}
@@ -329,31 +329,31 @@ return (
 
 {/* update course form */}
 {showEditForm && (
-  <div className="bg-white/10 backdrop-blur-sm p-4 roundedmb-6">
+  <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
     <form onSubmit={updateCourse}>
       <div className="mb-4">
-        <label className="block text-white mb-2">Course Title</label>
+        <label className="block text-blue-900 mb-2 drop-shadow-2xl">Course Title</label>
         <input 
           type="text"
           value={editedCourse.title}
           onChange={(e) => setEditedCourse({...editedCourse, title: e.target.value})}
-          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          className="w-full p-2 rounded bg-white/20 text-blue-900 placeholder-gray-900"
           placeholder="Enter desired course title"
           required
           />
       </div>
       <div className="mb-4">
-        <label className="block text-white mb-2">Description</label>
+        <label className="block text-white mb-2 drop-shadow-2xl">Description</label>
         <textarea 
           value="{editedCourse.description}"
           onChange={(e) => setEditedCourse ({...editedCourse, description: e.target.value})}
-          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-900"
           placeholder="Enter course description"
           rows="3"
           />
       </div>
      <div className="mb-4">
-      <label className="block text-white mb-2">Category</label>
+      <label className="block text-blue-900 mb-2">Category</label>
        <input
         type="text"
         value={editedCourse.category}
@@ -376,7 +376,7 @@ return (
 
      <button 
        type="submit"
-       className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+       className="bg-green-600 text-white px-4 py-2 rounded drop-shadow-2xl hover:bg-green-700"
        >
         ➕Update Course
        </button>

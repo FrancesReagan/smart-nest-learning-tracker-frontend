@@ -9,9 +9,9 @@ function CourseCard({ course, onDelete, onEdit }) {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "On the horizon": return "bg-yellow-500"
-      case "Working it": return "bg-blue-500"
-      case "BAM did it": return "bg-green-500"
+      case "On the horizon": return "bg-gray-800"
+      case "Working it": return "bg-blue-600"
+      case "BAM did it": return "bg-green-400"
       default: return "bg-gray-500"
     }
   }
@@ -42,7 +42,7 @@ function CourseCard({ course, onDelete, onEdit }) {
 
       <div className="flex space-x-2">
         <Link to={`/courses/${course._id}`}
-            className="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700"
+            className="bg-blue-200 text-gray-800 px-3 py-1 rounded text-sm hover:bg-green-300"
             >
               View Sessions
 
@@ -50,7 +50,7 @@ function CourseCard({ course, onDelete, onEdit }) {
 
             <button 
                onClick={() => onEdit(course)}
-               className="bg-gray-600 text-white px-3 py-1 rounded text-sm hover:bg-gray-700"
+               className="bg-yellow-400 text-gray-900 px-3 py-1 rounded text-sm hover:bg-orange-400"
                >
                 Edit
 
@@ -58,7 +58,7 @@ function CourseCard({ course, onDelete, onEdit }) {
 
              <button 
                onClick={handleDelete}
-               className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+               className="bg-red-300 text-gray-950 px-3 py-1 rounded text-sm hover:bg-red-400"
                >
                 Delete
 

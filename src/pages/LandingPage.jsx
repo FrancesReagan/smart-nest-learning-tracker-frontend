@@ -21,17 +21,17 @@ function LandingPage() {
         </nav>
         <div className="flex-1 flex items-center justify-center text-center">
           <div>
-            <h1 className="text-5xl text-white font-bold mb-4">
+            <h1 className="text-5xl text-white font-bold mb-4 drop-shadow-lg">
               Learning Tracker
             </h1>
-            <p className="text-gray-300 text-lg mb-8">
+            <p className="text-blue-500 text-lg mb-8 drop-shadow">
               Keep track of your courses and learning sessions
             </p>
-            <Link to="/register" className="bg-blue-500 text-white px-6 py-3 rounded text-lg mr-4"
+            <Link to="/register" className="bg-blue-500 text-white px-6 py-3 rounded text-lg mr-4 drop-shadow"
             >
               Start Tracking
             </Link>
-            <Link to="/login" className="text-white border border-white px-6 py-3 rounded text-lg"
+            <Link to="/login" className="text-blue-500 border border-white drop-shadow-lg px-6 py-3 rounded text-lg"
             >
               Sign In
             </Link>
