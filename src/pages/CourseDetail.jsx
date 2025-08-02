@@ -523,7 +523,15 @@ return (
               className="w-full p-1 bg-white/20 text-gray-900 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
               />
           </div>
-          
+          <div className="flex justify-end space-x-2">
+            <button 
+              type="submit"
+              className="bg-green-400 text-gray-900 px-3 py-1 rounded-lg text-sm hover:bg-green-300 transition duration-300"
+             >
+              Update 
+            </button>
+            
+          </div>
         </form>
       )
         <p className="text-gray-900 mb-2 drop-shadow-2xl">{session.notes}</p>
