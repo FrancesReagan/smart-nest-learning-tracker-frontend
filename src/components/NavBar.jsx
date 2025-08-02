@@ -18,14 +18,14 @@ function NavBar() {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="flex justify-between items-center">
-       <Link to="/dashboard" className="text-white text-xl font-bold">
+       <Link to="/dashboard" className="text-white text-4xl font-bold drop-shadow-lg">
 
         SmartNest
 
        </Link>
 
        <div className="flex items-center space-x-4">
-        <span className="text-gray-300">
+        <span className="text-gray-300 drop-shadow-lg">
 
           Good to see you, {currentUser?.username}
 
@@ -33,7 +33,7 @@ function NavBar() {
 
         <button
          onClick={handleLogout}
-         className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700" 
+         className="bg-gray-900 text-white px-4 py-2 rounded hover:bg-red-700" 
         >
           Log out...
 

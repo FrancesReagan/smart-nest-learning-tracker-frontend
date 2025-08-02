@@ -29,21 +29,27 @@ const { token } = useAuth();
 const navigate = useNavigate();
 const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-
-  // GET COURSES ---GET//
-const getCourses = useCallback(async () => {
-  try {
-    const response = await axios.get(`${baseURL}/api/courses`, {
-    headers: {Authorization: `Bearer ${token}`},
-     });
+//  GET ALL COURSES---GET-//
+  // wrap getCourses in a useCallback//
+  // useCallback is used to memoize functions, preventing unnecessary re-creation on re-renders
+  // This is especially useful for functions passed as dependencies to useEffect.
+  const getCourses = useCallback(async() => {
+    try {
+      const response = await axios.get(`${baseURL}/api/courses`,{
+        headers: { Authorization: `Bearer ${token}`},
+      });
       setCourses(response.data);
+      // initialize with current course data//
+      console.log("All courses:", response.data);
     } catch (error) {
-    console.error("Error retrieving your courses:", error);
-    if (error.response?.status === 401) setError("Session expired. Login again...");
-    else if (error.response?.status === 500) setError("Server Error. Try again...");
-    else setError("Failed to load your courses...Refresh the page.");
-  }
-}, [token,baseURL]);
+      console.error("Error in retrieving all courses:", error);
+      if (error.response?.status === 404) setError("Your courses could not found.");
+       else if (error.response?.status===401) setError("Session expired. You need to log in once more.");
+       else if (error.response?.status===403) setError("To view courses you need to have the correct permissions.");
+       else setError("Courses failed to load...please try again.");
+    }
+  },[token,baseURL]); 
+
 
 useEffect(() => {
   if (currentUser && token) getCourses();
@@ -115,22 +121,22 @@ useEffect(() => {
     <div className="relative z-10 p-6">
       {/* HEADER */}
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-white mb-2">
+        <h1 className="text-3xl font-bold text-shadow-gray-700 mb-2 drop-shadow-2xl">
          
-          🤓Good to see you again. Let's do this {currentUser.username}
+          🤓Good to see you again. Let's do this {currentUser?.username}
        
         </h1>
-        <p className="text-gray-200">SmartNesting...Track your courses and learning process!</p>
+        <p className="text-shadow-gray-700 drop-shadow-2xl">SmartNesting...Track your courses and learning process!</p>
       </div>
 {/* error and success message */}
-    {error && <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6">{error}</div>}
-    {success && <div className="bg-green-500/20 border border-green-500 text-green-200 p-3 rounded mb-6">{success}</div>}
+    {error && <div className="bg-red-500/20 border border-red-400 text-red-200 p-3 rounded mb-6">{error}</div>}
+    {success && <div className="bg-green-500/20 border border-green-400 text-green-200 p-3 rounded mb-6">{success}</div>}
     
      {/* add course button */}
      <div className="mb-6">
       <button
         onClick={() => setShowAddForm(!showAddForm)}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        className="bg-green-300 text-gray-900 px-4 py-2 rounded hover:bg-green-500"
         >
           {showAddForm ? "Cancel" : "Add Course"}
 
@@ -140,27 +146,27 @@ useEffect(() => {
      {/* add course form */}
      {showAddForm && (
       <div className="bg-white/10 backdrop-blur-sm p-6 rounded mb-6">
-        <h3 className="text-white text-lg mb-4">Add New Course</h3>
+        <h3 className="text-shadow-gray-700 text-lg mb-4">Add New Course</h3>
       <form onSubmit={addCourse}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-white mb-2">Title</label>
+            <label className="block text-shadow-gray-700 mb-2 drop-shadow-2xl">Title</label>
             <input
               type="text"
               value={courseForm.title}
               onChange={(e) => setCourseForm({...courseForm, title: e.target.value})}
-              className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+              className="w-full p-2 rounded bg-white/20 text-blue-900 placeholder-gray-700"
               placeholder="Course title"
               required
               />
           </div>
 
         <div>
-        <label className="block text-white mb-2">Category</label>
+        <label className="block text-shadow-gray-700 mb-2">Category</label>
         <select 
          value={courseForm.category}
          onChange={(e) => setCourseForm({...courseForm, category: e.target.value})}
-         className="w-full p-2 rounded bg-white/20 text-white"
+         className="w-full p-2 rounded bg-white/30 text-gray-800"
          >
           <option value="Programming">Programming</option>
           <option value="Design">Design</option>
@@ -173,11 +179,11 @@ useEffect(() => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-white mb-2">Description</label>
+        <label className="block text-shadow-gray-700 mb-2">Description</label>
         <textarea
           value={courseForm.description}
           onChange={(e) => setCourseForm({...courseForm, description: e.target.value})}
-          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          className="w-full p-2 rounded bg-white/30 text-gray-900 placeholder-gray-700"
           placeholder="What will you learn today?"
           rows="3"
           required
@@ -186,22 +192,22 @@ useEffect(() => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-white mb-2">Course URL(optional)</label>
+          <label className="block text-shadow-gray-600 mb-2">Course URL(optional)</label>
           <input
            type="url"
            value={courseForm.url}
            onChange={(e) => setCourseForm({...courseForm, url: e.target.value})}
-           className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+           className="w-full p-2 rounded bg-white/20 text-blue-900 placeholder-gray-700"
            placeholder="https://..."
            />
         </div>
 
         <div>
-          <label className="block text-white mb-2">Status</label>
+          <label className="block text-shadow-gray-600 mb-2">Status</label>
           <select
             value={courseForm.status}
             onChange={(e) => setCourseForm({...courseForm, status:e.target.value})}
-            className="w-full p-2 rounded bg-white/20 text-white"
+            className="w-full p-2 rounded bg-white/20 text-shadow-gray-600"
             >
               <option value="On the horizon">On the horizon</option>
               <option value="Working it">Working it</option>
@@ -211,7 +217,7 @@ useEffect(() => {
       </div>
 
       {/* <div className="flex space-x-2"> */}
-        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add Course</button>
+        <button type="submit" className="bg-yellow-200 text-gray-900 px-4 py-2 rounded hover:bg-orange-400">Add Course</button>
       </form>
     </div>
     )}
@@ -220,7 +226,7 @@ useEffect(() => {
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
   {courses.length===0 ?(
     <div className="col-span-full text-center py-12">
-      <p className="text-gray-300 text-lg">No courses added yet...add your first one.</p>
+      <p className="text-gray-800 text-lg">No courses added yet...add your first one.</p>
 </div>
   ) : (
     courses.map(course => (
