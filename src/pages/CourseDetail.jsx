@@ -1,4 +1,4 @@
-import backgroundImage1 from '../assets/designer-4.jpg';
+dimport backgroundImage1 from '../assets/designer-4.jpg';
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -188,11 +188,8 @@ const updateSession = async (sessionId, updatedSession) => {
      await axios.put(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, sessionData, {
       headers: { Authorization: `Bearer ${token}` },
     });
-   
     setSuccess("Session updated successfully.");
     getSessions();
-    // reset editing state//
-    setEditingSession(null);
     // reset editing state//
     setEditingSession(null);
     setTimeout(() => setSuccess(""), 3000);
@@ -207,7 +204,7 @@ const updateSession = async (sessionId, updatedSession) => {
 
 // Delete Sessions---DELETE//
 const handleDeleteSessionConfirmed = async () => {
-   const sessionId = sesstionToDelete;
+   const sessionId = sessionToDelete;
     setError("");
     setSuccess("");
     setShowDeleteSessionModal(false);
@@ -241,9 +238,8 @@ useEffect(() => {
  if (currentUser && token) {
   getCourse();
   getSessions();
-  getCourses();
  }
-}, [id, currentUser, token, getCourse, getSessions, getCourses]);
+}, [id, currentUser, token, getCourse, getSessions]);
 
 // loading and error states//
 if(!course) {
@@ -281,7 +277,7 @@ return (
     <div className="absolute inset-0 bg-black/50" />
 
 {/*  Main Content */}
-    <div className="relative z-10 p-6 max-w-4xl-mx-auto">
+    <div className="relative z-10 p-6 max-w-4xl mx-auto">
 
       {/* Error and Succeess Messages */}
       {error && (
@@ -344,7 +340,7 @@ return (
       <div className="mb-4">
         <label className="block text-gray-800 mb-2 drop-shadow-2xl">Description</label>
         <textarea 
-          value="{editedCourse.description}"
+          value={editedCourse.description}
           onChange={(e) => setEditedCourse ({...editedCourse, description: e.target.value})}
           className="w-full p-2 rounded bg-white/20 text-gray-800 placeholder-gray-900"
           placeholder="Enter course description"
@@ -470,7 +466,7 @@ return (
           <button
             onClick={() => {
               setSessionToDelete(session._id);
-              setShowDeleteCourseModal(true);
+              setShowDeleteSessionModal(true);
             }}
             className="bg-red-400 text-gray-900 px-2 py-1 rounded text-xs hover:bg-yellow-300"
            >
@@ -567,7 +563,7 @@ return (
       </div>
      </div>
   )}
-  {showDeleteCourseModal && (
+  {showDeleteSessionModal && (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-xl text-center">
         <p className="text-gray-900 text-lg mb-4">Are you sure you want to delete this session?</p>
@@ -591,9 +587,9 @@ return (
       </div>
     </div>
   )}
-</div>
+</div>>
 );
-}
+
        
 
 export default CourseDetail;
