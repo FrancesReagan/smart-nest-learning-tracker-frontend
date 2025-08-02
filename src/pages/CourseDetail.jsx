@@ -553,6 +553,16 @@ return (
                   {topic} 
                 </span>
               ))}
+            </div>
+          </div>
+        )}
+       </>
+      )}
+    </div>
+    ))
+   )}
+  </div>
+
        
 
 export default CourseDetail;
