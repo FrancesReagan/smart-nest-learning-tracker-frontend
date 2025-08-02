@@ -117,7 +117,7 @@ useEffect(() => {
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-shadow-gray-700 mb-2 drop-shadow-2xl">
          
-          🤓Good to see you again. Let's do this {currentUser.username}
+          🤓Good to see you again. Let's do this {currentUser?.username}
        
         </h1>
         <p className="text-shadow-gray-700 drop-shadow-2xl">SmartNesting...Track your courses and learning process!</p>

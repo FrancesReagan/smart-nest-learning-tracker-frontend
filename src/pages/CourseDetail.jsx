@@ -14,15 +14,26 @@ function CourseDetail() {
 
   // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
-  const [courses, setCourses] = useState(null);
+  // const [courses, setCourses] = useState(null);
   const [sessions, setSessions] = useState([]);
-  const [selectedSession, setSelectedSession] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
- const [showEditForm, setShowEditForm] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [newSession, setNewSession] = useState({ notes:"", topicsLearned:"" });
   const [editedCourse, setEditedCourse] = useState(null);
+  // const [selectedSession, setSelectedSession] = useState(null);
+
+  // state for managing editing the sessions//
+  const[editingSession, setEditingSession] = useState(null);
+  const[editedSessionData, setEditedSessionData] = useState({notes:"", topicsLearned:""});
+
+  // state for confirmation modal----to ensure user meant to do something or not---confirm or cancel and action they did//
+  const [showDeleteCourseModal, setShowDeleteCourseModal] = useState(false);
+  const[showDeleteSessionModal, setShowDeleteSessionModal] = useState(false);
+  const[sessionToDelete, setSessionToDelete] = useState(null);
+ 
+ 
 
   // custom hooks for user and authentication context//
   const { currentUser } = useUser();
@@ -49,12 +60,12 @@ function CourseDetail() {
        else if (error.response?.status===403) setError("To view courses you need to have the correct permissions.");
        else setError("Courses failed to load...please try again.");
     }
-  },[id,token,baseURL]); 
+  },[token,baseURL]); 
 
   // GET COURSE BY ID---GET//
   const getCourse = useCallback(async() => {
     try {
-      const response = await axios.get(`${baseURL}/api/courses/${id}`, {
+      const response = await axios.get(`${baseURL}/api/courses/${id}`,{
         headers: { Authorization: `Bearer ${token}` },
       });
       setCourse(response.data);
@@ -137,7 +148,8 @@ const addSession = async (e) => {
       const response = await axios.post(`${baseURL}/api/courses/${id}/sessions`, sessionData, {
       headers: {Authorization:`Bearer ${token}`},
     });
-     setSessions(response.data);
+
+    //  setSessions(response.data);
     setNewSession({ notes:"", topicsLearned:""});
     setShowAddForm(false);
     setSuccess("Session added successfully");
@@ -192,8 +204,8 @@ const updateSession = async (sessionId, updatedSession) => {
     const response = await axios.put(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, sessionData, {
       headers: { Authorization: `Bearer ${token}` },
     });
-     setSessions(response.data);
-    setSuccess("Session updated succesffuly.");
+    //  setSessions(response.data);
+    setSuccess("Session updated successfully.");
     getSessions();
     setTimeout(() => setSuccess(""), 3000);
   } catch (error) {
@@ -215,7 +227,8 @@ const deleteSession = async (sessionId) => {
         const response = await axios.delete(`${baseURL}/api/courses/${id}/sessions/${sessionId}`, {
         headers: {Authorization: `Bearer ${token}`},
       });
-       setSessions(response.data);
+
+      //  setSessions(response.data);
       setSuccess("Session deleted successfully.");
       getSessions();
       setTimeout(() => setSuccess(""),3000);
@@ -316,10 +329,10 @@ return (
       </div>
 
 
-{/* Update course form, conditionally rendered */}
+{/* Update course button --form, conditionally rendered */}
 <button 
   onClick={() => setShowEditForm(!showEditForm)}
-  className="mt-4 bg-blue-600 text-white px-4 py-2 drop-shadow-xl rounded hover:bg-blue-700 mr-4"
+  className="mt-4 bg-blue-600 text-gray-400 px-4 py-2 drop-shadow-xl rounded hover:bg-blue-700 mr-4"
   >
 
      {showEditForm ? "Cancel" : "Update Course"}
@@ -343,31 +356,31 @@ return (
           />
       </div>
       <div className="mb-4">
-        <label className="block text-white mb-2 drop-shadow-2xl">Description</label>
+        <label className="block text-gray-800 mb-2 drop-shadow-2xl">Description</label>
         <textarea 
           value="{editedCourse.description}"
           onChange={(e) => setEditedCourse ({...editedCourse, description: e.target.value})}
-          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-900"
+          className="w-full p-2 rounded bg-white/20 text-gray-800 placeholder-gray-900"
           placeholder="Enter course description"
           rows="3"
           />
       </div>
      <div className="mb-4">
-      <label className="block text-blue-900 mb-2">Category</label>
+      <label className="block text-blue-900 mb-2 drop-shadow-2xl">Category</label>
        <input
         type="text"
         value={editedCourse.category}
         onChange={(e) => setEditedCourse({...editedCourse, category: e.target.value})}
-        className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+        className="w-full p-2 rounded bg-white/20 text-gray-800 placeholder-gray-600"
         placeholder="Enter a course category"
         />
      </div>
      <div className="mb-4">
-      <label className="block text-white mb-2">Status</label>
+      <label className="block text-gray-800 mb-2 drop-shadow-2xl">Status</label>
       <select
         value={editedCourse.status}
         onChange={(e) => setEditedCourse({...editedCourse,status:e.target.value})}
-        className="w-full p-2 rounded bg-white/20 text-white"
+        className="w-full p-2 rounded bg-white/20 text-gray-900"
         >
         <option value="Active">Active</option>
         <option value="Inactive">Inactive</option>
@@ -376,7 +389,7 @@ return (
 
      <button 
        type="submit"
-       className="bg-green-600 text-white px-4 py-2 rounded drop-shadow-2xl hover:bg-green-700"
+       className="bg-yellow-400 text-gray-900 px-4 py-2 rounded drop-shadow-2xl hover:bg-yellow-200"
        >
         ➕Update Course
        </button>
@@ -389,7 +402,7 @@ return (
 <div className="mb-6">
   <button
     onClick={() => setShowAddForm(!showAddForm)}
-    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    className="bg-green-300 text-gray-900 px-4 py-2 rounded hover:bg-blue-500"
     >
       {showAddForm? "Cancel" : "Add Session"}
 
@@ -402,31 +415,31 @@ return (
 
 {showAddForm && (
   <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6">
-    <form onSubmit={addSession}>
+    <form onSubmit={addSessions}>
       <div className="mb-4">
-        <label className="block text-white mb-2">Notes</label>
+        <label className="block text-gray-900 mb-2 drop-shadow-xl">Notes</label>
         <textarea
          value={newSession.notes}
          onChange={(e) => setNewSession ({...newSession, notes: e.target.value})}
-         className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+         className="w-full p-2 rounded bg-white/20 text-gray-800 placeholder-gray-600"
          placeholder="Today, I learned about..."
          rows="3"
          />
       </div>
       <div className="mb-4">
-        <label className="block text-white mb-2">Topics Learned (comma separated)</label>
+        <label className="block text-gray-900 mb-2 drop-shadow-2xl">Topics Learned (comma separated)</label>
          <input
           type="text"
           value={newSession.topicsLearned}
           onChange={(e) => setNewSession({...newSession, topicsLearned: e.target.value})}
-          className="w-full p-2 rounded bg-white/20 text-white placeholder-gray-300"
+          className="w-full p-2 rounded bg-white/20 text-gray-900 placeholder-gray-600"
           placeholder="React hooks, API calls, Crypto, etc."
          />
       </div>
 
       <button 
         type="submit"
-        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        className="bg-yellow-300 text-gray-900 px-4 py-2 rounded hover:bg-orange-200"
         >
           ➕Add Session
 
@@ -438,25 +451,25 @@ return (
 
 {/* Sessions List */}
 <div className="space-y-4">
-  <h2 className="text-2xl font-bold text-white">
+  <h2 className="text-2xl font-bold drop-shadow-2xl text-gray-900">
      🎒Learning Sessions 
     ({sessions.length})
   </h2>
 
   {sessions.length===0 ? (
     <div className="bg-white/10 backdrop-blur-sm p-6 rounded text-center">
-      <p className="text-gray-300">No sessions yet. Add your first one above🔝</p>
+      <p className="text-gray-900">No sessions yet. Add your first one above🔝</p>
       </div>
   ) : ( 
     sessions.map(session => (
       <div key={session._id} className="bg-white/10 backdrop-blur-sm p-4 rounded">
         <div className="flex justify-between items-start mb-2">
-          <div className="text-sm text-gray-300">
+          <div className="text-sm text-gray-800">
             {new Date(session.date).toLocaleDateString()}
           </div>
           <button
             onClick={() => deleteSession(session._id)}
-            className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-700"
+            className="bg-red-400 text-gray-900 px-2 py-1 rounded text-xs hover:bg-yellow-300"
            >
             ✖️Delete
 
@@ -464,15 +477,15 @@ return (
         </div>
 
       {session.notes && (
-        <p className="text-white mb-2">{session.notes}</p>
+        <p className="text-gray-900 mb-2 drop-shadow-2xl">{session.notes}</p>
       )}  
 
       {session.topicsLearned && session.topicsLearned.length > 0 && (
         <div>
-          <p className="text-sm text-gray-300 mb-1">Topics:</p>
+          <p className="text-sm text-gray-900 mb-1">Topics:</p>
           <div className="flex flex-wrap gap-2">
             {session.topicsLearned.map((topic, index) => (
-              <span key={index} className="bg-blue-600 text-white px-2 py-1 rounded text-xs"> 
+              <span key={index} className="bg-blue-400 text-gray-900 px-2 py-1 rounded text-s drop-shadow-2xl"> 
                {topic}
               </span>
              ))}
