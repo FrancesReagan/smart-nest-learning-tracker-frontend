@@ -21,7 +21,8 @@ Session Add to Course [SmartNest-Learning-Tracker](https://smartnesttracker.netl
 <img width="909" height="683" alt="image" src="https://github.com/user-attachments/assets/2158c2e6-0ef3-421e-ac09-8069a8eb878a" />
 
 Confirmation modal for Session [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
-https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2
+<img width="652" height="405" alt="image" src="https://github.com/user-attachments/assets/21d2d45f-f3df-4d4f-8bd1-0856096d2fe7" />
+
 
 
 
