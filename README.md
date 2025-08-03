@@ -59,6 +59,19 @@ _User Experience_
  * Error Handling - comprehensive error messages and user feedback.
    
  * Success Notifications - clear feedback for successful operations.
+
+
+   ----------------------------------------------------------------------------------------------------
+
+   __Tech Stack__
+
+   _Core Tech_
+    * React 19.1.0 - modern React with hooks and functional components.
+    * React Router DOM 7.7.1 - client-side routing and navigation.
+    * Vite 7.0.4 - fast build tool and development server.
+    * Tailwind CSS 4.1 - CSS framework - Utility -first styles
+
+   
    
 
 
