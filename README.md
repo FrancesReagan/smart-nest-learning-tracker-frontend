@@ -14,6 +14,9 @@ Landing Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/)
 Dashboard Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/dashboard)
 <img width="920" height="703" alt="image" src="https://github.com/user-attachments/assets/deb2d95b-6ba9-45f2-8034-d4cf45876c0a" />
 
+Update a Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
+<img width="915" height="682" alt="image" src="https://github.com/user-attachments/assets/0729f59d-5ea1-44b1-90f7-8f26df939abd" />
+
 Adding Sessions to Courses [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
 <img width="911" height="692" alt="image" src="https://github.com/user-attachments/assets/dbd044a6-48f7-4e55-9e79-3fe5af1bf38f" />
 
@@ -22,14 +25,6 @@ Session Add to Course [SmartNest-Learning-Tracker](https://smartnesttracker.netl
 
 Confirmation modal for Session [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
 <img width="652" height="405" alt="image" src="https://github.com/user-attachments/assets/21d2d45f-f3df-4d4f-8bd1-0856096d2fe7" />
-
-
-
-
-
-
-
- 
 
 
  __SmartNest Learning Tracker Features__
