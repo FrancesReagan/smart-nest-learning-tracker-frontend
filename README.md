@@ -78,34 +78,23 @@ _User Experience_
     * React Context API - global state management for auth and user data.
       
     * Custom Hooks - reusable logic for user management.
+      
+
+<img width="189" height="671" alt="image" src="https://github.com/user-attachments/assets/e619d2f4-7155-45e9-ae78-5e138d9b0705" />
 
 
- ` _Project Structure_
-    src/
-├── assets/                 # Images and static assets
-│   ├── designer-4.jpg      # Background image for dashboard/course details
-│   └── designer-5.jpg      # Background image for auth pages
-├── client/                 # API client configuration
-│   └── backendClient.js    # Axios instance with interceptors
-├── components/             # Reusable UI components
-│   ├── CourseCard.jsx      # Individual course card component
-│   ├── NavBar.jsx          # Navigation bar with user info
-│   └── ProtectedRoute.jsx  # Route protection wrapper
-├── contexts/               # React Context providers
-│   ├── AuthContext.jsx     # Authentication state and methods
-│   └── UserContext.jsx     # User data management
-├── hooks/                  # Custom React hooks
-│   └── useUser.js          # User management hook
-├── pages/                  # Page components
-│   ├── CourseDetail.jsx    # Detailed course view with sessions
-│   ├── Dashboard.jsx       # Main dashboard with course grid
-│   ├── LandingPage.jsx     # Public landing page
-│   ├── LoginPage.jsx       # User login form
-│   └── RegisterPage.jsx    # User registration form
-├── App.jsx                 # Main app component with routing
-├── App.css                 # Custom CSS styles
-├── index.css               # Tailwind CSS imports
-└── main.jsx                # Application entry point`
+__Installation__
+
+_Prerequisites_
+ * Node.js
+ * npm
+ * Backend API running (see backend documentation)
+
+_Installation_
+ * Clone the repository
+   `git clone 
+
+ 
   
       
 
