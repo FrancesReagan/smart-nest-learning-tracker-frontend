@@ -134,7 +134,21 @@ _Course Management Endpoints_
 * PUT /api/course/:id - update a course
   
 * DELETE /api/courses/:id -delete a course
- 
+
+
+ _Session Management Endpoints_
+
+ * GET /api/courses/:id/sessions - get a course sessions
+ * POST /api/courses/:id/sessions - create a new session
+ * PUT /api/courses/:id/sessions/:sessionID - update a session
+ * DELETE /api/courses/:id/sessions/:sessionId - delete session
+
+   ---------------------------------------------------------------------
+
+   __Design System__
+
+   _Color Scheme_
+    * Primary 
   
       
 
