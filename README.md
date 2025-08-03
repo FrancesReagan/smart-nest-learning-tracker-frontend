@@ -3,6 +3,21 @@ __🪺SmartNest-LEARNING-TRACKER__
 
  _SmartNest Learning Tracker is a  modern REACT-based learning management system that helps those who use it to track all of their courses, sessions, and notes on their learning journey.  SmartNest is buit with REACT, TailwindCSS, and integrated with a Node.js backend._
 
+Landing Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/)
+ <img width="916" height="651" alt="image" src="https://github.com/user-attachments/assets/6c04e2e3-d23d-42ef-8ff6-979666fa65f6" />
+
+
+ Register Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/register)
+<img width="917" height="654" alt="image" src="https://github.com/user-attachments/assets/8950c889-2c2c-474b-8356-7396a50339b5" />
+
+
+Dashboard Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/dashboard)
+<img width="920" height="703" alt="image" src="https://github.com/user-attachments/assets/deb2d95b-6ba9-45f2-8034-d4cf45876c0a" />
+
+
+ 
+
+
  __SmartNest Learning Tracker Features__
 
  
