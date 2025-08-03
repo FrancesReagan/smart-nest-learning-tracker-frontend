@@ -394,6 +394,50 @@ _API Client Configuation_
          * confirm backend CORS configuration.
          * test API endpoints directly with Postman.
 
+-----------------------------------------------------------------
+
+__Troubleshooting__
+  - common issues -
+     * build errors:
+        ` npm run clear-cache
+          npm install
+          npm run build`
+
+     * API connection issues -
+         *Verify VITE_API_URL in evironment variables
+         *check backend server status
+         *confirm CORS configuration
+
+    * Authenication Problems
+       *clear localStorage `localStorage.clear()`
+       *check token expiry in backend logs
+       *verfiy JWT secret configuration
+
+   *Styling Issues
+       * ensure Tailwind CSS is properly imported
+       * check for conflicting CSS rules
+       * verify PostCSS configuration.
+
+   * Performance Optimization
+       * Code splitting - implemented with React Router
+       * lazy loading - consider implementing for large components
+       * image optimization - compress background images
+
+-----------------------------------------------------------
+
+__Future Vision & Roadmap__
+  _SmartNest Full Vision - AI-Powered EdTech Platform_
+    * The current learning tracker is just the start - SmartNest will become an innovative EdTech application that revolutionizes online learning through AI-powered features and personalized experiences.
+
+    _AI-Powered Features (Phase 2)_
+      _AI-Generated Explainer videos_
+         * Automated Video Creation - AI generates custom explainer videos for any topic or concept.
+         * Real-Time updates - automatically updates explainer videos when applications or technologies change.
+         * version monitoring - continuously monitors software/platform updates and creates from content.
+         * makes traditional explainer videos obsolete - dynamic, always-current video content.
+
+     _Customizable AI Teachers_
+        * Personalized Avatars - choose your AI teacher
      
    
    
