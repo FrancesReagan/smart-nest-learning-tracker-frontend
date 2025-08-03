@@ -189,6 +189,39 @@ _Session Management_
  * token expiry - automatic logout on the 401 responses
  * route protection - protectedRoute component guars the authenticated pages
 
+-------------------------------------------
+
+__Component Architecture__
+_Context Providers_
+ * AuthProvider - manages authentication state and methods
+ * UserProvider - handles user data and profile information
+
+_Custom Hooks_
+ * useAuth() - access authentication methods and state
+ * useUser() - access current user data and management functions.
+
+_Protected Routes_
+ *ProtectedRoute - wrapper component tha redirects unauthenticated users.
+ *Route Guards - automatic redirects based on authentication status.
+
+ ---------------------------------------------------------
+
+ __Responsive Design__
+
+ _Breakpoints_
+  *Mobie - default styling (< 768px)
+  *Tablet - `md`: prefix (768px +)
+  *Desktop - `lg`: prefix (1024px +)
+
+
+  _Responsive Features_
+   *Grid layouts - adaptive course grids (1 column mobile, 2 tablet, 3 desktop).
+   *Navigation - collapsible mobile-friendly navigation
+   *Forms - stacked mobile layout,side-by-side desktop layout.
+   *typography - scalable text sizes across device.
+
+   ----------------------------------------------------------------------------------------
+
    
   
       
