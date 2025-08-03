@@ -68,7 +68,7 @@ if (error.response?.status===400 || error.response?.status===401) {
 const register = async (userData) => {
   try {
      setAuthLoading(true); 
-     const response = await axios.post("${baseURL}/api/users/register", userData );  
+     const response = await axios.post(`${baseURL}/api/users/register`, userData);  
 
   if(!response.data) {
     throw new Error("Registration failed");
