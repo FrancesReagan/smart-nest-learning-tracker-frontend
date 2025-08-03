@@ -114,6 +114,26 @@ _Installation_
 
 ----------------------------------------------------------------------------------------
 
+__API Integration__
+
+_The application communicates with a RESTful backend API using the following endpoints:
+
+ _Authenication Endpoints_
+  * POST /api/users/register - user registration
+  * POST /api/users/login - user login
+  * GET /api/users/me - get current user profile
+
+_Course Management Endpoints_
+
+* GET /api/courses - get all user courses
+  
+* POST /api/courses - create a new course
+  
+* GET /api/courses/:id -get a specific course
+  
+* PUT /api/course/:id - update a course
+  
+* DELETE /api/courses/:id -delete a course
  
   
       
