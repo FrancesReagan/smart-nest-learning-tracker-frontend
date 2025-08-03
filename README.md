@@ -322,8 +322,57 @@ const corsOptions = {
 // Recommended to replace  app.use(cors()) with:
 app.use(cors(corsOptions));
 The CORS configuration will be in the server.js file to use the above settings instead of the permissive app.use(cors()) for production security.
-      
 
+
+_Environment Variables Setup_
+ *Frontend (.env.production) - `VITE_API_URL=https://smart-nest-learning-tracker-backend.onrender.com`
+ *Backend (Render environment variables) - 
+     `MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/smartnest
+      JWT_SECRET=your-super-secret-jwt-key
+      NODE_ENV=production
+      FRONTEND_URL=https://your-app-name.netlify.app`
+
+
+_API Client Configuation_
+  *Your backendClient.js automatically uses the environment variable:
+
+        `export const backendClient = axios.create({
+        baseURL: `${import.meta.env.VITE_API_URL}/api`,  // Points to Render backend
+         });`
+
+
+ -----------------------------------------------------
+
+ __Deployment Workflow__
+  _Development to Production Pipeline_
+     - Develop Locally  
+          `#Frontend (localhost:5173)
+            `npm run dev`
+
+           `#Backend (localhost:3000)
+            `npm run dev`
+
+    - Test integration - 
+          - ensure local frontend can connect to local backend
+          -test all CRUD operations
+          -verify authentication flow
+
+     -Deploy Backend First -
+          - push backend code to Git
+          - deploy to Render
+          - test backend endpoints directly
+          - note to Render URL
+
+      -Update Frontend Environment 
+           - update ` .env.production` with Render URL
+           - commit and push changes
+
+      -Deploy Frontend -
+           - netlify auto-deploys on Git push
+           -Or manually trigger deploy
+           -test full application
+
+       
    
    
 
