@@ -1,5 +1,6 @@
 __🪺SmartNest-LEARNING-TRACKER__
 *Frontend*
+
  _SmartNest Learning Tracker is a  modern REACT-based learning management system that helps those who use it to track all of their courses, sessions, and notes on their learning journey.  SmartNest is buit with REACT, TailwindCSS, and integrated with a Node.js backend._
 
  __SmartNest Learning Tracker Features__
