@@ -148,7 +148,48 @@ _Course Management Endpoints_
    __Design System__
 
    _Color Scheme_
-    * Primary 
+    * Primary: Blue/Gray tones for interactive elements
+    * Success: green for positive actions and confirmations
+    * Warning: Yellow/Orange for edit actions
+    * Danger: red for delete actions and errors
+    * Background: dark overlay with beautiful nature imagery; and hands and globe.
+  
+  _Typography_
+    * System fonts - system-ui, avenir, helvetica, arial , sans-serif
+    * text shadows - enhanced readability over background images
+    * font weights - bold headers regular body text 
+
+  _Visual Effects_
+   *Glassmorphism - semi-transparent backgrounds wiht backdrop blur
+   *Drop shadows - enhanced depth and uisual hierarchy
+   *Hover effects - interactive feedback on all clickable elements
+
+   _______________________________________________________________________________________
+   
+__Authentication Flow__
+
+_Registration Process_
+* user fills out the registration form (username, email, password)
+* client-side validation (password length, email format,username length)
+* API call to the backend registration endpoint
+* automatic login and a redirect to dashboard
+* JWT Token stored in the localStorage
+
+
+_Login Process_
+* User enters their email and password
+* API call to the backend login endpoint
+* JWT token received and stored
+* User data stored in the context
+* Redirect to the dashboard
+
+_Session Management_
+ * Token Storage -JWT stored in the localStorage
+ * automatic headers - axios interceptors add the Authorization header
+ * token expiry - automatic logout on the 401 responses
+ * route protection - protectedRoute component guars the authenticated pages
+
+   
   
       
 
