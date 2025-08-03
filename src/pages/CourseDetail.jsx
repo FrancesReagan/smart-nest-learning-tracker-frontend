@@ -12,7 +12,7 @@ function CourseDetail() {
 
   // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
-  const [courses, setCourses] = useState(null); // DELETION: This state variable was not used, so the code has been updated to reflect that.
+  // const [courses, setCourses] = useState(null); // DELETION: This state variable was not used, so the code has been updated to reflect that.
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
