@@ -222,6 +222,44 @@ _Protected Routes_
 
    ----------------------------------------------------------------------------------------
 
+   __Deployment & Backend Connection__
+
+   _Architecture Overview_
+    *Frontend - deployed on Netlify.com at https://smartnesttracker.netlify.app/
+    *Backend - deployed on Render.com
+    *Database - MongoDB Atlas (connected to Render backend)
+
+   _Frontend Deployment (Netlify)_
+
+    * Prepare the repository
+      - ensure your code is pushed to GitHub
+      - verify `.env.production` contains your Render backend URL -
+         `VITE_API_URL=https://smart-nest-learning-tracker-backend.onrender.com`
+
+    * Deploy  to Netlify
+      - sign up/login to Netlify.com
+      - import from Git -
+           - click "new site from Git"
+           -connect your Git provider (GitHub)
+           -select your frontend repository
+      - configure build settings -
+           - build command - `npm run build`
+           -publish directory - `dist`
+           - node version: 18
+      -add environment variables-
+           - go to site settings - environment variables
+           - add - `VITE_API_URL = https://smart-nest-learning-tracker-backend.onrender.com`
+      - deploy - 
+           - click "deploy site"
+
+      -Live URL - your app will be available at https://smartnesttracker.netlify.app/
+
+  * API Client Configuration -
+     - your backendClient.js automatically uses the environment variable -
+         `export const backendClient = axios.create({
+              baseURL: `${import.meta.env.VITE_API_URL}/api , // --this points to Render backend--//
+            });`
+
    
   
       
