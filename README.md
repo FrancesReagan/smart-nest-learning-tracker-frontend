@@ -92,7 +92,27 @@ _Prerequisites_
 
 _Installation_
  * Clone the repository
-   `git clone 
+   
+   `git clone https://github.com/FrancesReagan/smart-nest-learning-tracker-frontend/tree/main`
+
+   `cd smart-nest-learning-tracker-frontend`
+
+* Create `.env` file for local dev:
+
+  `VITE_API_URL=http://localhost:3000`
+
+  Create `.env.production` file for production:
+
+  `VITE_API_URL=https://smart-nest-learning-tracker-backend.onrender.com`
+
+*Start the development server:
+
+ `npm run dev`
+
+*Open your browser navigate to: `http://localhost:5173`
+
+
+----------------------------------------------------------------------------------------
 
  
   
