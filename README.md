@@ -260,8 +260,68 @@ _Protected Routes_
               baseURL: `${import.meta.env.VITE_API_URL}/api , // --this points to Render backend--//
             });`
 
-   
-  
+
+ __Backend Deployment (Render)__
+ *Step 1 - Deploy Backend
+   -sign up/login to Render.com
+   -Create Web service 
+      -connect your backend repository
+      -choose "web service"
+      -configure build and start commands
+   _Set Environment Variables
+      -MongoDB connection string
+      -JWT secrets
+      -CORS origins (include your Netlify URL)
+
+ *Step2 - Get Backend URL
+     - after deployment, Render provides a URL like - `https://smart-nest-learning-tracker-backend.onrender.com`
+     -the URL goes in your frontend's `VITE_API_URL`
+
+
+ _Connecting frontend to backend_
+ * CORS configuration (backend) 
+  CORS configuration to allow requests from your Netlify domain:
+
+// In your backend server.js
+import cors from "cors";
+
+// Define allowed origins
+const allowedOrigins = [
+  'http://localhost:5173',                           // Local development (Vite)
+  'http://localhost:3000',                           // Local development (alternative)
+  'https://smartnesttracker.netlify.app',           // Your Netlify domain
+  'https://deploy-preview-*--smartnesttracker.netlify.app', // Netlify deploy previews
+  'https://your-custom-domain.com'                   // Custom domain (if any)
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    
+    // Check if the origin is in our explicitly allowed list
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Check if the origin is a Netlify deploy preview URL
+    const netlifyPattern = /^https:\/\/deploy-preview-\d+--smartnesttracker\.netlify\.app$/;
+    if (netlifyPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // If the origin is not allowed, deny access
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+// Recommended to replace  app.use(cors()) with:
+app.use(cors(corsOptions));
+The CORS configuration will be in the server.js file to use the above settings instead of the permissive app.use(cors()) for production security.
       
 
    
