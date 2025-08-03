@@ -372,7 +372,29 @@ _API Client Configuation_
            -Or manually trigger deploy
            -test full application
 
-       
+     ----------------------------------------------------------
+
+     __Troubleshooting Production Issues__
+
+       _Backend Not Responding_
+          * check Render service status
+          * review Render logs for errors
+          * verify environment variables
+          *test database connection
+
+      _Frontend Build Failures_
+         * Check Netlify build logs
+         * Verify Node.js version compatible
+         *Check for missing dependencies
+         *Clear build cache and re-deploy
+
+      _API Connection Issues_
+         * Verify VITE_API_URL in Netlify environment
+         * Check browser network tab for failed requests.
+         * confirm backend CORS configuration.
+         * test API endpoints directly with Postman.
+
+     
    
    
 
