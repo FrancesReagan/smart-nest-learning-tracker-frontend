@@ -80,7 +80,7 @@ _User Experience_
     * Custom Hooks - reusable logic for user management.
 
 
-  _Project Structure_
+ ` _Project Structure_
     src/
 ├── assets/                 # Images and static assets
 │   ├── designer-4.jpg      # Background image for dashboard/course details
@@ -105,7 +105,7 @@ _User Experience_
 ├── App.jsx                 # Main app component with routing
 ├── App.css                 # Custom CSS styles
 ├── index.css               # Tailwind CSS imports
-└── main.jsx                # Application entry point
+└── main.jsx                # Application entry point`
   
       
 
