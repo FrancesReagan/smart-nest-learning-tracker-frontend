@@ -46,6 +46,8 @@ Confirmation modal for Session [SmartNest-Learning-Tracker](https://smartnesttra
 -----------------------------------------------------------------------------------------------------------------------------
 
  _Features in Detail_
+
+ 
   _Authentication & User Management_
   
    * User Registration & Login - secure authentication with JWT Tokens.
