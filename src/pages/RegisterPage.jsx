@@ -57,10 +57,13 @@ function RegisterPage() {
              backgroundColor: '#1a202c'
            }}
            />
+
+
+           
       <div className="absolute inset-0 bg-black/50"/>
        <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
         <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg w-full max-w-md">
-           <h2 className="text-2xl font-bold text-white text-center mb-6">Sign Up</h2>
+           <h2 className="text-6xl font-bold text-white text-center mb-6 ">Sign Up</h2>
               {error && (
                    <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-4">
                         {error}
@@ -70,36 +73,36 @@ function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-white mb-2">Username</label>
+            <label className="block text-white text-2xl mb-2">Username</label>
             <input 
              type="text"
              value={username}
              onChange={(e) => setUsername(e.target.value)} 
-             className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
+             className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-900"
              placeholder="Choose a username"
              required
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-white mb-2">Email</label>
+            <label className="block text-white mb-2 text-2xl">Email</label>
              <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
+              className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-900"
               placeholder="your@email.com"
               required
              />
           </div>
 
           <div className="mb-6">
-            <label className="block text-white mb-2">Password</label>
+            <label className="block text-white mb-2 text-2xl">Password</label>
              <input
               type="password"
               value={password}
               onChange={(e)=> setPassword(e.target.value)}
-              className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
+              className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-900"
               placeholder="At least 5 characters"
               required
               disabled={authLoading}
@@ -108,7 +111,7 @@ function RegisterPage() {
 
           <button 
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 mb-4 disabled: opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gray-900 text-white text-2xl py-3 rounded hover:bg-blue-900 mb-4 disabled: opacity-50 disabled:cursor-not-allowed"
                        disabled={authLoading}
           >
               {authLoading? "Creating Account..." : "Create Account"}
@@ -117,16 +120,16 @@ function RegisterPage() {
         </form>
 
         <div className="text-center">
-          <p className="text-gray-300">
+          <p className="text-gray-300 text-xl">
 
             Already have an account?{" "}
 
-            <Link to="/login" className="text-blue-400 hover:text-blue-300">
+            <Link to="/login" className="text-blue-300 hover:text-yellow-300 drop-shadow-lg">
               Login
             </Link>
           </p>
 
-          <Link to="/" className="text-gray-400 hover:text-gray-300 text-sm">
+          <Link to="/" className="text-gray-900 hover:text-yellow-300 text-lg">
             Back to Home 
           </Link>
 

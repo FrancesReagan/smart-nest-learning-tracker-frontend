@@ -35,6 +35,7 @@ const handleSubmit = async (e) => {
 }
 
 return (
+  
   <div className="min-h-screen relative">
     {/* Birds Background */}
     <div className="absolute inset-0 bg-cover bg-center opacity-40"
@@ -43,6 +44,7 @@ return (
              backgroundColor: '#1a202c'
            }}
     />
+    
     <div className="absolute inset-0 bg-black/50" />
     <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
       <div className="bg-white/10 backdrop-blur-sm p-8 rounded-lg w-full max-w-md">
@@ -61,7 +63,7 @@ return (
       type="email"
       value={email}
       onChange={(e) => setEmail(e.target.value)}
-      className="w-full p-3 rounded bg-white/20 text-white placeholder-gray-300"
+      className="w-full p-3 rounded bg-white/20 text-gray-800 placeholder-gray-300"
       placeholder="your@email.com"
       required
       />
