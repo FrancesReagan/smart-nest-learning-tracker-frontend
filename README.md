@@ -492,6 +492,6 @@ __Future Vision & Roadmap__
      
    
    
-
-
+---------------------------------------------------------------
+Acknowledgements: My instructors: Abraham Tavarez and Colton Wrigth of Per Scholas; my fellow cohort members of 2025-RTT-23 --- a special shout out to Manasa Madhihalli Sammy for her eagle eyes spotting 2 issues that kept my register page from working in the deployed site---thank you:).
 
