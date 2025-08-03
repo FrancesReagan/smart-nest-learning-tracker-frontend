@@ -14,6 +14,12 @@ Landing Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/)
 Dashboard Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/dashboard)
 <img width="920" height="703" alt="image" src="https://github.com/user-attachments/assets/deb2d95b-6ba9-45f2-8034-d4cf45876c0a" />
 
+Adding Sessions to Courses [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
+<img width="911" height="692" alt="image" src="https://github.com/user-attachments/assets/dbd044a6-48f7-4e55-9e79-3fe5af1bf38f" />
+
+
+
+
 
  
 
