@@ -28,8 +28,22 @@ Confirmation modal for Session [SmartNest-Learning-Tracker](https://smartnesttra
 
 
  __SmartNest Learning Tracker Features__
-
+ _Quick Look at Features_
  
+ - 🕊️ **Beautiful Landing Page** - Inspiring birds background with clean call-to-action
+   
+- 🌍 **Interactive Dashboard** - Earth background with course management grid
+  
+- 📚 **Course Management** - Add, edit, delete courses with status tracking
+  
+- 📝 **Session Tracking** - Log learning sessions with notes and topics
+  
+- 🔐 **Secure Authentication** - JWT-based login and registration
+  
+- 📱 **Responsive Design** - Works seamlessly on all devices
+
+
+ _Features in Detail_
   _Authentication & User Management_
   
    * User Registration & Login - secure authentication with JWT Tokens.
@@ -163,8 +177,11 @@ _Course Management Endpoints_
  _Session Management Endpoints_
 
  * GET /api/courses/:id/sessions - get a course sessions
+   
  * POST /api/courses/:id/sessions - create a new session
+   
  * PUT /api/courses/:id/sessions/:sessionID - update a session
+   
  * DELETE /api/courses/:id/sessions/:sessionId - delete session
 
    ---------------------------------------------------------------------
@@ -462,6 +479,9 @@ __Future Vision & Roadmap__
 
      _Customizable AI Teachers_
         * Personalized Avatars - choose your AI teacher
+
+     _Gamification_ 
+       
      
    
    
