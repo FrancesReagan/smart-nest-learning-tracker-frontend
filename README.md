@@ -4,21 +4,29 @@ __🪺SmartNest-LEARNING-TRACKER__
  _SmartNest Learning Tracker is a  modern REACT-based learning management system that helps those who use it to track all of their courses, sessions, and notes on their learning journey.  SmartNest is buit with REACT, TailwindCSS, and integrated with a Node.js backend._
 
 Landing Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/)
- <img width="916" height="651" alt="image" src="https://github.com/user-attachments/assets/6c04e2e3-d23d-42ef-8ff6-979666fa65f6" />
+<img width="913" height="395" alt="image" src="https://github.com/user-attachments/assets/ea7689e1-2f91-451b-9ed4-98560e3369ec" />
 
+Register Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/register)
+<img width="915" height="649" alt="image" src="https://github.com/user-attachments/assets/56e1765a-3ed5-4737-85a9-bc059ec1b99d" />
 
- Register Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/register)
-<img width="917" height="654" alt="image" src="https://github.com/user-attachments/assets/8950c889-2c2c-474b-8356-7396a50339b5" />
-
+Login Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/login)
+<img width="919" height="665" alt="image" src="https://github.com/user-attachments/assets/7ee74fb8-2f6f-4f89-8d11-3a7ef1eca05b" />
 
 Dashboard Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/dashboard)
-<img width="920" height="703" alt="image" src="https://github.com/user-attachments/assets/deb2d95b-6ba9-45f2-8034-d4cf45876c0a" />
+<img width="924" height="657" alt="image" src="https://github.com/user-attachments/assets/4750e34c-3b45-4ac4-b037-24c7f513d0c8" />
 
-Update a Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
-<img width="915" height="682" alt="image" src="https://github.com/user-attachments/assets/0729f59d-5ea1-44b1-90f7-8f26df939abd" />
+Course Detail [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
+<img width="918" height="660" alt="image" src="https://github.com/user-attachments/assets/3f2813ea-5d38-4d90-a6f0-e8ce7b2435ce" />
+
+Update Course [SmartNest-Learning-Tracker](![Uploading image.png…](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
+<img width="924" height="691" alt="image" src="https://github.com/user-attachments/assets/806e8cae-c7b2-45ac-b031-2b8e980f2fe7" />
 
 Adding Sessions to Courses [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
-<img width="911" height="692" alt="image" src="https://github.com/user-attachments/assets/dbd044a6-48f7-4e55-9e79-3fe5af1bf38f" />
+<img width="915" height="666" alt="image" src="https://github.com/user-attachments/assets/512c0dfa-27f8-448f-a152-3b49723b1865" />
+
+Updating Sessions [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
+<img width="1280" height="764" alt="image" src="https://github.com/user-attachments/assets/1b5519a4-d1bc-4a07-8ec2-145d9884b699" />
+
 
 Session Add to Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2) 
 <img width="909" height="683" alt="image" src="https://github.com/user-attachments/assets/2158c2e6-0ef3-421e-ac09-8069a8eb878a" />
