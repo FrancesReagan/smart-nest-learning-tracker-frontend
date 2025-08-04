@@ -212,6 +212,7 @@ useEffect(() => {
               <option value="On the horizon">On the horizon</option>
               <option value="Working it">Working it</option>
               <option value="BAM did it">BAM did it</option>
+              <option value="On-Hold">On-Hold</option>
             </select>
         </div>
       </div>
