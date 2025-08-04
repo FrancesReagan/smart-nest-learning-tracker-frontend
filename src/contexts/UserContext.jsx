@@ -1,5 +1,5 @@
 
-// need to figure out either setCurrentUser or getCurrent User---//
+
 import { useAuth } from "./AuthContext";
 
 import { createContext, useState, useEffect, useCallback} from "react";
@@ -22,6 +22,8 @@ export const UserProvider = ({ children }) => {
 
 
 // wrapping getCurrentUser in useCalback//
+// I used useCallback to memoize functions and prevent unnecessary re-renders. //
+// This is important when passing functions to useEffect dependencies.//
 const getCurrentUser = useCallback(async () => {
 try {
    setLoading(true);

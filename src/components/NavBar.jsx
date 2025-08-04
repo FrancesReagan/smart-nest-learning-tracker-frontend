@@ -25,15 +25,16 @@ function NavBar() {
        </Link>
 
        <div className="flex items-center space-x-4">
-        <span className="text-gray-300 drop-shadow-lg">
-
+        <span className="text-gray-300 text-xl drop-shadow-lg">
+     {/* optional chaining---checks if currentUser exists -- if yes show currentUser.username
+     if no show nothing---renders undefined---empty--no crash */}
           Good to see you, {currentUser?.username}
 
         </span>
 
         <button
          onClick={handleLogout}
-         className="bg-gray-900 text-white px-4 py-2 rounded hover:bg-red-700" 
+         className="bg-gray-900 text-white px-4 py-2 rounded text-xl hover:bg-red-400" 
         >
           Log out...
 

@@ -1,4 +1,11 @@
 // check issues here --fix try catch for specific error--more specific errors//
+// createContext--creates a global state that can be shared across components//
+// useContext - lets components access that global state//
+// useState - manages the state (data changes) within this component.
+
+
+// I created a custom hook pattern combining React Context with a wrapper hook. This gives me global 
+// authentication state that any component can access with just useAuth() instead of importing and using useContext everywhere.
 
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
@@ -10,7 +17,7 @@ import axios from "axios";
 // set up axios defaults//
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
 
-// create the context//
+// create the context---//
 const AuthContext = createContext();
 
 // custom hook to use the AuthContext//
@@ -20,8 +27,12 @@ export const useAuth = () => {
 };
  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
-// AuthProvider component(handles authentication only)
+// AuthProvider component(handles authentication only)  ---this component wraps entire app and provides authenication function
+// ---children means it will wrap around other components//
 export const AuthProvider = ({ children }) => {
+
+  // state variables//
+  // store user's login--check localStage firs for existing token//
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authLoading, setAuthLoading] = useState(false);
 
@@ -88,6 +99,10 @@ const register = async (userData) => {
  setToken (null);
 
 // specific error messages//
+// Optional chaining //
+// Optional chaining (?.) is like asking Hey, does this exist?//
+//  before trying to use it. It prevents the app from crashing when trying to access properties that might not exist.//
+// it will return undefined instead of crashing//
 if (error.response?.status === 400) {
   if (error.response.data?.message?.includes("email")) {
     throw new Error("This email already exists. Use a different email.");
