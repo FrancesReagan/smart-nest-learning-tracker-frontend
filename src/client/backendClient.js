@@ -5,9 +5,17 @@ export const backendClient = axios.create({
 });
 
 
-// added to simple backendClient code---as I have big plans for SmartNest--//
+
+// added to simple backendClient code---
+// Future planning or seeding in the code---I implemented axios interceptors to automatically add authentication 
+// tokens to every API request. This is middleware 
+//  for HTTP requests - it runs before every request goes out, so I don't have to manually add the auth header in every 
+// component as this
+// app develops further.
+
 // add request interceptor to include auth token//
 // request interceptor--like a security gard that runs before every request is sent to the server-//
+
 backendClient.interceptors.request.use(
   // this function will run on every successful request attempt//
   (config) => {

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 function CourseCard({ course, onDelete, onEdit }) {
   const handleDelete = (e) => {
     e.preventDefault();
+    // did not use confirmation modals here---just window//
     if(window.confirm("Do you want to delete this Course?")) {
       onDelete(course._id);
     }

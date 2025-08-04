@@ -38,6 +38,9 @@ function CourseDetail() {
   const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   // GET COURSE BY ID---GET//
+  // used useCallback to memoize functions and prevent 
+  // unnecessary re-renders. This is important when passing 
+  // functions to useEffect dependencies//
   const getCourse = useCallback(async () => {
     try {
       const response = await axios.get(`${baseURL}/api/courses/${id}`, {
@@ -140,6 +143,9 @@ function CourseDetail() {
 
   // GET SESSIONS---GET//
   // wrap getSessions in a useCallback//
+  // used useCallback to memoize functions and prevent 
+  // unnecessary re-renders. This is important when passing 
+  // functions to useEffect dependencies//
   const getSessions = useCallback(async () => {
     try {
       const response = await axios.get(`${baseURL}/api/courses/${id}/sessions`, {
