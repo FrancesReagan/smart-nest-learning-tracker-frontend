@@ -131,10 +131,17 @@ _User Experience_
     * React Context API - global state management for auth and user data.
       
     * Custom Hooks - reusable logic for user management.
-      
+
+ -----------------------------------------------------------------------
+
+ __Project Structure__
 
 <img width="189" height="671" alt="image" src="https://github.com/user-attachments/assets/e619d2f4-7155-45e9-ae78-5e138d9b0705" />
 
+<img width="369" height="341" alt="image" src="https://github.com/user-attachments/assets/6503be3d-f1c0-46c0-8261-5598a854df7c" />
+
+
+-----------------------------------------------------------------------------------
 
 __Installation__
 
