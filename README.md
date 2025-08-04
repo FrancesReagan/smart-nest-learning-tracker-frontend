@@ -178,10 +178,10 @@ __API Integration__
 
 _The application communicates with a RESTful backend API using the following endpoints:
 
- _Authenication Endpoints_
-  * POST /api/users/register - user registration
-  * POST /api/users/login - user login
-  * GET /api/users/me - get current user profile
+ _User Authenication Endpoints_
+  * POST /api/users/register - user registration -create 
+  * POST /api/users/login - user login - authenticate
+  * GET /api/users/me - get current user profile -get user
 
 _Course Management Endpoints_
 
@@ -196,7 +196,7 @@ _Course Management Endpoints_
 * DELETE /api/courses/:id -delete a course
 
 
- _Session Management Endpoints_
+ _Session Management (Nested resource) Endpoints_
 
  * GET /api/courses/:id/sessions - get a course sessions
    
@@ -622,6 +622,20 @@ _JaveScript/React concepts_
  [Express framework](https://expressjs.com/) - Web framework for Node.js
  [Mongoose Doc](https://mongoosejs.com/docs/middleware.html) 
  [JWT Web Tokens](https://www.jwt.io/introduction)
+ [bcrypt npmjs docs](https://www.npmjs.com/package/bcrypt)
+
+ _Deployment Platforms_
+ [Netlify Docs](https://docs.netlify.com/)
+ [Render](https://render.com/docs)
+ [MongoDB Atlas](https://www.mongodb.com/atlas)
+
+ _Development Tools_
+ [Vite](https://vitejs.dev/)
+ [Tailwind CSS](https://tailwindcss.com/docs/installation/using-vite)
+ [Postman)(https://learning.postman.com/docs/introduction/overview/)
+ 
+
+ 
      
    
    
