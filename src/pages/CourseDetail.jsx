@@ -367,7 +367,7 @@ function CourseDetail() {
         <div className="mb-6">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-blue-500 drop-shadow-lg"
+            className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-yellow-500 drop-shadow-lg"
           >
             {showAddForm ? "Cancel" : "Add Session"}
 
@@ -426,7 +426,7 @@ function CourseDetail() {
             sessions.map(session => (
               <div key={session._id} className="bg-white/10 backdrop-blur-sm p-4 rounded">
                 <div className="flex justify-between items-start mb-2">
-                  <div className="text-sm text-gray-800">
+                  <div className="text-xl text-gray-800">
                     {new Date(session.date).toLocaleDateString()}
                   </div>
 
@@ -482,7 +482,7 @@ function CourseDetail() {
                     <div className="flex justify-end space-x-2">
                       <button
                         type="submit"
-                        className="bg-green-400 text-gray-900 px-3 py-1 rounded-lg text-xl hover:bg-green-300 transition duration-300"
+                        className="bg-gray-400 text-gray-900 px-3 py-1 rounded-lg text-xl hover:bg-green-300 transition duration-300"
                       >
                         Update
                       </button>
@@ -535,7 +535,7 @@ function CourseDetail() {
 
               <button
                 onClick={() => setShowDeleteCourseModal(false)}
-                className="bg-gray-600 text-gray-900 text-xl px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+                className="bg-gray-400 text-gray-900 text-xl px-4 py-2 rounded hover:bg-blue-500 transition duration-300"
               >
                 Cancel
               </button>
@@ -560,7 +560,7 @@ function CourseDetail() {
                   setShowDeleteSessionModal(false);
                   setSessionToDelete(null);
                 }}
-                className="bg-gray-700 text-gray-900 px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+                className="bg-gray-300 text-gray-900 px-4 py-2 rounded hover:bg-blue-400 transition duration-300"
               >
                 Cancel
               </button>
