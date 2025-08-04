@@ -4,6 +4,8 @@ export const backendClient = axios.create({
   baseURL: `${import.meta.env.VITE_API_URL}/api`,
 });
 
+
+// added to simple backendClient code//
 // add request interceptor to include auth token//
 backendClient.interceptors.request.use(
   (config) => {

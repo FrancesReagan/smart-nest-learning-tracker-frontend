@@ -126,7 +126,7 @@ useEffect(() => {
           🤓Good to see you again. Let's do this {currentUser?.username}
        
         </h1>
-        <p className="text-shadow-gray-700 drop-shadow-2xl">SmartNesting...Track your courses and learning process!</p>
+        <p className="text-shadow-gray-700 text-xl drop-shadow-lg">SmartNesting...Track your courses and learning process!</p>
       </div>
 {/* error and success message */}
     {error && <div className="bg-red-500/20 border border-red-400 text-red-200 p-3 rounded mb-6">{error}</div>}
@@ -136,7 +136,7 @@ useEffect(() => {
      <div className="mb-6">
       <button
         onClick={() => setShowAddForm(!showAddForm)}
-        className="bg-green-300 text-gray-900 px-4 py-2 rounded hover:bg-green-500"
+        className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-green-500 drop-shadow-lg"
         >
           {showAddForm ? "Cancel" : "Add Course"}
 
