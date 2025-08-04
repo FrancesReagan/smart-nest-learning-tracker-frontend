@@ -5,7 +5,8 @@ import { useUser } from '@/hooks/useUser.js';
 
 
 
-
+// UserProvider manages the current logged-in user's data across the entire app //
+// here used in const { currentUser } = useUser();//
 function NavBar() {
   const { logout} = useAuth();
   const { currentUser, clearUser } = useUser();
@@ -28,6 +29,7 @@ function NavBar() {
         <span className="text-gray-300 text-xl drop-shadow-lg">
      {/* optional chaining---checks if currentUser exists -- if yes show currentUser.username
      if no show nothing---renders undefined---empty--no crash */}
+     {/* UserProvider used here as well */}
           Good to see you, {currentUser?.username}
 
         </span>
