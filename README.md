@@ -27,12 +27,9 @@ Adding Sessions to Courses [SmartNest-Learning-Tracker](https://smartnesttracker
 Updating Sessions [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
 <img width="1280" height="764" alt="image" src="https://github.com/user-attachments/assets/1b5519a4-d1bc-4a07-8ec2-145d9884b699" />
 
-
-Session Add to Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2) 
-<img width="909" height="683" alt="image" src="https://github.com/user-attachments/assets/2158c2e6-0ef3-421e-ac09-8069a8eb878a" />
-
 Confirmation modal for Session [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
-<img width="652" height="405" alt="image" src="https://github.com/user-attachments/assets/21d2d45f-f3df-4d4f-8bd1-0856096d2fe7" />
+<img width="765" height="352" alt="image" src="https://github.com/user-attachments/assets/c040857e-98a6-4577-9246-5da07b3dbe7d" />
+
 
 ----------------------------------------------------------------------------------------------------------------------------
  __SmartNest Learning Tracker Features__
