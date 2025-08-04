@@ -347,9 +347,9 @@ function CourseDetail() {
                   onChange={(e) => setEditedCourse({ ...editedCourse, status: e.target.value })}
                   className="w-full p-2 rounded bg-white/20 text-gray-900"
                 >
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                  <option value="Completed">Completed</option>
+                  <option value="On the horizon">On the horizon</option>
+                  <option value="Working it">Working it</option>
+                  <option value="BAM did it">BAM did it</option>
                   <option value="On-Hold">On-Hold</option>
                 </select>
               </div>
