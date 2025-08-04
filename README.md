@@ -606,6 +606,22 @@ __Future Vision & Roadmap__
        *Seasonal Events - limited time competitions and rewards.
        *Certifications disguised as games.
        *Social Accountability - friends can see if your not being on point with their goals.
+
+
+ --------------------------------------------------------------------------------------------------
+
+ __Referemces__
+
+_JaveScript/React concepts_
+ [Axios Interceptors](https://axios-http.com/docs/interceptors) - guide for request/response interceptors
+ [React Context API](https://react.dev/reference/react/createContext) -Global state management
+ [React Reference](https://react.dev/reference/react) - detailed reference documentation for working with React
+ [React Router](https://reactrouter.com/)
+
+ _backend Tech_
+ [Express framework](https://expressjs.com/) - Web framework for Node.js
+ [Mongoose Doc](https://mongoosejs.com/docs/middleware.html) 
+ [JWT Web Tokens](https://www.jwt.io/introduction)
      
    
    
