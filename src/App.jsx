@@ -18,6 +18,18 @@ import RegisterPage from "./pages/RegisterPage";
 import Dashboard from "./pages/Dashboard";
 import CourseDetail from "./pages/CourseDetail";
 
+
+
+// UserProvider manages the current logged-in user's data across the entire app. It's //
+// separate from AuthProvider - auth handles login/logout, while UserProvider handles //
+// who is the current user and what's their info.//
+// The Flow//
+// User logs in → AuthProvider stores token//
+// UserProvider sees token → automatically calls /api/users/me//
+// Backend returns user data → UserProvider stores it//
+// All components can now access currentUser.username, currentUser.email, etc.//
+// Bottom Line: AuthProvider = are you logged in?, UserProvider = who are you? //
+
 // main app component//
 function App() {
   return (
