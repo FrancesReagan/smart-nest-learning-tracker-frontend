@@ -19,7 +19,7 @@ Course Detail [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/
 <img width="918" height="660" alt="image" src="https://github.com/user-attachments/assets/3f2813ea-5d38-4d90-a6f0-e8ce7b2435ce" />
 
 Update Course [SmartNest-Learning-Tracker](![Uploading image.png…](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
-<img width="924" height="691" alt="image" src="https://github.com/user-attachments/assets/806e8cae-c7b2-45ac-b031-2b8e980f2fe7" />
+<img width="917" height="657" alt="image" src="https://github.com/user-attachments/assets/dd945674-05f3-49e2-a0e3-2f39c2c2aa62" />
 
 Confirmation modal for Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
 <img width="777" height="495" alt="image" src="https://github.com/user-attachments/assets/b3ecaa0a-8c09-4c57-b4c6-df19fd3cb151" />
