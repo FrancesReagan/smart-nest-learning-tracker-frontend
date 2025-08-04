@@ -12,7 +12,7 @@ function CourseDetail() {
 
   // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
-  // const [courses, setCourses] = useState(null); // DELETION: This state variable was not used, so the code has been updated to reflect that.
+  // const [courses, setCourses] = useState(null); 
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -28,7 +28,7 @@ function CourseDetail() {
 
   // state for confirmation modal----to ensure user meant to do something or not---confirm or cancel and action they did//
   const [showDeleteCourseModal, setShowDeleteCourseModal] = useState(false);
-  // ADDITION: A new state variable to control the session deletion modal.
+  //   state variable to control the session deletion modal.//
   const [showDeleteSessionModal, setShowDeleteSessionModal] = useState(false);
   const [sessionToDelete, setSessionToDelete] = useState(null);
 
@@ -216,7 +216,7 @@ function CourseDetail() {
     }
   };
 
-  // this is the main effect hook that will fetch or get the initial data//
+  //  main effect hook that will fetch or get the initial data//
   useEffect(() => {
     if (currentUser && token) {
       getCourse();
@@ -256,7 +256,7 @@ function CourseDetail() {
           backgroundColor: '#1a202c'
         }}
       />
-      {/* FIX: Added a semi-transparent overlay to improve text readability */}
+      {/* semi-transparent overlay to improve text readability */}
       <div className="absolute inset-0 bg-black/50" />
 
       {/* Main Content */}
@@ -284,15 +284,22 @@ function CourseDetail() {
             <span className="text-lg text-gray-300 drop-shadow-2xl">Status: {course.status}</span>
           </div>
 
-          {/* Delete course button */}
-          <button
-            onClick={() => setShowDeleteCourseModal(true)}
-            className="mt-4 bg-yellow-300 text-gray-900 text-xl px-4 py-2 drop-shadow-xl rounded hover:bg-orange-400"
-          >
-            ✖️Delete Course
-          </button>
-        </div>
-
+     {/* Grouped course action buttons for better layout */}
+     <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md: space-x-4 mt-4">
+       <button 
+         onClick={() => setShowEditForm(!showEditForm)}
+         className="bg-blue-400 text-gray-900 text-xl px-4 py-2 drop-shadow-xl rounded hover:bg-green-300 transition-colors duration-300"
+         >
+          {showEditForm ? "Cancel" : "Update Course"}
+         </button>
+         <button
+              onClick={() => setShowDeleteCourseModal(true)}
+              className="bg-yellow-300 text-gray-900 text-xl px-4 py-2 drop-shadow-xl rounded hover:bg-orange-400 transition-colors duration-300"
+            >
+              ✖️Delete Course
+            </button>
+          </div>
+         </div>
 
         {/* Update course button --form, conditionally rendered */}
         <button
@@ -369,10 +376,9 @@ function CourseDetail() {
         <div className="mb-6">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-yellow-500 drop-shadow-lg"
+            className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-yellow-500 drop-shadow-lg transition-colors duration-300"
           >
             {showAddForm ? "Cancel" : "Add Session"}
-
           </button>
         </div>
 
@@ -427,8 +433,8 @@ function CourseDetail() {
           ) : (
             sessions.map(session => (
               <div key={session._id} className="bg-white/10 backdrop-blur-sm p-4 rounded">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="text-xl text-gray-800">
+                <div className="flex flex-colmd:flex-row md:justify-between md:items-center mb-2">
+                  <div className="text-xl text-gray-800 font-semibold mb-2 md:mb-0">
                     {new Date(session.date).toLocaleDateString()}
                   </div>
 
@@ -451,7 +457,7 @@ function CourseDetail() {
                         setSessionToDelete(session._id);
                         setShowDeleteSessionModal(true);
                       }}
-                      className="bg-red-300 text-gray-900 text-xl px-2 py-1 rounded hover:bg-yellow-300"
+                      className="bg-red-300 text-gray-900 text-xl px-2 py-1 rounded hover:bg-yellow-300 transition duration-300"
                     >
                       ✖️Delete
                     </button>
@@ -545,7 +551,7 @@ function CourseDetail() {
           </div>
         </div>
       )}
-      {/* ADDITION: This is a new modal component dedicated to confirming session deletion. */}
+      {/* modal component dedicated to confirming session deletion. */}
       {showDeleteSessionModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl text-center">
