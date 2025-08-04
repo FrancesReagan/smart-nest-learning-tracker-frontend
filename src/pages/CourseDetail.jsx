@@ -12,7 +12,7 @@ function CourseDetail() {
 
   // state variables for managing the component data and UI state//
   const [course, setCourse] = useState(null);
-  const [courses, setCourses] = useState(null); // DELETION: This state variable was not used, so the code has been updated to reflect that.
+  // const [courses, setCourses] = useState(null); // DELETION: This state variable was not used, so the code has been updated to reflect that.
   const [sessions, setSessions] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
@@ -264,7 +264,7 @@ function CourseDetail() {
 
         {/* Error and Succeess Messages */}
         {error && (
-          <div className="bg-red-500/20 border border-red-500 text-red-200 p-3 rounded mb-6 drop-shadow-lg">
+          <div className="bg-red-500/20 border border-red-400 text-red-200 p-3 rounded mb-6 drop-shadow-lg">
             {error}
           </div>
         )}
@@ -280,14 +280,14 @@ function CourseDetail() {
           <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-2xl">{course.title}</h1>
           <p className="text-gray-200 mb-2 drop-shadow-2xl">{course.description}</p>
           <div className="flex space-x-4">
-            <span className="text-sm text-gray-300 drop-shadow-2xl">Category:{course.category}</span>
-            <span className="text-sm text-gray-300 drop-shadow-2xl">Status: {course.status}</span>
+            <span className="text-lg text-gray-300 drop-shadow-2xl">Category:{course.category}</span>
+            <span className="text-lg text-gray-300 drop-shadow-2xl">Status: {course.status}</span>
           </div>
 
           {/* Delete course button */}
           <button
             onClick={() => setShowDeleteCourseModal(true)}
-            className="mt-4 bg-red-400 text-gray-900 px-4 py-2 drop-shadow-xl rounded hover:bg-orange-200"
+            className="mt-4 bg-yellow-300 text-gray-900 text-xl px-4 py-2 drop-shadow-xl rounded hover:bg-orange-400"
           >
             ✖️Delete Course
           </button>
@@ -297,7 +297,7 @@ function CourseDetail() {
         {/* Update course button --form, conditionally rendered */}
         <button
           onClick={() => setShowEditForm(!showEditForm)}
-          className="mt-4 bg-blue-600 text-gray-900 px-4 py-2 drop-shadow-xl rounded hover:bg-blue-700 mr-4"
+          className="mt-4 bg-blue-400 text-gray-900 text-xl px-4 py-2 drop-shadow-xl rounded hover:bg-green-300 mr-4"
         >
 
           {showEditForm ? "Cancel" : "Update Course"}
@@ -367,7 +367,7 @@ function CourseDetail() {
         <div className="mb-6">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-green-300 text-gray-900 px-4 py-2 rounded hover:bg-blue-500"
+            className="bg-green-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-yellow-500 drop-shadow-lg"
           >
             {showAddForm ? "Cancel" : "Add Session"}
 
@@ -382,22 +382,22 @@ function CourseDetail() {
           <div className="bg-white/10 backdrop-blur-sm p-4 rounded mb-6 drop-shadow-2xl">
             <form onSubmit={addSession}>
               <div className="mb-4">
-                <label className="block text-gray-900 mb-2 drop-shadow-xl">Notes</label>
+                <label className="block text-gray-900 text-xl mb-2 drop-shadow-xl">Notes</label>
                 <textarea
                   value={newSession.notes}
                   onChange={(e) => setNewSession({ ...newSession, notes: e.target.value })}
-                  className="w-full p-2 rounded bg-white/20 text-gray-900 placeholder-gray-700"
+                  className="w-full p-2 rounded bg-white/20 text-gray-900 text-xl placeholder-gray-700"
                   placeholder="Today, I learned about..."
                   rows="3"
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-900 mb-2 drop-shadow-2xl">Topics Learned (comma separated)</label>
+                <label className="block text-gray-900 mb-2 text-xl drop-shadow-2xl">Topics Learned (comma separated)</label>
                 <input
                   type="text"
                   value={newSession.topicsLearned}
                   onChange={(e) => setNewSession({ ...newSession, topicsLearned: e.target.value })}
-                  className="w-full p-2 rounded bg-white/20 text-gray-900 placeholder-gray-700"
+                  className="w-full p-2 rounded bg-white/20 text-gray-900 text-xl placeholder-gray-700"
                   placeholder="React hooks, API calls, Crypto, etc."
                 />
               </div>
@@ -414,19 +414,19 @@ function CourseDetail() {
 
         {/* Sessions List */}
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold drop-shadow-2xl text-gray-900">
+          <h2 className="text-3xl font-bold drop-shadow-lg text-gray-900">
             🎒Learning Sessions ({sessions.length})
           </h2>
 
           {sessions.length === 0 ? (
             <div className="bg-white/10 backdrop-blur-sm p-6 rounded text-center">
-              <p className="text-gray-900">No sessions yet. Add your first one above🔝</p>
+              <p className="text-gray-900 text-xl">No sessions yet. Add your first one above🔝</p>
             </div>
           ) : (
             sessions.map(session => (
               <div key={session._id} className="bg-white/10 backdrop-blur-sm p-4 rounded">
                 <div className="flex justify-between items-start mb-2">
-                  <div className="text-sm text-gray-800">
+                  <div className="text-xl text-gray-800">
                     {new Date(session.date).toLocaleDateString()}
                   </div>
 
@@ -439,7 +439,7 @@ function CourseDetail() {
                           topicsLearned: session.topicsLearned.join(", "),
                         });
                       }}
-                      className="bg-blue-400 text-gray-900 px-2 py-1 rounded-lg text-sm hover:bg-blue500 transition duration-300"
+                      className="bg-yellow-400 text-gray-900 text-xl px-2 py-1 rounded-lg hover:bg-blue-300 transition duration-300"
                     >
                       ✏️Edit Session
                     </button>
@@ -449,7 +449,7 @@ function CourseDetail() {
                         setSessionToDelete(session._id);
                         setShowDeleteSessionModal(true);
                       }}
-                      className="bg-red-400 text-gray-900 px-2 py-1 rounded text-xs hover:bg-yellow-300"
+                      className="bg-red-300 text-gray-900 text-xl px-2 py-1 rounded hover:bg-yellow-300"
                     >
                       ✖️Delete
                     </button>
@@ -462,7 +462,7 @@ function CourseDetail() {
                     updateSession(editingSession, editedSessionData);
                   }}>
                     <div className="mb-2">
-                      <label className="block text-gray-800 mb-1 text-sm drop-shadow-2xl">Notes</label>
+                      <label className="block text-gray-800 mb-1 text-xl drop-shadow-2xl">Notes</label>
                       <textarea
                         value={editedSessionData.notes}
                         onChange={(e) => setEditedSessionData({ ...editedSessionData, notes: e.target.value })}
@@ -471,25 +471,25 @@ function CourseDetail() {
                       />
                     </div>
                     <div className="mb-2">
-                      <label className="block text-gray-900 mb-1 text-sm">Topics Learned (comma separated)</label>
+                      <label className="block text-gray-900 mb-1 text-xl">Topics Learned (comma separated)</label>
                       <input
                         type="text"
                         value={editedSessionData.topicsLearned}
                         onChange={(e) => setEditedSessionData({ ...editedSessionData, topicsLearned: e.target.value })}
-                        className="w-full p-1 bg-white/20 text-gray-900 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
+                        className="w-full p-1 bg-white/20 text-gray-900 text-xl placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                       />
                     </div>
                     <div className="flex justify-end space-x-2">
                       <button
                         type="submit"
-                        className="bg-green-400 text-gray-900 px-3 py-1 rounded-lg text-sm hover:bg-green-300 transition duration-300"
+                        className="bg-gray-400 text-gray-900 px-3 py-1 rounded-lg text-xl hover:bg-green-300 transition duration-300"
                       >
                         Update
                       </button>
                       <button
                         type="button"
                         onClick={() => setEditingSession(null)}
-                        className="bg-gray-500 text-gray-900 px-3 py-1 rounded-lg text-sm hover:bg-gray-700 transition duration-300"
+                        className="bg-gray-500 text-gray-900 px-3 py-1 rounded-lg text-xl hover:bg-gray-700 transition duration-300"
                       >
                         Cancel
                       </button>
@@ -498,14 +498,14 @@ function CourseDetail() {
                 ) : (
                   <>
                     {session.notes && (
-                      <p className="text-gray-800 mb-2 drop-shadow-2xl">{session.notes}</p>
+                      <p className="text-gray-800 mb-2 drop-shadow-2xl text-2xl">{session.notes}</p>
                     )}
                     {session.topicsLearned && session.topicsLearned.length > 0 && (
                       <div>
-                        <p className="text-sm text-gray-900 mb-1 drop-shadow-2xl">Topics:</p>
+                        <p className="text-xl text-gray-900 mb-1 drop-shadow-2xl">Topics:</p>
                         <div className="flex flex-wrap gap-2">
                           {session.topicsLearned.map((topic, index) => (
-                            <span key={index} className="bg-blue-400 text-gray-900 px-2 py-1 rounded-lg text-sm drop-shadow-2xl">
+                            <span key={index} className="bg-blue-300 text-gray-900 px-2 py-1 rounded-lg text-xl drop-shadow-2xl">
                               {topic}
                             </span>
                           ))}
@@ -524,18 +524,18 @@ function CourseDetail() {
       {showDeleteCourseModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-xl text-center">
-            <p className="text-gray-800 text-lg mb-4">Are you absolutely sure you want to permanently delete this course?</p>
+            <p className="text-gray-800 mb-4 text-xl">Are you absolutely sure you want to permanently delete this course?</p>
             <div className="flex justify-center space-x-4">
               <button
                 onClick={deleteCourse}
-                className="bg-red-300 text-gray-900 px-4 py-2 rounded hover:bg-orange-400 transition duration-300"
+                className="bg-red-300 text-gray-900 text-xl px-4 py-2 rounded hover:bg-orange-400 transition duration-300"
               >
                 Confirm
               </button>
 
               <button
                 onClick={() => setShowDeleteCourseModal(false)}
-                className="bg-gray-600 text-gray-900 px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+                className="bg-gray-400 text-gray-900 text-xl px-4 py-2 rounded hover:bg-blue-500 transition duration-300"
               >
                 Cancel
               </button>
@@ -560,7 +560,7 @@ function CourseDetail() {
                   setShowDeleteSessionModal(false);
                   setSessionToDelete(null);
                 }}
-                className="bg-gray-700 text-gray-900 px-4 py-2 rounded hover:bg-gray-400 transition duration-300"
+                className="bg-gray-300 text-gray-900 px-4 py-2 rounded hover:bg-blue-400 transition duration-300"
               >
                 Cancel
               </button>
