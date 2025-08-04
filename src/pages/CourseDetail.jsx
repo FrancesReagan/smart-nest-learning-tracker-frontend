@@ -349,6 +349,8 @@ function CourseDetail() {
                 >
                   <option value="Active">Active</option>
                   <option value="Inactive">Inactive</option>
+                  <option value="Completed">Completed</option>
+                  <option value="On-Hold">On-Hold</option>
                 </select>
               </div>
 
