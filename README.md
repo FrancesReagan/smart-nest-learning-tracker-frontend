@@ -16,10 +16,10 @@ Dashboard Page [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app
 <img width="924" height="657" alt="image" src="https://github.com/user-attachments/assets/4750e34c-3b45-4ac4-b037-24c7f513d0c8" />
 
 Course Detail [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688f0ec76dbfc41373aa6fc2)
-<img width="1280" height="764" alt="image" src="https://github.com/user-attachments/assets/bde16fc7-a510-4024-8685-b877fc158f7c" />
+<img width="923" height="686" alt="image" src="https://github.com/user-attachments/assets/09adfcc3-e3fb-4146-b32f-de455ef43147" />
 
 Update Course [SmartNest-Learning-Tracker](![Uploading image.png…](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
-<img width="1280" height="764" alt="image" src="https://github.com/user-attachments/assets/148ad116-1861-47ea-bfe1-ec5b581f860e" />
+<img width="924" height="688" alt="image" src="https://github.com/user-attachments/assets/fb2a0dce-c9f5-409a-a158-014980068ec7" />
 
 Confirmation modal for Course [SmartNest-Learning-Tracker](https://smartnesttracker.netlify.app/courses/688ce162729491a54092ee66)
 <img width="777" height="495" alt="image" src="https://github.com/user-attachments/assets/b3ecaa0a-8c09-4c57-b4c6-df19fd3cb151" />
