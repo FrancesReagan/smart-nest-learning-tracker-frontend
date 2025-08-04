@@ -31,8 +31,8 @@ const baseURL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 //  GET ALL COURSES---GET-//
   // wrap getCourses in a useCallback//
-  // useCallback is used to memoize functions, preventing unnecessary re-creation on re-renders
-  // This is especially useful for functions passed as dependencies to useEffect.
+  // useCallback --- memoize functions, preventing unnecessary re-creation on re-renders//
+  //  for functions passed as dependencies to useEffect.//
   const getCourses = useCallback(async() => {
     try {
       const response = await axios.get(`${baseURL}/api/courses`,{
